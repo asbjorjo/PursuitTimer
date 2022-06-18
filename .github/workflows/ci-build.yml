@@ -103,7 +103,7 @@ jobs:
           path: PursuitTimer/bin/Release/net6.0-ios/**/*.ipa
 
       -name: Make appstore key ready
-        run: echo ""${{ secrets.APPSTORE_PRIVATE_KEY }}" > Authkey_${{ secrets.APPSTORE_KEY_ID }}.p8
+        run: echo "${{ secrets.APPSTORE_PRIVATE_KEY }}" > Authkey_${{ secrets.APPSTORE_KEY_ID }}.p8
       - name: Publish to App Store
         env:
           API_PRIVATE_KEYS_DIR: .
