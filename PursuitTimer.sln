@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PursuitTimer.Blazor", "Purs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PursuitTimer.Shared", "PursuitTimer.Shared\PursuitTimer.Shared.csproj", "{87B9BE8B-B8D1-403B-8D7D-167E15927263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asdf", "asdf\asdf.csproj", "{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,12 +31,6 @@ Global
 		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Release|Any CPU.Build.0 = Release|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{487E93E3-F47D-42FA-BE99-1C6B5839CA4D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
