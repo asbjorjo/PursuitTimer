@@ -57,6 +57,5 @@
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
 		<CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
-		<ArchiveOnBuild>true</ArchiveOnBuild>
 	</PropertyGroup>
 </Project>
