@@ -1,0 +1,57 @@
+﻿@page "/timer"
+
+@using PursuitTimer.Shared.Services
+@inject TimerService timer
+
+<h1>Timer</h1>
+
+
+@if(timer.IsRunning())
+{
+    <p role="status">@splits.Last()</p>
+
+    <button class="btn btn-primary" @onclick="MarkTime">Split</button>
+
+    <ol>
+    @foreach (var split in splits)
+    {
+        <li>@split</li>
+    }
+    </ol>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="MarkTime">Start</button>
+}
+
+
+
+@code {
+    private long[] splits = Array.Empty<long>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (timer.IsRunning())
+        {
+            UpdateTimes();
+        }
+    }
+
+    private void MarkTime()
+    {
+        if (!timer.IsRunning())
+        {
+            timer.Start();
+        }
+
+        timer.MarkTime();
+        UpdateTimes();
+    }
+
+    private void UpdateTimes()
+    {
+        splits = timer.GetTimes();
+    }
+}

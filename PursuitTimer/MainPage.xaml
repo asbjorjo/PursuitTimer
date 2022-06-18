@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PursuitTimer.MainPage">
+
+    <ContentView
+        x:Name="TimerView">
+        <VerticalStackLayout 
+            x:Name="TimerLayout"
+            Spacing="25" 
+            Padding="30,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Label 
+                x:Name="LastSplitLabel"
+                FontSize="200"
+                FontAutoScalingEnabled="False"
+                HorizontalOptions="Center"
+                IsVisible="false" />
+
+            <Button 
+                x:Name="StartBtn"
+                Text="Start"
+                Clicked="OnStartClicked" />
+
+            <Button
+                x:Name="StopBtn"
+                Text="Stop"
+                Clicked="OnStopClicked"
+                IsVisible="false" />
+
+        </VerticalStackLayout>
+    </ContentView>
+</ContentPage>
