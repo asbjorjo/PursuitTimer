@@ -20,9 +20,9 @@ jobs:
     - name: Install iOS workload
       run: dotnet workload install ios
     - name: Install MAUI workload
-      run: dotnet workload install maui-ios
+      run: dotnet workload install maui
     - name: Restore dependencies
-      run: dotnet restore PursuitTimer -r ios-arm64
+      run: dotnet restore PursuitTimer
     - name: Build
       run: dotnet build PursuitTimer -c Release -f:net6.0-ios --no-restore
     - name: Import Code-Signing Certificates
