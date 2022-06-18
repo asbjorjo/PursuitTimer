@@ -1,4 +1,4 @@
-name: .NET
+name: Android
 
 on:
   push:
