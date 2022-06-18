@@ -24,7 +24,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore PursuitTimer
     - name: Build
-      run: dotnet build PursuitTimer -c Release -f:net6.0-ios --no-restore
+      run: dotnet build PursuitTimer -c Release -f:net6.0-ios --no-restore /p:EnableAssemblyILStripping=false
     - name: Import Code-Signing Certificates
       uses: Apple-Actions/import-codesign-certs@v1
       with:
