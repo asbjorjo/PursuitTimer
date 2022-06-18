@@ -43,7 +43,7 @@ jobs:
         run: dotnet build PursuitTimer -c Release -f net6.0-android --no-restore
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Release -f net6.0-android --no-build
+        run: dotnet publish PursuitTimer -c Release -f net6.0-android
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -89,7 +89,7 @@ jobs:
         run: dotnet build PursuitTimer -c Release -f net6.0-ios --no-restore
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64 --no-build
+        run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
