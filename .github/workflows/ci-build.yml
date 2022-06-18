@@ -95,4 +95,9 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-build
+          path: PursuitTimer/bin/Release/net6.0-ios/**/*.app/
+      - name: Upload iOS Package
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: ios-ci-package
           path: PursuitTimer/bin/Release/net6.0-ios/**/*.ipa
