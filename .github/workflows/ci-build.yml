@@ -101,3 +101,6 @@ jobs:
         with:
           name: ios-ci-package
           path: PursuitTimer/bin/Release/net6.0-ios/**/*.ipa
+
+      -name: Publish to App Store
+       run: xcrun altool --upload-package -f PursuitTimer/bin/Release/net6.0-ios/ios-arm64/publish/PursuitTimer.ipa --bundle-id me.velotimer.pursuittimer --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
