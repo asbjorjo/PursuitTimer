@@ -33,7 +33,7 @@ jobs:
         api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
         api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
     - name: dotnet publish
-      run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64 /p:ArchiveOnBuild=true /p:EnableAssemblyILStripping=false
+      run: dotnet build PursuitTimer -c Release -f:net6.0-ios -r ios-arm64   /p:ArchiveOnBuild=true /p:EnableAssemblyILStripping=false /p:BuildIpa=true
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
