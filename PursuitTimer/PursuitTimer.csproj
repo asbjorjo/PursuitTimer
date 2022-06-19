@@ -53,6 +53,12 @@
 	  <ProjectReference Include="..\PursuitTimer.Shared\PursuitTimer.Shared.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidSigningKeyStore>pursuittimer.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyAlias>me.veloti.pursuittimer.play</AndroidSigningKeyAlias>
+	</PropertyGroup>
+		
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
