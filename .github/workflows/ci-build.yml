@@ -41,7 +41,7 @@ jobs:
         run: dotnet restore PursuitTimer
 
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Release -f net6.0-android --no-restore
+        run: dotnet build PursuitTimer -c Release -f net6.0-android --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }} /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
         run: dotnet publish PursuitTimer -c Release -f net6.0-android /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }} /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
@@ -96,7 +96,7 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Release -f net6.0-ios --no-restore
+        run: dotnet build PursuitTimer -c Release -f net6.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Publish MAUI iOS
         run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
