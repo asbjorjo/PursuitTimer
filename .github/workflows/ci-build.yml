@@ -44,13 +44,22 @@ jobs:
         run: dotnet build PursuitTimer -c Release -f net6.0-android --no-restore
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Release -f net6.0-android /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet publish PursuitTimer -c Release -f net6.0-android /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }} /p:AndroidSigningKeyPass=${{ secrects.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrects.PLAYSTORE_PASS }}
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: android-ci-build
           path: PursuitTimer/bin/Release/net6.0-android/*Signed.a*
+
+      - name: Publish to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.APPSTORE_SERVICE_ACCOUNT }}
+          packageName: me.veloti.PursuitTimer
+          releaseFiles: PursuitTimer/bin/Release/net6.0-android/publish/me.veloti.pursuittimer-Signed.aab
+          track: internal
+          status: inProgress
 
 # MAUI iOS Build
   build-ios:
