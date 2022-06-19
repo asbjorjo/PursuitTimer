@@ -44,7 +44,7 @@ jobs:
         run: dotnet build PursuitTimer -c Release -f net6.0-android --no-restore
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Release -f net6.0-android
+        run: dotnet publish PursuitTimer -c Release -f net6.0-android /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
