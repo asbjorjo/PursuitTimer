@@ -59,6 +59,7 @@ jobs:
           packageName: me.veloti.pursuittimer
           releaseFiles: PursuitTimer/bin/Release/net6.0-android/publish/me.veloti.pursuittimer-Signed.aab
           track: internal
+          status: completed
 
 # MAUI iOS Build
   build-ios:
