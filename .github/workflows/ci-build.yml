@@ -90,7 +90,7 @@ jobs:
         run: dotnet build PursuitTimer -c Release -f net6.0-ios --no-restore
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64
+        run: dotnet publish PursuitTimer -c Release -f:net6.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
