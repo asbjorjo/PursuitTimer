@@ -32,6 +32,21 @@ public partial class MainPage : ContentPage
 		LastSplitLabel.IsVisible = true;
 
         TimerLayout.Layout(Bounds);
+		DeviceDisplay.KeepScreenOn = true;
+		DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
+    }
+
+	private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+	{
+		if (LastSplitLabel.IsVisible)
+		{
+            LastSplitLabel.HeightRequest = TimerView.Width - StopBtn.Height;
+
+            double ratio = TimerView.Height / LastSplitLabel.HeightRequest;
+            double fontSize = ratio < MinRatio ? LastSplitLabel.HeightRequest / MinRatio * ratio : LastSplitLabel.HeightRequest;
+
+            LastSplitLabel.FontSize = fontSize;
+        }
     }
 
 	private void OnSplitClicked(object sender, EventArgs e)
@@ -40,7 +55,7 @@ public partial class MainPage : ContentPage
 
 		splits = _timerService.GetTimes();
 
-        LastSplitLabel.HeightRequest = TimerView.Height - StartBtn.Height;
+        LastSplitLabel.HeightRequest = TimerView.Height - StopBtn.Height;
 
         double ratio = TimerView.Width / LastSplitLabel.HeightRequest;
         double fontSize = ratio < MinRatio ? LastSplitLabel.HeightRequest / MinRatio * ratio : LastSplitLabel.HeightRequest;
@@ -49,7 +64,6 @@ public partial class MainPage : ContentPage
         LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
 
         TimerLayout.Layout(Bounds);
-
     }
 
     private void OnStopClicked(object sender, EventArgs e)
@@ -63,6 +77,8 @@ public partial class MainPage : ContentPage
 
 		LastSplitLabel.Text = "";
 		LastSplitLabel.IsVisible = false;
+
+		DeviceDisplay.KeepScreenOn = false;
     }
 }
 
