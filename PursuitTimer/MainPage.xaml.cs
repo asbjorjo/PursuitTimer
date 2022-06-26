@@ -7,6 +7,7 @@ public partial class MainPage : ContentPage
 	readonly TimerService _timerService;
 	readonly TapGestureRecognizer _splitTap;
 	List<TimeSpan> splits = new();
+	TimeDisplayDrawable timeDisplay;
 
 	public MainPage(TimerService timerService)
 	{
@@ -20,11 +21,14 @@ public partial class MainPage : ContentPage
 	private void OnStartClicked(object sender, EventArgs e)
     {
 		TimerView.GestureRecognizers.Add(_splitTap);
+		TimeDisplay.GestureRecognizers.Add(_splitTap);
 		
 		_timerService.Start();
 
+		TimeDisplay.HeightRequest = TimerView.Height - StartBtn.Height;
+
 		StartBtn.IsVisible = false;
-		LastSplitLabel.IsVisible = true;
+		TimeDisplay.IsVisible = true;
 		StopBtn.IsVisible = true;
 
 		TimerLayout.Layout(Bounds);
@@ -32,23 +36,27 @@ public partial class MainPage : ContentPage
 
 	private void OnSplitClicked(object sender, EventArgs e)
     {
+		object _timedisplay;
 		_timerService.MarkTime();
 
 		splits = _timerService.GetTimes();
-		LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
 
+		Resources.TryGetValue("timedisplay", out _timedisplay);
+		timeDisplay = (TimeDisplayDrawable)_timedisplay;
+		timeDisplay.UpdateTime(splits.Last());
+        TimeDisplay.Invalidate();
         TimerLayout.Layout(Bounds);
     }
 
 	private void OnStopClicked(object sender, EventArgs e)
 	{
 		TimerView.GestureRecognizers.Remove(_splitTap);
+		TimeDisplay.GestureRecognizers.Remove(_splitTap);
 
 		_timerService.Reset();
 
-		LastSplitLabel.IsVisible = false;
-		LastSplitLabel.Text = "";
 		StopBtn.IsVisible = false;
+		TimeDisplay.IsVisible = false;
 		StartBtn.IsVisible = true;
 	}
 }
