@@ -4,10 +4,6 @@
              xmlns:drawable="clr-namespace:PursuitTimer"
              x:Class="PursuitTimer.MainPage">
 
-    <ContentPage.Resources>
-        <drawable:TimeDisplayDrawable x:Key="timedisplay" />
-    </ContentPage.Resources>
-    
     <ContentView
         x:Name="TimerView">
         <VerticalStackLayout 
@@ -17,9 +13,11 @@
             HorizontalOptions="Center"
             VerticalOptions="Center">
 
-            <GraphicsView 
-                x:Name="TimeDisplay"
-                Drawable="{StaticResource timedisplay}"
+            <Label
+                x:Name="LastSplitLabel"
+                FontFamily="RobotoMono"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
                 IsVisible="false" />
 
             <Button 

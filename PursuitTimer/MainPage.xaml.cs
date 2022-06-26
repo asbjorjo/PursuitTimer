@@ -4,7 +4,9 @@ namespace PursuitTimer;
 
 public partial class MainPage : ContentPage
 {
-	readonly TimerService _timerService;
+    private const double MinRatio = 3.5;
+
+    readonly TimerService _timerService;
 	readonly TapGestureRecognizer _splitTap;
 	List<TimeSpan> splits = new();
 	TimeDisplayDrawable timeDisplay;
@@ -21,43 +23,58 @@ public partial class MainPage : ContentPage
 	private void OnStartClicked(object sender, EventArgs e)
     {
 		TimerView.GestureRecognizers.Add(_splitTap);
-		TimeDisplay.GestureRecognizers.Add(_splitTap);
 		
 		_timerService.Start();
 
-		TimeDisplay.HeightRequest = TimerView.Height - StartBtn.Height;
-
 		StartBtn.IsVisible = false;
-		TimeDisplay.IsVisible = true;
 		StopBtn.IsVisible = true;
 
-		TimerLayout.Layout(Bounds);
+		LastSplitLabel.HeightRequest = TimerView.Height - StartBtn.Height;
+		LastSplitLabel.IsVisible = true;
+
+        //TimeDisplay.GestureRecognizers.Add(_splitTap);
+        //TimeDisplay.HeightRequest = TimerView.Height - StartBtn.Height;
+        //TimeDisplay.IsVisible = true;
+
+        TimerLayout.Layout(Bounds);
     }
 
 	private void OnSplitClicked(object sender, EventArgs e)
     {
-		object _timedisplay;
 		_timerService.MarkTime();
 
 		splits = _timerService.GetTimes();
 
-		Resources.TryGetValue("timedisplay", out _timedisplay);
-		timeDisplay = (TimeDisplayDrawable)_timedisplay;
-		timeDisplay.UpdateTime(splits.Last());
-        TimeDisplay.Invalidate();
+        LastSplitLabel.HeightRequest = TimerView.Height - StartBtn.Height;
+
+        double ratio = TimerView.Width / LastSplitLabel.HeightRequest;
+        double fontSize = ratio < MinRatio ? LastSplitLabel.HeightRequest / MinRatio * ratio : LastSplitLabel.HeightRequest;
+
+		LastSplitLabel.FontSize = fontSize;
+        LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
+
         TimerLayout.Layout(Bounds);
+
+        //object _timedisplay;
+        //Resources.TryGetValue("timedisplay", out _timedisplay);
+        //timeDisplay = (TimeDisplayDrawable)_timedisplay;
+        //timeDisplay.UpdateTime(splits.Last());
+        //TimeDisplay.Invalidate();
     }
 
-	private void OnStopClicked(object sender, EventArgs e)
+    private void OnStopClicked(object sender, EventArgs e)
 	{
 		TimerView.GestureRecognizers.Remove(_splitTap);
-		TimeDisplay.GestureRecognizers.Remove(_splitTap);
 
 		_timerService.Reset();
 
 		StopBtn.IsVisible = false;
-		TimeDisplay.IsVisible = false;
 		StartBtn.IsVisible = true;
-	}
+
+		LastSplitLabel.Text = "";
+		LastSplitLabel.IsVisible = false;
+        //TimeDisplay.GestureRecognizers.Remove(_splitTap);
+        //TimeDisplay.IsVisible = false;
+    }
 }
 
