@@ -9,7 +9,6 @@ public partial class MainPage : ContentPage
     readonly TimerService _timerService;
 	readonly TapGestureRecognizer _splitTap;
 	List<TimeSpan> splits = new();
-	TimeDisplayDrawable timeDisplay;
 
 	public MainPage(TimerService timerService)
 	{
@@ -32,10 +31,6 @@ public partial class MainPage : ContentPage
 		LastSplitLabel.HeightRequest = TimerView.Height - StartBtn.Height;
 		LastSplitLabel.IsVisible = true;
 
-        //TimeDisplay.GestureRecognizers.Add(_splitTap);
-        //TimeDisplay.HeightRequest = TimerView.Height - StartBtn.Height;
-        //TimeDisplay.IsVisible = true;
-
         TimerLayout.Layout(Bounds);
     }
 
@@ -55,11 +50,6 @@ public partial class MainPage : ContentPage
 
         TimerLayout.Layout(Bounds);
 
-        //object _timedisplay;
-        //Resources.TryGetValue("timedisplay", out _timedisplay);
-        //timeDisplay = (TimeDisplayDrawable)_timedisplay;
-        //timeDisplay.UpdateTime(splits.Last());
-        //TimeDisplay.Invalidate();
     }
 
     private void OnStopClicked(object sender, EventArgs e)
@@ -73,8 +63,6 @@ public partial class MainPage : ContentPage
 
 		LastSplitLabel.Text = "";
 		LastSplitLabel.IsVisible = false;
-        //TimeDisplay.GestureRecognizers.Remove(_splitTap);
-        //TimeDisplay.IsVisible = false;
     }
 }
 
