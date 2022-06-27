@@ -15,7 +15,7 @@
 
             <Label
                 x:Name="LastSplitLabel"
-                FontFamily="RobotoMono"
+                FontFamily="RobotoMonoRegular"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 IsVisible="false" />
