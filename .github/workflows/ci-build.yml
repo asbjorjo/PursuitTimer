@@ -58,7 +58,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.APPSTORE_SERVICE_ACCOUNT }}
           packageName: me.veloti.pursuittimer
           releaseFiles: PursuitTimer/bin/Release/net6.0-android/publish/me.veloti.pursuittimer-Signed.aab
-          track: internal
+          track: alpha
           status: completed
 
 # MAUI iOS Build
