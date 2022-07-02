@@ -5,7 +5,7 @@ namespace PursuitTimer;
 
 public partial class MainPage : ContentPage
 {
-    private const double MinRatio = 3.5;
+    private const double MinRatio = 4.0;
 
     readonly TimerService _timerService;
 	readonly TapGestureRecognizer _splitTap;

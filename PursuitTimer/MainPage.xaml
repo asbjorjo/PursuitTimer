@@ -4,20 +4,21 @@
              x:Class="PursuitTimer.MainPage"
              x:Name="TimerPage">
 
-    <Grid
+    <Grid 
         x:Name="TimerLayout">
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
-        
+
+            
         <Label
             Grid.Row="0"
             x:Name="LastSplitLabel"
-            FontFamily="RobotoMono"
+            FontFamily="RobotoMonoRegular"
             VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"/>
+            HorizontalTextAlignment="Center"
+            IsVisible="false" />
 
         <ScrollView
             Grid.Row="0"
