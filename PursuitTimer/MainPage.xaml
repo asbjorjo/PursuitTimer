@@ -17,8 +17,7 @@
             x:Name="LastSplitLabel"
             FontFamily="RobotoMonoRegular"
             VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"
-            IsVisible="false" />
+            HorizontalTextAlignment="Center"/>
 
         <ScrollView
             Grid.Row="0"
