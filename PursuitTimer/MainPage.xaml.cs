@@ -73,7 +73,7 @@ public partial class MainPage : ContentPage
 			Summary.Remove(child);
 		}
 
-        foreach (TimeSpan intermediate in _timerService.GetTimes())
+        foreach (TimeSpan intermediate in splits)
         {
             Label interLabel = new Label();
             interLabel.Text = intermediate.ToString("ss'.'fff");
@@ -83,7 +83,7 @@ public partial class MainPage : ContentPage
 
 		Summary.Add(new Label
 		{
-			Text = _timerService.GetTimes().Sum().ToString("mm':'ss'.'fff"),
+			Text = splits.Sum().ToString("mm':'ss'.'fff"),
 			FontSize = 32
 		});
 
