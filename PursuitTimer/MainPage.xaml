@@ -13,10 +13,20 @@
         </Grid.RowDefinitions>
         
         <Label
+            Grid.Row="0"
             x:Name="LastSplitLabel"
             FontFamily="RobotoMono"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"/>
+
+        <ScrollView
+            Grid.Row="0"
+            x:Name="SummaryView"
+            IsVisible="false">
+            <StackLayout
+                x:Name="Summary">
+            </StackLayout>
+        </ScrollView>
 
         <Button
             Grid.Row="1"

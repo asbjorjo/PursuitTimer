@@ -1,4 +1,5 @@
-﻿using PursuitTimer.Shared.Services;
+﻿using PursuitTimer.Shared.Extensions;
+using PursuitTimer.Shared.Services;
 
 namespace PursuitTimer;
 
@@ -22,6 +23,13 @@ public partial class MainPage : ContentPage
 
     private void OnStartClicked(object sender, EventArgs e)
     {
+		if (SummaryView.IsVisible)
+		{
+			SummaryView.IsVisible = false;
+			LastSplitLabel.IsVisible = true;
+			LastSplitLabel.Layout(SummaryView.Bounds);
+		}
+
 		TimerLayout.GestureRecognizers.Add(_splitTap);
 		
 		_timerService.Start();
@@ -35,8 +43,9 @@ public partial class MainPage : ContentPage
 
 	private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
 	{
-		double ratio = LastSplitLabel.Height / LastSplitLabel.Height;
-        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+		//double ratio = TimerLayout.Width / LastSplitLabel.Height;
+		//double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+		double fontSize = LastSplitLabel.Height / MinRatio;
 
         LastSplitLabel.FontSize = fontSize;
     }
@@ -58,7 +67,31 @@ public partial class MainPage : ContentPage
 	{
 		TimerLayout.GestureRecognizers.Remove(_splitTap);
 
-		_timerService.Reset();
+		var children = Summary.Children.ToList();
+		foreach (var child in children)
+		{
+			Summary.Remove(child);
+		}
+
+        foreach (TimeSpan intermediate in _timerService.GetTimes())
+        {
+            Label interLabel = new Label();
+            interLabel.Text = intermediate.ToString("ss'.'fff");
+			interLabel.FontSize = 32;
+            Summary.Add(interLabel);
+        }
+
+		Summary.Add(new Label
+		{
+			Text = _timerService.GetTimes().Sum().ToString("mm':'ss'.'fff"),
+			FontSize = 32
+		});
+
+        LastSplitLabel.IsVisible = false;
+        SummaryView.IsVisible = true;
+        SummaryView.Layout(LastSplitLabel.Bounds);
+
+        _timerService.Reset();
 
         StopBtn.IsVisible = false;
 		StartBtn.IsVisible = true;
