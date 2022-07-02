@@ -16,37 +16,29 @@ public partial class MainPage : ContentPage
 		TapGestureRecognizer tapGestureRecognizer = new();
 		tapGestureRecognizer.Tapped += OnSplitClicked;
 		_splitTap = tapGestureRecognizer;
+        DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
         InitializeComponent();
-	}
+    }
 
-	private void OnStartClicked(object sender, EventArgs e)
+    private void OnStartClicked(object sender, EventArgs e)
     {
-		TimerView.GestureRecognizers.Add(_splitTap);
+		TimerLayout.GestureRecognizers.Add(_splitTap);
 		
 		_timerService.Start();
 
-		StartBtn.IsVisible = false;
+        StartBtn.IsVisible = false;
 		StopBtn.IsVisible = true;
+        StopBtn.Layout(StartBtn.Bounds);
 
-		LastSplitLabel.HeightRequest = TimerView.Height - StartBtn.Height;
-		LastSplitLabel.IsVisible = true;
-
-        TimerLayout.Layout(Bounds);
 		DeviceDisplay.KeepScreenOn = true;
-		DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
     }
 
 	private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
 	{
-		if (LastSplitLabel.IsVisible)
-		{
-            LastSplitLabel.HeightRequest = TimerView.Width - StopBtn.Height;
+		double ratio = LastSplitLabel.Height / LastSplitLabel.Height;
+        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
-            double ratio = TimerView.Height / LastSplitLabel.HeightRequest;
-            double fontSize = ratio < MinRatio ? LastSplitLabel.HeightRequest / MinRatio * ratio : LastSplitLabel.HeightRequest;
-
-            LastSplitLabel.FontSize = fontSize;
-        }
+        LastSplitLabel.FontSize = fontSize;
     }
 
 	private void OnSplitClicked(object sender, EventArgs e)
@@ -55,29 +47,25 @@ public partial class MainPage : ContentPage
 
 		splits = _timerService.GetTimes();
 
-        LastSplitLabel.HeightRequest = TimerView.Height - StopBtn.Height;
-
-        double ratio = TimerView.Width / LastSplitLabel.HeightRequest;
-        double fontSize = ratio < MinRatio ? LastSplitLabel.HeightRequest / MinRatio * ratio : LastSplitLabel.HeightRequest;
+        double ratio = TimerLayout.Width / LastSplitLabel.Height;
+        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
 		LastSplitLabel.FontSize = fontSize;
         LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
-
-        TimerLayout.Layout(Bounds);
     }
 
     private void OnStopClicked(object sender, EventArgs e)
 	{
-		TimerView.GestureRecognizers.Remove(_splitTap);
+		TimerLayout.GestureRecognizers.Remove(_splitTap);
 
 		_timerService.Reset();
 
-		StopBtn.IsVisible = false;
+        StopBtn.IsVisible = false;
 		StartBtn.IsVisible = true;
+        StartBtn.Layout(StopBtn.Bounds);
 
-		LastSplitLabel.Text = "";
-		LastSplitLabel.IsVisible = false;
-
+        LastSplitLabel.Text = "";
+		
 		DeviceDisplay.KeepScreenOn = false;
     }
 }

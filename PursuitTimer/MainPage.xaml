@@ -1,36 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:drawable="clr-namespace:PursuitTimer"
-             x:Class="PursuitTimer.MainPage">
+             x:Class="PursuitTimer.MainPage"
+             x:Name="TimerPage">
 
-    <ContentView
-        x:Name="TimerView">
-        <VerticalStackLayout 
-            x:Name="TimerLayout"
-            Spacing="0" 
-            Padding="0,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+    <Grid
+        x:Name="TimerLayout">
 
-            <Label
-                x:Name="LastSplitLabel"
-                FontFamily="RobotoMono"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                IsVisible="false" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+        
+        <Label
+            x:Name="LastSplitLabel"
+            FontFamily="RobotoMono"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"/>
 
-            <Button 
-                x:Name="StartBtn"
-                Text="Start"
-                Clicked="OnStartClicked" />
+        <Button
+            Grid.Row="1"
+            x:Name="StartBtn"
+            Text="Start"
+            Clicked="OnStartClicked" />
 
-            <Button
-                x:Name="StopBtn"
-                Text="Stop"
-                Clicked="OnStopClicked"
-                IsVisible="false" />
+        <Button
+            Grid.Row="1"
+            x:Name="StopBtn"
+            Text="Stop"
+            Clicked="OnStopClicked"
+            IsVisible="false" />
 
-        </VerticalStackLayout>
-    </ContentView>
+    </Grid>
 </ContentPage>
