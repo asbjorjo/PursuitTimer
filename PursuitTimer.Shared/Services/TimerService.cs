@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PursuitTimer.Shared.Services
+﻿namespace PursuitTimer.Shared.Services
 {
     public class TimerService
     {
@@ -13,6 +7,7 @@ namespace PursuitTimer.Shared.Services
 
         public void Start()
         {
+            Reset();
             MarkTime();
             running = true;
         }

@@ -1,0 +1,59 @@
+using PursuitTimer.Shared.Services;
+
+namespace PursuitTimer;
+
+public partial class TimerPage : ContentPage
+{
+    private const double MinRatio = 4.0;
+
+    readonly TimerService _timerService;
+    readonly TapGestureRecognizer _splitTap;
+    List<TimeSpan> splits = new();
+
+    public TimerPage(TimerService timerService)
+    {
+        _timerService = timerService;
+        TapGestureRecognizer tapGestureRecognizer = new();
+        tapGestureRecognizer.Tapped += OnSplitClicked;
+        _splitTap = tapGestureRecognizer;
+
+        InitializeComponent();
+
+        TimerLayout.GestureRecognizers.Add(_splitTap);
+
+        DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
+    }
+    
+    private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+    {
+        //double ratio = TimerLayout.Width / LastSplitLabel.Height;
+        //double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+        double fontSize = LastSplitLabel.Height / MinRatio;
+
+        LastSplitLabel.FontSize = fontSize;
+    }
+
+    private void OnSplitClicked(object sender, EventArgs e)
+    {
+        _timerService.MarkTime();
+
+        splits = _timerService.GetTimes();
+
+        double ratio = TimerLayout.Width / LastSplitLabel.Height;
+        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+
+        LastSplitLabel.FontSize = fontSize;
+        LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
+    }
+
+    private async void OnStopClicked(object sender, EventArgs e)
+    {
+        _timerService.Stop();
+
+        LastSplitLabel.Text = "";
+
+        DeviceDisplay.KeepScreenOn = false;
+
+        await Shell.Current.GoToAsync("//SummaryPage");
+    }
+}

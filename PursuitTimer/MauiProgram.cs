@@ -1,4 +1,5 @@
-﻿using PursuitTimer.Shared.Services;
+﻿using CommunityToolkit.Maui;
+using PursuitTimer.Shared.Services;
 
 namespace PursuitTimer;
 
@@ -9,6 +10,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -16,8 +18,10 @@ public static class MauiProgram
 				fonts.AddFont("RobotoMono-Regular.ttf", "RobotoMonoRegular");
 			});
 
-		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<TimerService>();
+		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<TimerPage>();
+		builder.Services.AddTransient<SummaryPage>();
 
 		return builder.Build();
 	}
