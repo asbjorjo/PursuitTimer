@@ -17,8 +17,6 @@ public partial class MainPage : ContentPage
 
     private async void OnStartClickedAsync(object sender, EventArgs e)
     {
-		_timerService.Start();
-
         await Shell.Current.GoToAsync("//TimerPage");
     }
 }

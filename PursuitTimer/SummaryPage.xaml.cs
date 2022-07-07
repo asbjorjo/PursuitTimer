@@ -1,58 +1,32 @@
 using PursuitTimer.Shared.Extensions;
-using PursuitTimer.Shared.Services;
+using PursuitTimer.Shared.Model;
+using System.Runtime.CompilerServices;
 
 namespace PursuitTimer;
 
+[QueryProperty(nameof(Splits), "Splits")]
 public partial class SummaryPage : ContentPage
 {
-    readonly TimerService _timerService;
-    List<TimeSpan> splits = new();
+    public static readonly BindableProperty SplitsProperty =
+        BindableProperty.Create("Splits", typeof(List<SplitTime>), typeof(SummaryPage), new List<SplitTime>());
 
-    public SummaryPage(TimerService timerService)
+    public List<SplitTime> Splits
+    {
+        get =>  (List<SplitTime>)GetValue(SplitsProperty);
+        set 
+        {
+            SetValue(SplitsProperty, value);
+        }
+    }
+
+    public SummaryPage()
 	{
         InitializeComponent();
-
-        _timerService = timerService;
-    }
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        UpdateView();
-
-        base.OnNavigatedTo(args);
-    }
-
-    private void UpdateView()
-    {
-        splits = _timerService.GetTimes();
-
-        var children = Summary.Children.ToList();
-        foreach (var child in children)
-        {
-            Summary.Remove(child);
-        }
-
-        foreach (TimeSpan intermediate in splits)
-        {
-            Label interLabel = new Label();
-            interLabel.Text = intermediate.ToString("ss'.'fff");
-            interLabel.FontSize = 32;
-            Summary.Add(interLabel);
-        }
-
-        Summary.Add(new Label
-        {
-            Text = splits.Sum().ToString("mm':'ss'.'fff"),
-            FontSize = 32
-        });
-
-        SummaryView.Layout(Summary.Bounds);
+        BindingContext = this;
     }
 
     private async void OnStartClickedAsync(object sender, EventArgs e)
     {
-        _timerService.Start();
-
         await Shell.Current.GoToAsync("//TimerPage");
     }
 }

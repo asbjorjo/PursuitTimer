@@ -13,11 +13,15 @@
         <ScrollView
             Grid.Row="0"
             x:Name="SummaryView">
-            <StackLayout
-                    x:Name="Summary">
+            <StackLayout x:Name="Summary" BindableLayout.ItemsSource="{Binding Splits}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" FontSize="32"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
             </StackLayout>
         </ScrollView>
- 
+
         <Button
             Grid.Row="1"
             x:Name="StartBtn"

@@ -1,9 +1,17 @@
-﻿namespace PursuitTimer.Shared.Services
+﻿using PursuitTimer.Shared.Model;
+
+namespace PursuitTimer.Shared.Services
 {
     public class TimerService
     {
         private bool running = false;
         private List<DateTime> times = new();
+        private List<SplitTime> splits = new();
+
+        public List<SplitTime> Splits
+        {
+            get => splits;
+        }
 
         public void Start()
         {
@@ -19,7 +27,16 @@
 
         public long MarkTime()
         {
-            times.Add(DateTime.Now);
+            var time = DateTime.UtcNow;
+
+            if (times.Count > 0)
+            {
+                var split = time - times.Last();
+                
+                splits.Add(new SplitTime(time, split, splits.Count > 0 ? split - splits.Last().Split : default));
+            }
+            
+            times.Add(time);
 
             int n = times.Count;
 
@@ -41,7 +58,8 @@
         public void Reset()
         {
             Stop();
-            times.Clear();
+            times = new();
+            splits = new();
         }
 
         public bool IsRunning()

@@ -8,8 +8,7 @@ public partial class TimerPage : ContentPage
 
     readonly TimerService _timerService;
     readonly TapGestureRecognizer _splitTap;
-    List<TimeSpan> splits = new();
-
+    
     public TimerPage(TimerService timerService)
     {
         _timerService = timerService;
@@ -26,6 +25,11 @@ public partial class TimerPage : ContentPage
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        if (!_timerService.IsRunning())
+        {
+            _timerService.Start();
+        }
+
         DeviceDisplay.KeepScreenOn = true;
 
         base.OnNavigatedTo(args);
@@ -44,13 +48,11 @@ public partial class TimerPage : ContentPage
     {
         _timerService.MarkTime();
 
-        splits = _timerService.GetTimes();
-
         double ratio = TimerLayout.Width / LastSplitLabel.Height;
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
         LastSplitLabel.FontSize = fontSize;
-        LastSplitLabel.Text = splits.Last().ToString("ss'.'fff");
+        LastSplitLabel.Text = _timerService.Splits.Last().Split.ToString("ss'.'fff");
     }
 
     private async void OnStopClicked(object sender, EventArgs e)
@@ -61,6 +63,11 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.KeepScreenOn = false;
 
-        await Shell.Current.GoToAsync("//SummaryPage");
+        var navigationParameters = new Dictionary<string, object>
+        {
+            {"Splits", _timerService.Splits}
+        };
+
+        await Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
     }
 }
