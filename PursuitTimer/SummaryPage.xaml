@@ -16,7 +16,20 @@
             <StackLayout x:Name="Summary" BindableLayout.ItemsSource="{Binding Splits}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" FontSize="32"/>
+                        <HorizontalStackLayout>
+                            <Label
+                                Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
+                                FontFamily="RobotoMonoRegular"
+                                FontSize="32"
+                                Margin="15,0"
+                                HorizontalTextAlignment="End"/>
+                            <Label
+                                Text="{Binding DeltaPrevious, StringFormat='{0:ss}.{0:fff}'}" 
+                                FontFamily="RobotoMonoRegular"
+                                FontSize="32"
+                                Margin="15,0"
+                                HorizontalTextAlignment="End"/>
+                        </HorizontalStackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
