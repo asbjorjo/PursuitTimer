@@ -13,34 +13,17 @@ public partial class SummaryPage : ContentPage
         InitializeComponent();
 
         _timerService = timerService;
-        
-        splits = _timerService.GetTimes();
-
-        var children = Summary.Children.ToList();
-        foreach (var child in children)
-        {
-            Summary.Remove(child);
-        }
-
-        foreach (TimeSpan intermediate in splits)
-        {
-            Label interLabel = new Label();
-            interLabel.Text = intermediate.ToString("ss'.'fff");
-            interLabel.FontSize = 32;
-            Summary.Add(interLabel);
-        }
-
-        Summary.Add(new Label
-        {
-            Text = splits.Sum().ToString("mm':'ss'.'fff"),
-            FontSize = 32
-        });
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnNavigatedTo(args);
+        UpdateView();
 
+        base.OnNavigatedTo(args);
+    }
+
+    private void UpdateView()
+    {
         splits = _timerService.GetTimes();
 
         var children = Summary.Children.ToList();
@@ -62,6 +45,8 @@ public partial class SummaryPage : ContentPage
             Text = splits.Sum().ToString("mm':'ss'.'fff"),
             FontSize = 32
         });
+
+        SummaryView.Layout(Summary.Bounds);
     }
 
     private async void OnStartClickedAsync(object sender, EventArgs e)
