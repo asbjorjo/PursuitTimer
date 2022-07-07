@@ -53,8 +53,6 @@ public partial class SummaryPage : ContentPage
     {
         _timerService.Start();
 
-        DeviceDisplay.KeepScreenOn = true;
-
         await Shell.Current.GoToAsync("//TimerPage");
     }
 }

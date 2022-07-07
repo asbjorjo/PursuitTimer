@@ -23,7 +23,14 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
     }
-    
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        DeviceDisplay.KeepScreenOn = true;
+
+        base.OnNavigatedTo(args);
+    }
+
     private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
     {
         //double ratio = TimerLayout.Width / LastSplitLabel.Height;
