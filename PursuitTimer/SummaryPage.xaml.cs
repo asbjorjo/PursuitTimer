@@ -1,6 +1,4 @@
-using PursuitTimer.Shared.Extensions;
 using PursuitTimer.Shared.Model;
-using System.Runtime.CompilerServices;
 
 namespace PursuitTimer;
 
