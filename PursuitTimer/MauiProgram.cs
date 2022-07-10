@@ -1,4 +1,5 @@
-﻿using PursuitTimer.Shared.Services;
+﻿using PursuitTimer.Pages;
+using PursuitTimer.Shared.Services;
 
 namespace PursuitTimer;
 

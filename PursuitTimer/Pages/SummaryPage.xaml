@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
-             x:Class="PursuitTimer.SummaryPage"
+             x:Class="PursuitTimer.Pages.SummaryPage"
              Title="{x:Static res:AppResources.Summary}">
     <Grid 
         x:Name="TimerLayout">

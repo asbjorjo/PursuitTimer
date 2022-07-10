@@ -1,6 +1,4 @@
-﻿using PursuitTimer.Shared.Services;
-
-namespace PursuitTimer;
+﻿namespace PursuitTimer.Pages;
 
 public partial class MainPage : ContentPage
 {

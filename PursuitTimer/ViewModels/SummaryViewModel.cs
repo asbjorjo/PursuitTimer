@@ -1,6 +1,7 @@
 ﻿using PursuitTimer.Shared.Extensions;
+using PursuitTimer.Shared.Model;
 
-namespace PursuitTimer.Shared.Model
+namespace PursuitTimer.ViewModels
 {
     public class SummaryViewModel
     {

@@ -1,6 +1,6 @@
-using PursuitTimer.Shared.Model;
+using PursuitTimer.ViewModels;
 
-namespace PursuitTimer;
+namespace PursuitTimer.Pages;
 
 [QueryProperty(nameof(SummaryView), "SummaryView")]
 public partial class SummaryPage : ContentPage

@@ -1,8 +1,8 @@
 using PursuitTimer.Resources.Strings;
-using PursuitTimer.Shared.Model;
 using PursuitTimer.Shared.Services;
+using PursuitTimer.ViewModels;
 
-namespace PursuitTimer;
+namespace PursuitTimer.Pages;
 
 public partial class TimerPage : ContentPage
 {

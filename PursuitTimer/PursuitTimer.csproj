@@ -59,7 +59,7 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResources.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="SummaryPage.xaml.cs">
+	  <Compile Update="Pages\SummaryPage.xaml.cs">
 	    <DependentUpon>SummaryPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -76,10 +76,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="SummaryPage.xaml">
+	  <MauiXaml Update="Pages\SummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="TimerPage.xaml">
+	  <MauiXaml Update="Pages\TimerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
