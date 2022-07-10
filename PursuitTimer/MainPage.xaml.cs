@@ -4,12 +4,8 @@ namespace PursuitTimer;
 
 public partial class MainPage : ContentPage
 {
-    readonly TimerService _timerService;
-
-	public MainPage(TimerService timerService)
+	public MainPage()
 	{
-		_timerService = timerService;
-
         InitializeComponent();
 
         StartBtn.Clicked += OnStartClickedAsync;

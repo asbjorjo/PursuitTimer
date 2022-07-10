@@ -16,7 +16,6 @@ namespace PursuitTimer.Shared.Services
         public void Start()
         {
             Reset();
-            MarkTime();
             running = true;
         }
 
@@ -27,6 +26,11 @@ namespace PursuitTimer.Shared.Services
 
         public long MarkTime()
         {
+            if (!running)
+            {
+                Start();
+            }
+
             var time = DateTime.UtcNow;
 
             if (times.Count > 0)

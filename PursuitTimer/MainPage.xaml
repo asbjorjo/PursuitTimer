@@ -4,16 +4,18 @@
              x:Class="PursuitTimer.MainPage"
              x:Name="TimerPage">
 
-    <Grid 
+    <StackLayout
         x:Name="TimerLayout">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="64" />
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
             
         <Button
-            Grid.Row="1"
             x:Name="StartBtn"
-            Text="Start"/>
-    </Grid>
+            HeightRequest="64"
+            FontFamily="RobotoMonoRegular"
+            FontSize="24"
+            Text="Tidtaking"/>
+    </StackLayout>
 </ContentPage>

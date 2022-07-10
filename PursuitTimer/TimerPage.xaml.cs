@@ -8,7 +8,30 @@ public partial class TimerPage : ContentPage
 
     readonly TimerService _timerService;
     readonly TapGestureRecognizer _splitTap;
-    
+
+    public static readonly BindableProperty FontSizeProperty =
+        BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
+    public static readonly BindableProperty SplitTextProperty =
+        BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), "Start");
+
+    public double FontSize
+    {
+        get => (double)GetValue(FontSizeProperty);
+        set
+        {
+            SetValue(FontSizeProperty, value);
+        }
+    }
+    public string SplitText
+    {
+        get => (string)GetValue(SplitTextProperty);
+        set
+        {
+            SetValue(SplitTextProperty, value);
+        }
+    }
+
+
     public TimerPage(TimerService timerService)
     {
         _timerService = timerService;
@@ -21,45 +44,51 @@ public partial class TimerPage : ContentPage
         TimerLayout.GestureRecognizers.Add(_splitTap);
 
         DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
+
+        BindingContext = this;
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        if (!_timerService.IsRunning())
-        {
-            _timerService.Start();
-        }
-
         DeviceDisplay.KeepScreenOn = true;
 
         base.OnNavigatedTo(args);
+    }
+
+    private void UpdateFontSize()
+    {
+        double ratio = TimerLayout.Width / LastSplitLabel.Height;
+        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+
+        FontSize = fontSize;
     }
 
     private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
     {
         //double ratio = TimerLayout.Width / LastSplitLabel.Height;
         //double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
-        double fontSize = LastSplitLabel.Height / MinRatio;
 
-        LastSplitLabel.FontSize = fontSize;
+        UpdateFontSize();
     }
 
     private void OnSplitClicked(object sender, EventArgs e)
     {
         _timerService.MarkTime();
 
-        double ratio = TimerLayout.Width / LastSplitLabel.Height;
-        double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
+        UpdateFontSize();
 
-        LastSplitLabel.FontSize = fontSize;
-        LastSplitLabel.Text = _timerService.Splits.Last().Split.ToString("ss'.'fff");
+        if (_timerService.Splits.Count > 0)
+        {
+            SplitText = _timerService.Splits.Last().Split.ToString("ss'.'fff");
+        } else
+        {
+            SplitText = "Split";
+        }
     }
 
-    private async void OnStopClicked(object sender, EventArgs e)
+    private void OnStopClicked(object sender, EventArgs e)
     {
         _timerService.Stop();
-
-        LastSplitLabel.Text = "";
 
         DeviceDisplay.KeepScreenOn = false;
 
@@ -68,6 +97,8 @@ public partial class TimerPage : ContentPage
             {"Splits", _timerService.Splits}
         };
 
-        await Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
+        Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
+
+        SplitText = "Start";
     }
 }

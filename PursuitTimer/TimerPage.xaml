@@ -14,8 +14,10 @@
             Grid.Row="0"
             x:Name="LastSplitLabel"
             FontFamily="RobotoMonoRegular"
+            FontSize="{Binding FontSize}"
             VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"/>
+            HorizontalTextAlignment="Center"
+            Text="{Binding SplitText}"/>
 
         <ScrollView
             Grid.Row="0"
@@ -29,7 +31,9 @@
         <Button
             Grid.Row="1"
             x:Name="StopBtn"
-            Text="Stop"
+            FontFamily="RobotoMonoRegular"
+            FontSize="24"
+            Text="Avslutt"
             Clicked="OnStopClicked"/>
 
     </Grid>
