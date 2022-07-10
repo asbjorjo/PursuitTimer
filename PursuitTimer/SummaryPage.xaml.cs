@@ -2,18 +2,18 @@ using PursuitTimer.Shared.Model;
 
 namespace PursuitTimer;
 
-[QueryProperty(nameof(Splits), "Splits")]
+[QueryProperty(nameof(SummaryView), "SummaryView")]
 public partial class SummaryPage : ContentPage
 {
-    public static readonly BindableProperty SplitsProperty =
-        BindableProperty.Create("Splits", typeof(List<SplitTime>), typeof(SummaryPage), new List<SplitTime>());
+    public static readonly BindableProperty SummaryViewProperty =
+        BindableProperty.Create("SummaryView", typeof(SummaryViewModel), typeof(SummaryPage), new SummaryViewModel());
 
-    public List<SplitTime> Splits
+    public SummaryViewModel SummaryView
     {
-        get =>  (List<SplitTime>)GetValue(SplitsProperty);
+        get =>  (SummaryViewModel)GetValue(SummaryViewProperty);
         set 
         {
-            SetValue(SplitsProperty, value);
+            SetValue(SummaryViewProperty, value);
         }
     }
 

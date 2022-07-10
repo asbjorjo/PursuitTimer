@@ -1,3 +1,4 @@
+using PursuitTimer.Shared.Model;
 using PursuitTimer.Shared.Services;
 
 namespace PursuitTimer;
@@ -92,9 +93,11 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.KeepScreenOn = false;
 
+        SummaryViewModel summaryView = new SummaryViewModel(_timerService.Splits);
+
         var navigationParameters = new Dictionary<string, object>
         {
-            {"Splits", _timerService.Splits}
+            {"SummaryView", summaryView}
         };
 
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
