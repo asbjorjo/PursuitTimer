@@ -1,3 +1,4 @@
+using PursuitTimer.Resources.Strings;
 using PursuitTimer.Shared.Model;
 using PursuitTimer.Shared.Services;
 
@@ -13,7 +14,7 @@ public partial class TimerPage : ContentPage
     public static readonly BindableProperty FontSizeProperty =
         BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
     public static readonly BindableProperty SplitTextProperty =
-        BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), "Start");
+        BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), AppResources.Start);
 
     public double FontSize
     {
@@ -83,7 +84,7 @@ public partial class TimerPage : ContentPage
             SplitText = _timerService.Splits.Last().Split.ToString("ss'.'fff");
         } else
         {
-            SplitText = "Split";
+            SplitText = AppResources.Split;
         }
     }
 
@@ -102,6 +103,6 @@ public partial class TimerPage : ContentPage
 
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
-        SplitText = "Start";
+        SplitText = AppResources.Start;
     }
 }
