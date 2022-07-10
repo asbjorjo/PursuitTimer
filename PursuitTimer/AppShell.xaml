@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PursuitTimer"
+    xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
@@ -13,12 +14,12 @@
 
     <ShellContent
         Shell.NavBarIsVisible="False"
-        Title="Timer"
+        Title="{x:Static res:AppResources.Timing}"
         ContentTemplate="{DataTemplate local:TimerPage}"
         Route="TimerPage" />
 
     <ShellContent 
-        Title="Summary"
+        Title="{x:Static res:AppResources.Summary}"
         ContentTemplate="{DataTemplate local:SummaryPage}"
         Route="SummaryPage"/>
 </Shell>

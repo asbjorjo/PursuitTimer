@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.MainPage"
              x:Name="TimerPage">
 
@@ -16,6 +17,6 @@
             HeightRequest="64"
             FontFamily="RobotoMonoRegular"
             FontSize="24"
-            Text="Tidtaking"/>
+            Text="{x:Static res:AppResources.Timing}"/>
     </StackLayout>
 </ContentPage>
