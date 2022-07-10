@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="End" xml:space="preserve">
-    <value>End</value>
+    <value>Avslutt</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Splitt</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="Stop" xml:space="preserve">
-    <value>Stop</value>
+    <value>Stopp</value>
   </data>
   <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
+    <value>Sammendrag</value>
   </data>
   <data name="Timing" xml:space="preserve">
-    <value>Timing</value>
+    <value>Tidtaking</value>
   </data>
 </root>
