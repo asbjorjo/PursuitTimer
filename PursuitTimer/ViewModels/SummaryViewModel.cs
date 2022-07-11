@@ -1,5 +1,5 @@
-﻿using PursuitTimer.Shared.Extensions;
-using PursuitTimer.Shared.Model;
+﻿using PursuitTimer.Extensions;
+using PursuitTimer.Model;
 
 namespace PursuitTimer.ViewModels
 {

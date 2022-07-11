@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PursuitTimer.Shared.Extensions
+namespace PursuitTimer.Extensions
 {
     public static class TimeSpanExtension
     {

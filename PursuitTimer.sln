@@ -5,10 +5,6 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PursuitTimer", "PursuitTimer\PursuitTimer.csproj", "{F8328C60-47E3-4D27-9844-524C6F086D1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PursuitTimer.Blazor", "PursuitTimer.Blazor\PursuitTimer.Blazor.csproj", "{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PursuitTimer.Shared", "PursuitTimer.Shared\PursuitTimer.Shared.csproj", "{87B9BE8B-B8D1-403B-8D7D-167E15927263}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,16 +17,6 @@ Global
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A44AEE7-71F5-4C5A-8FE7-D45C7A7EE2EF}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87B9BE8B-B8D1-403B-8D7D-167E15927263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

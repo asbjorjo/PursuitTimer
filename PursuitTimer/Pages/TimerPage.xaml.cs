@@ -1,5 +1,5 @@
 using PursuitTimer.Resources.Strings;
-using PursuitTimer.Shared.Services;
+using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;

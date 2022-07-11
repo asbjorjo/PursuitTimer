@@ -1,4 +1,4 @@
-﻿namespace PursuitTimer.Shared.Model
+﻿namespace PursuitTimer.Model
 {
     public class SplitTime
     {

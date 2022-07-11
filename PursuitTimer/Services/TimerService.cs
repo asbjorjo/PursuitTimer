@@ -1,6 +1,6 @@
-﻿using PursuitTimer.Shared.Model;
+﻿using PursuitTimer.Model;
 
-namespace PursuitTimer.Shared.Services
+namespace PursuitTimer.Services
 {
     public class TimerService
     {
@@ -30,7 +30,9 @@ namespace PursuitTimer.Shared.Services
             if (!running)
             {
                 Start();
-            } else {
+            }
+            else
+            {
                 var time = DateTime.UtcNow;
                 var split = Splits.Count > 0 ? time - splits.Last().Time : time - StartTime;
 
