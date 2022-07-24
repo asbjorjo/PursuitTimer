@@ -1,9 +1,18 @@
-﻿namespace PursuitTimer.Model
+﻿using PursuitTimer.Extensions;
+
+namespace PursuitTimer.Model
 {
     public class TimingSession
     {
         public DateTime StartTime { get; }
         public List<SplitTime> SplitTimes { get; }
+        public TimeSpan TotalTime { get => SplitTimes.Select(x => x.Split).Sum(); }
+
+        public TimingSession()
+        {
+            StartTime = DateTime.UtcNow;
+            SplitTimes = new();
+        }
 
         public TimingSession(DateTime startTime)
         {
