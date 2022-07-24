@@ -18,11 +18,11 @@
             Grid.Row="0"
             x:Name="LastSplitLabel"
             FontFamily="B612Mono"
-            FontSize="{Binding FontSize}"
-            BackgroundColor="{Binding SplitColor}"
+            FontSize="{Binding Fontsize}"
+            BackgroundColor="{Binding Splitcolor}"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
-            Text="{Binding SplitText}" />
+            Text="{Binding Splittext}" />
 
         <Button
             Grid.Row="1"

@@ -10,6 +10,8 @@ public partial class TimerPage : ContentPage
 
     readonly TimerService _timerService;
 
+    TimerViewModel viewModel => BindingContext as TimerViewModel;
+
     public static readonly BindableProperty FontSizeProperty =
         BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
     public static readonly BindableProperty SplitColorProperty =
@@ -51,7 +53,7 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
 
-        BindingContext = this;
+        BindingContext = new TimerViewModel();
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
@@ -65,6 +67,7 @@ public partial class TimerPage : ContentPage
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
         FontSize = fontSize;
+        viewModel.Fontsize = FontSize;
     }
 
     private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
@@ -85,6 +88,7 @@ public partial class TimerPage : ContentPage
             var splitTime = _timerService.TimingSession.SplitTimes.Last();
 
             SplitText = splitTime.Split.ToString("ss'.'fff");
+            viewModel.Splittext = SplitText;
 
             if (splitTime.DeltaPrevious > TimeSpan.Zero)
             {
@@ -92,10 +96,12 @@ public partial class TimerPage : ContentPage
             } else {
                 SplitColor = Colors.LightGreen;
             }
+            viewModel.Splitcolor = SplitColor;
         }
         else
         {
             SplitText = AppResources.Split;
+            viewModel.Splittext = SplitText;
         }
     }
 
@@ -115,6 +121,8 @@ public partial class TimerPage : ContentPage
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
         SplitText = AppResources.Start;
+        viewModel.Splittext= SplitText;
         SplitColor = Color.FromArgb(Colors.White.ToArgbHex());
+        viewModel.Splitcolor = SplitColor;
     }
 }
