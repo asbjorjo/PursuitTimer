@@ -47,7 +47,7 @@
             x:Name="StartBtn"
             FontFamily="RobotoMonoRegular"
             FontSize="24"
-            Text="{x:Static res:AppResources.Start}"
+            Text="{x:Static res:AppResources.Timing}"
             Clicked="OnStartClickedAsync"/>
 
     </Grid>
