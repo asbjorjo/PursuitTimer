@@ -6,13 +6,15 @@ namespace PursuitTimer.Pages;
 
 public partial class TimerPage : ContentPage
 {
-    private const double MinRatio = 4.2;
+    private const double MinRatio = 3.8;
 
     readonly TimerService _timerService;
     readonly TapGestureRecognizer _splitTap;
 
     public static readonly BindableProperty FontSizeProperty =
         BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
+    public static readonly BindableProperty SplitColorProperty =
+        BindableProperty.Create("SplitColor", typeof(Color), typeof(TimerPage), Colors.White);
     public static readonly BindableProperty SplitTextProperty =
         BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), AppResources.Start);
 
@@ -22,6 +24,14 @@ public partial class TimerPage : ContentPage
         set
         {
             SetValue(FontSizeProperty, value);
+        }
+    }
+    public Color SplitColor
+    {
+        get => (Color)GetValue(SplitColorProperty);
+        set
+        {
+            SetValue(SplitColorProperty, value);
         }
     }
     public string SplitText
@@ -80,21 +90,14 @@ public partial class TimerPage : ContentPage
         {
             var splitTime = _timerService.TimingSession.SplitTimes.Last();
 
-            var splitText = splitTime.Split.ToString("ss'.'fff");
+            SplitText = splitTime.Split.ToString("ss'.'fff");
 
-            if (splitTime.DeltaPrevious < TimeSpan.Zero)
+            if (splitTime.DeltaPrevious > TimeSpan.Zero)
             {
-                splitText += "-";
-            } else if (splitTime.DeltaPrevious > TimeSpan.Zero)
-            {
-                splitText += "+";
-            } else
-            {
-                splitText += " ";
+                SplitColor = Colors.Coral;
+            } else {
+                SplitColor = Colors.LightGreen;
             }
-
-            SplitText = splitText;
-
         } else
         {
             SplitText = AppResources.Split;
@@ -117,5 +120,6 @@ public partial class TimerPage : ContentPage
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
         SplitText = AppResources.Start;
+        SplitColor = Colors.White;
     }
 }
