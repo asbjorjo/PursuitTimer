@@ -5,24 +5,30 @@ namespace PursuitTimer.ViewModels
 {
     public class SummaryViewModel
     {
-        public SummaryViewModel()
-        {
-            SplitTimes = new();
-        }
-
-        public SummaryViewModel(List<SplitTime> splitTimes)
-        {
-            SplitTimes = splitTimes;
-        }
-
-        public List<SplitTime> SplitTimes
+        public TimingSession TimingSession
         {
             get;
         }
 
+        public List<SplitTime> SplitTimes
+        {
+            get => TimingSession.SplitTimes;
+        }
+
         public TimeSpan SumTimes
         {
-            get => SplitTimes.Select(x => x.Split).Sum();
+            get => TimingSession.TotalTime;
         }
+
+        public SummaryViewModel()
+        {
+            TimingSession = new();
+        }
+
+        public SummaryViewModel(TimingSession timingSession)
+        {
+            TimingSession = timingSession;
+        }
+
     }
 }

@@ -94,7 +94,7 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.KeepScreenOn = false;
 
-        SummaryViewModel summaryView = new SummaryViewModel(_timerService.TimingSession.SplitTimes);
+        SummaryViewModel summaryView = new SummaryViewModel(_timerService.TimingSession);
 
         var navigationParameters = new Dictionary<string, object>
         {
