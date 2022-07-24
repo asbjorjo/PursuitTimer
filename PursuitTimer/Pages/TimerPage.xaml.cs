@@ -6,7 +6,7 @@ namespace PursuitTimer.Pages;
 
 public partial class TimerPage : ContentPage
 {
-    private const double MinRatio = 4.0;
+    private const double MinRatio = 4.2;
 
     readonly TimerService _timerService;
     readonly TapGestureRecognizer _splitTap;
@@ -67,9 +67,6 @@ public partial class TimerPage : ContentPage
 
     private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
     {
-        //double ratio = TimerLayout.Width / LastSplitLabel.Height;
-        //double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
-
         UpdateFontSize();
     }
 
@@ -81,7 +78,23 @@ public partial class TimerPage : ContentPage
 
         if (_timerService.TimingSession.SplitTimes.Count > 0)
         {
-            SplitText = _timerService.TimingSession.SplitTimes.Last().Split.ToString("ss'.'fff");
+            var splitTime = _timerService.TimingSession.SplitTimes.Last();
+
+            var splitText = splitTime.Split.ToString("ss'.'fff");
+
+            if (splitTime.DeltaPrevious < TimeSpan.Zero)
+            {
+                splitText += "-";
+            } else if (splitTime.DeltaPrevious > TimeSpan.Zero)
+            {
+                splitText += "+";
+            } else
+            {
+                splitText += " ";
+            }
+
+            SplitText = splitText;
+
         } else
         {
             SplitText = AppResources.Split;
