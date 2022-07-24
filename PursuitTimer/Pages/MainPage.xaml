@@ -7,11 +7,6 @@
 
     <StackLayout
         x:Name="TimerLayout">
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="64" />
-        </Grid.RowDefinitions>-->
-            
         <Button
             x:Name="StartBtn"
             HeightRequest="64"
