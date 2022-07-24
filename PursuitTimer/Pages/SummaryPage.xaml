@@ -8,62 +8,73 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="neutralTemplate">
-                <HorizontalStackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
                     <Label
-                                Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                    <Label
-                                Text="{Binding DeltaPrevious, StringFormat=' {0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                </HorizontalStackLayout>
+                            Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="Start"/>
+                    <Label  Grid.Column="1"
+                            Text="{Binding DeltaPrevious, StringFormat=' {0:ss}.{0:fff}'}" 
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="End"/>
+                </Grid>
             </DataTemplate>
             <DataTemplate x:Key="positiveTemplate">
-                <HorizontalStackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
                     <Label
-                                Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                    <Label
-                                Text="{Binding DeltaPrevious, StringFormat='+{0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                </HorizontalStackLayout>
+                            Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="Start"/>
+                    <Label  Grid.Column="1"
+                            Text="{Binding DeltaPrevious, StringFormat='+{0:ss}.{0:fff}'}" 
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="End"/>
+                </Grid>
             </DataTemplate>
             <DataTemplate x:Key="negativeTemplate">
-                <HorizontalStackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
                     <Label
-                                Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                    <Label
-                                Text="{Binding DeltaPrevious, StringFormat='-{0:ss}.{0:fff}'}" 
-                                FontFamily="RobotoMonoRegular"
-                                FontSize="32"
-                                Margin="15,0"
-                                HorizontalTextAlignment="End"/>
-                </HorizontalStackLayout>
+                            Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="Start"/>
+                    <Label  Grid.Column="1"
+                            Text="{Binding DeltaPrevious, StringFormat='-{0:ss}.{0:fff}'}"
+                            FontFamily="RobotoMonoRegular"
+                            FontSize="32"
+                            Margin="15,0"
+                            HorizontalTextAlignment="End"/>
+                </Grid>
             </DataTemplate>
-            <tmplts:SplitSummaryDataTemplateSelector x:Key="SplitSummaryTemplate"
-                                                     NeutralSplit="{StaticResource neutralTemplate}"
-                                                     NegativeSplit="{StaticResource negativeTemplate}"
-                                                     PositiveSplit="{StaticResource positiveTemplate}" />
+            <tmplts:SplitDataTemplateSelector x:Key="SplitSummaryTemplate"
+                                              NeutralSplit="{StaticResource neutralTemplate}"
+                                              NegativeSplit="{StaticResource negativeTemplate}"
+                                              PositiveSplit="{StaticResource positiveTemplate}" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <Grid 
-        x:Name="TimerLayout">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="32" />
@@ -72,9 +83,7 @@
 
         <ScrollView
             Grid.Row="0">
-            <StackLayout x:Name="Summary" 
-                         BindableLayout.ItemsSource="{Binding Path=SummaryView.SplitTimes}" 
-                         BindableLayout.ItemTemplateSelector="{StaticResource SplitSummaryTemplate}" />
+            <CollectionView ItemsSource="{Binding Path=SummaryView.SplitTimes}" ItemTemplate="{StaticResource SplitSummaryTemplate}" />
         </ScrollView>
         <Label
             Grid.Row="1"

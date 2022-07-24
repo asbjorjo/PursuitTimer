@@ -1,34 +1,33 @@
 ﻿using PursuitTimer.Extensions;
 using PursuitTimer.Model;
 
-namespace PursuitTimer.ViewModels
+namespace PursuitTimer.ViewModels;
+
+public class SummaryViewModel
 {
-    public class SummaryViewModel
+    public TimingSession TimingSession
     {
-        public TimingSession TimingSession
-        {
-            get;
-        }
-
-        public List<SplitTime> SplitTimes
-        {
-            get => TimingSession.SplitTimes;
-        }
-
-        public TimeSpan SumTimes
-        {
-            get => TimingSession.TotalTime;
-        }
-
-        public SummaryViewModel()
-        {
-            TimingSession = new();
-        }
-
-        public SummaryViewModel(TimingSession timingSession)
-        {
-            TimingSession = timingSession;
-        }
-
+        get;
     }
+
+    public List<SplitTime> SplitTimes
+    {
+        get => TimingSession.SplitTimes;
+    }
+
+    public TimeSpan SumTimes
+    {
+        get => TimingSession.TotalTime;
+    }
+
+    public SummaryViewModel()
+    {
+        TimingSession = new();
+    }
+
+    public SummaryViewModel(TimingSession timingSession)
+    {
+        TimingSession = timingSession;
+    }
+
 }

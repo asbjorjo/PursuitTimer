@@ -2,7 +2,7 @@
 
 namespace PursuitTimer.Templates;
 
-public class SplitSummaryDataTemplateSelector : DataTemplateSelector
+public class SplitDataTemplateSelector : DataTemplateSelector
 {
     public DataTemplate PositiveSplit { get; set; }
     public DataTemplate NegativeSplit { get; set; }
