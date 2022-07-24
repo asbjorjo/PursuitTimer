@@ -10,11 +10,14 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="64" />
         </Grid.RowDefinitions>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnSplitClicked" />
+        </Grid.GestureRecognizers>
 
         <Label
             Grid.Row="0"
             x:Name="LastSplitLabel"
-            FontFamily="RobotoMonoRegular"
+            FontFamily="B612Mono"
             FontSize="{Binding FontSize}"
             BackgroundColor="{Binding SplitColor}"
             VerticalTextAlignment="Center"
@@ -24,7 +27,7 @@
         <Button
             Grid.Row="1"
             x:Name="StopBtn"
-            FontFamily="RobotoMonoRegular"
+            FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.End}"
             Clicked="OnStopClicked"/>

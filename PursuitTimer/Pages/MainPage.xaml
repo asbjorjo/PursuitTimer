@@ -10,7 +10,7 @@
         <Button
             x:Name="StartBtn"
             HeightRequest="64"
-            FontFamily="RobotoMonoRegular"
+            FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Timing}"/>
     </StackLayout>

@@ -6,10 +6,9 @@ namespace PursuitTimer.Pages;
 
 public partial class TimerPage : ContentPage
 {
-    private const double MinRatio = 3.8;
+    private const double MinRatio = 3.9;
 
     readonly TimerService _timerService;
-    readonly TapGestureRecognizer _splitTap;
 
     public static readonly BindableProperty FontSizeProperty =
         BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
@@ -47,13 +46,8 @@ public partial class TimerPage : ContentPage
     public TimerPage(TimerService timerService)
     {
         _timerService = timerService;
-        TapGestureRecognizer tapGestureRecognizer = new();
-        tapGestureRecognizer.Tapped += OnSplitClicked;
-        _splitTap = tapGestureRecognizer;
 
         InitializeComponent();
-
-        TimerLayout.GestureRecognizers.Add(_splitTap);
 
         DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
 
