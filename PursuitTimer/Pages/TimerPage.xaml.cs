@@ -79,9 +79,9 @@ public partial class TimerPage : ContentPage
 
         UpdateFontSize();
 
-        if (_timerService.Splits.Count > 0)
+        if (_timerService.TimingSession.SplitTimes.Count > 0)
         {
-            SplitText = _timerService.Splits.Last().Split.ToString("ss'.'fff");
+            SplitText = _timerService.TimingSession.SplitTimes.Last().Split.ToString("ss'.'fff");
         } else
         {
             SplitText = AppResources.Split;
@@ -94,7 +94,7 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.KeepScreenOn = false;
 
-        SummaryViewModel summaryView = new SummaryViewModel(_timerService.Splits);
+        SummaryViewModel summaryView = new SummaryViewModel(_timerService.TimingSession.SplitTimes);
 
         var navigationParameters = new Dictionary<string, object>
         {
