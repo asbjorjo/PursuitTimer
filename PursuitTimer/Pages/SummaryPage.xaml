@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:PursuitTimer.Model"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              xmlns:tmplts="clr-namespace:PursuitTimer.Templates"
              x:Class="PursuitTimer.Pages.SummaryPage"
              Title="{x:Static res:AppResources.Summary}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="neutralTemplate">
+            <DataTemplate x:Key="neutralTemplate" x:DataType="model:SplitTime">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
@@ -27,7 +28,7 @@
                             HorizontalTextAlignment="End"/>
                 </Grid>
             </DataTemplate>
-            <DataTemplate x:Key="positiveTemplate">
+            <DataTemplate x:Key="positiveTemplate" x:DataType="model:SplitTime">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
@@ -47,7 +48,7 @@
                             HorizontalTextAlignment="End"/>
                 </Grid>
             </DataTemplate>
-            <DataTemplate x:Key="negativeTemplate">
+            <DataTemplate x:Key="negativeTemplate" x:DataType="model:SplitTime">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
