@@ -5,7 +5,7 @@ namespace PursuitTimer.Services
     public class TimerService
     {
         private bool running = false;
-        private TimingSession timingSession;
+        private TimingSession timingSession = new();
         
         public TimingSession TimingSession
         {
