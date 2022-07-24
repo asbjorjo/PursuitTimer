@@ -88,9 +88,9 @@ public partial class TimerPage : ContentPage
 
             if (splitTime.DeltaPrevious > TimeSpan.Zero)
             {
-                SplitColor = Colors.Coral;
+                SplitColor = Color.FromArgb(Colors.Coral.ToArgbHex());
             } else {
-                SplitColor = Colors.LightGreen;
+                SplitColor = Color.FromArgb(Colors.LightGreen.ToArgbHex());
             }
         } else
         {
@@ -114,6 +114,6 @@ public partial class TimerPage : ContentPage
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
         SplitText = AppResources.Start;
-        SplitColor = Colors.White;
+        SplitColor = Color.FromArgb(Colors.White.ToArgbHex());
     }
 }
