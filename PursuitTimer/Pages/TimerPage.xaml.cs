@@ -62,8 +62,6 @@ public partial class TimerPage : ContentPage
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        DeviceDisplay.KeepScreenOn = true;
-
         base.OnNavigatedTo(args);
     }
 
@@ -82,6 +80,8 @@ public partial class TimerPage : ContentPage
 
     private void OnSplitClicked(object sender, EventArgs e)
     {
+        DeviceDisplay.KeepScreenOn = true;
+
         _timerService.MarkTime();
 
         UpdateFontSize();
