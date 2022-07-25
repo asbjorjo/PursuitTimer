@@ -9,41 +9,7 @@ public partial class TimerPage : ContentPage
     private const double MinRatio = 3.9;
 
     readonly TimerService _timerService;
-
     TimerViewModel viewModel => BindingContext as TimerViewModel;
-
-    public static readonly BindableProperty FontSizeProperty =
-        BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
-    public static readonly BindableProperty SplitColorProperty =
-        BindableProperty.Create("SplitColor", typeof(Color), typeof(TimerPage), Colors.Transparent);
-    public static readonly BindableProperty SplitTextProperty =
-        BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), AppResources.Start);
-
-    public double FontSize
-    {
-        get => (double)GetValue(FontSizeProperty);
-        set
-        {
-            SetValue(FontSizeProperty, value);
-        }
-    }
-    public Color SplitColor
-    {
-        get => (Color)GetValue(SplitColorProperty);
-        set
-        {
-            SetValue(SplitColorProperty, value);
-        }
-    }
-    public string SplitText
-    {
-        get => (string)GetValue(SplitTextProperty);
-        set
-        {
-            SetValue(SplitTextProperty, value);
-        }
-    }
-
 
     public TimerPage(TimerService timerService)
     {
@@ -68,8 +34,7 @@ public partial class TimerPage : ContentPage
         double ratio = TimerLayout.Width / LastSplitLabel.Height;
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
-        FontSize = fontSize;
-        viewModel.Fontsize = FontSize;
+        viewModel.Fontsize = fontSize;
     }
 
     private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
@@ -89,21 +54,13 @@ public partial class TimerPage : ContentPage
         {
             var splitTime = _timerService.TimingSession.SplitTimes.Last();
 
-            SplitText = splitTime.Split.ToString("ss'.'fff");
-            viewModel.Splittext = SplitText;
+            viewModel.Splittext = splitTime.Split.ToString("ss'.'fff");
 
-            if (splitTime.DeltaPrevious > TimeSpan.Zero)
-            {
-                SplitColor = Colors.Coral;
-            } else {
-                SplitColor = Colors.LightGreen;
-            }
-            viewModel.Splitcolor = SplitColor;
+            viewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
         }
         else
         {
-            SplitText = AppResources.Split;
-            viewModel.Splittext = SplitText;
+            viewModel.Splittext = AppResources.Split;
         }
     }
 
@@ -122,9 +79,7 @@ public partial class TimerPage : ContentPage
 
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
-        SplitText = AppResources.Start;
-        viewModel.Splittext= SplitText;
-        SplitColor = Colors.Transparent;
-        viewModel.Splitcolor = SplitColor;
+        viewModel.Splittext = AppResources.Start;
+        viewModel.Splitcolor = Colors.Transparent;
     }
 }
