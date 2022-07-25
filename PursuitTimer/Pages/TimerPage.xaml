@@ -23,7 +23,11 @@
             HorizontalTextAlignment="Center">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="{Binding Splittext}" BackgroundColor="{Binding Splitcolor}" />
+                    <Span
+                          FontFamily="B612Mono"
+                          FontSize="{Binding Fontsize}"
+                          BackgroundColor="{Binding Splitcolor}"
+                          Text="{Binding Splittext}" />
                 </FormattedString>
             </Label.FormattedText>
         </Label>
