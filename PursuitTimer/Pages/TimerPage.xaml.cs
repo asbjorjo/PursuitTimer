@@ -17,8 +17,6 @@ public partial class TimerPage : ContentPage
 
         InitializeComponent();
 
-        DeviceDisplay.MainDisplayInfoChanged += DeviceDisplay_MainDisplayInfoChanged;
-
         BindingContext = new TimerViewModel();
     }
 
@@ -35,11 +33,6 @@ public partial class TimerPage : ContentPage
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
         viewModel.Fontsize = fontSize;
-    }
-
-    private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
-    {
-        UpdateFontSize();
     }
 
     private void OnSplitClicked(object sender, EventArgs e)
