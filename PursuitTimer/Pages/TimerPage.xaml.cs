@@ -56,9 +56,11 @@ public partial class TimerPage : ContentPage
         BindingContext = new TimerViewModel();
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnSizeAllocated(double width, double height)
     {
-        base.OnNavigatedTo(args);
+        base.OnSizeAllocated(width, height);
+
+        UpdateFontSize();
     }
 
     private void UpdateFontSize()
