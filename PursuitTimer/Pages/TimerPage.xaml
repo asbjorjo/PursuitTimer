@@ -26,7 +26,7 @@
                     <Span Text="{Binding Splittext}" BackgroundColor="{Binding Splitcolor}" />
                 </FormattedString>
             </Label.FormattedText>
-        </Label
+        </Label>
 
         <Button
             Grid.Row="1"
