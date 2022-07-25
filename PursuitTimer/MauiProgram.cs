@@ -1,4 +1,5 @@
-﻿using PursuitTimer.Pages;
+using CommunityToolkit.Maui;
+using PursuitTimer.Pages;
 using PursuitTimer.Services;
 
 namespace PursuitTimer;
@@ -10,6 +11,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
