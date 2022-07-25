@@ -19,10 +19,14 @@
             x:Name="LastSplitLabel"
             FontFamily="B612Mono"
             FontSize="{Binding Fontsize}"
-            BackgroundColor="{Binding Splitcolor}"
             VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"
-            Text="{Binding Splittext}" />
+            HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding Splittext}" BackgroundColor="{Binding Splitcolor}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label
 
         <Button
             Grid.Row="1"
