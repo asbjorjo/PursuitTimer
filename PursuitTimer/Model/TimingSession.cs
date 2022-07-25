@@ -4,21 +4,10 @@ namespace PursuitTimer.Model
 {
     public class TimingSession
     {
-        public DateTime StartTime { get; }
-        public List<SplitTime> SplitTimes { get; }
+        public DateTime StartTime { get; } = DateTime.UtcNow;
+        public TimeSpan Target { get; set; } = TimeSpan.Zero;
+        public List<SplitTime> SplitTimes { get; } = new();
         public TimeSpan TotalTime { get => SplitTimes.Select(x => x.Split).Sum(); }
-
-        public TimingSession()
-        {
-            StartTime = DateTime.UtcNow;
-            SplitTimes = new();
-        }
-
-        public TimingSession(DateTime startTime)
-        {
-            StartTime = startTime;
-            SplitTimes = new();
-        }
 
         public void AddSplit()
         {
@@ -29,7 +18,11 @@ namespace PursuitTimer.Model
         {
             var split = SplitTimes.Count > 0 ? time - SplitTimes.Last().Time : time - StartTime;
 
-            SplitTimes.Add(new SplitTime(time, split, SplitTimes.Count > 0 ? split - SplitTimes.Last().Split : default));
+            SplitTimes.Add(new SplitTime(
+                time, 
+                split, 
+                SplitTimes.Count > 0 ? split - SplitTimes.Last().Split : default, 
+                Target > TimeSpan.Zero ? split - Target : default));
         }
     }
 }

@@ -49,7 +49,13 @@ public partial class TimerPage : ContentPage
 
             viewModel.Splittext = splitTime.Split.ToString("ss'.'fff");
 
-            viewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+            if (_timerService.TimingSession.Target > TimeSpan.Zero)
+            {
+                viewModel.Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+            } else
+            {
+                viewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+            }
         }
         else
         {
