@@ -7,7 +7,7 @@ namespace PursuitTimer.ViewModels;
 public partial class TimerViewModel : ObservableObject
 {
     [ObservableProperty]
-    private Color splitcolor = Colors.White;
+    private Color splitcolor = Colors.Transparent;
     [ObservableProperty]
     private SplitTime splittime;
     [ObservableProperty]

@@ -15,7 +15,7 @@ public partial class TimerPage : ContentPage
     public static readonly BindableProperty FontSizeProperty =
         BindableProperty.Create("FontSize", typeof(double), typeof(TimerPage), 32.0);
     public static readonly BindableProperty SplitColorProperty =
-        BindableProperty.Create("SplitColor", typeof(Color), typeof(TimerPage), Colors.White);
+        BindableProperty.Create("SplitColor", typeof(Color), typeof(TimerPage), Colors.Transparent);
     public static readonly BindableProperty SplitTextProperty =
         BindableProperty.Create("SplitText", typeof(string), typeof(TimerPage), AppResources.Start);
 
@@ -124,7 +124,7 @@ public partial class TimerPage : ContentPage
 
         SplitText = AppResources.Start;
         viewModel.Splittext= SplitText;
-        SplitColor = Color.FromArgb(Colors.White.ToArgbHex());
+        SplitColor = Colors.Transparent;
         viewModel.Splitcolor = SplitColor;
     }
 }
