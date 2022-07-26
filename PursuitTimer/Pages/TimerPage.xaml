@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:PursuitTimer.Converters"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.Pages.TimerPage"
              Title="TimerPage">
+    <ContentPage.Resources>
+        <conv:TimeSpanToStringConverter x:Key="TimeSpanConverter" />
+    </ContentPage.Resources>
+    
     <Grid 
         x:Name="TimerLayout">
         <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
             <RowDefinition Height="*" />
             <RowDefinition Height="64" />
         </Grid.RowDefinitions>
@@ -14,8 +20,14 @@
             <TapGestureRecognizer Tapped="OnSplitClicked" />
         </Grid.GestureRecognizers>
 
+        <Entry x:Name="TargetEntry" 
+               FontSize="24"
+               FontFamily="B612Mono"
+               Keyboard="Numeric" 
+               Text="{Binding Target, Converter={StaticResource TimeSpanConverter}, ConverterParameter='ss\\.fff'}" />
+
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             x:Name="LastSplitLabel"
             FontFamily="B612Mono"
             FontSize="{Binding Fontsize}"
@@ -33,7 +45,7 @@
         </Label>
 
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             x:Name="StopBtn"
             FontFamily="B612Mono"
             FontSize="24"

@@ -38,8 +38,10 @@ public partial class TimerPage : ContentPage
     private void OnSplitClicked(object sender, EventArgs e)
     {
         DeviceDisplay.KeepScreenOn = true;
+        TargetEntry.IsReadOnly = true;
 
         _timerService.MarkTime();
+        _timerService.TimingSession.Target = viewModel.Target;
 
         UpdateFontSize();
 
@@ -78,6 +80,7 @@ public partial class TimerPage : ContentPage
 
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
+        TargetEntry.IsReadOnly = false;
         viewModel.Splittext = AppResources.Start;
         viewModel.Splitcolor = Colors.Transparent;
     }

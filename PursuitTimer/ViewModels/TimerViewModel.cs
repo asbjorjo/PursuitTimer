@@ -14,4 +14,6 @@ public partial class TimerViewModel : ObservableObject
     private string splittext = AppResources.Start;
     [ObservableProperty]
     private double fontsize = 32;
+    [ObservableProperty]
+    private TimeSpan target = TimeSpan.Zero;
 }
