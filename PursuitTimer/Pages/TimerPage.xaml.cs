@@ -1,6 +1,7 @@
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
+using System.Globalization;
 
 namespace PursuitTimer.Pages;
 
@@ -17,7 +18,7 @@ public partial class TimerPage : ContentPage
 
         InitializeComponent();
 
-        BindingContext = new TimerViewModel();
+        BindingContext = new TimerViewModel(timerService.TimingSession);
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -41,7 +42,7 @@ public partial class TimerPage : ContentPage
         TargetEntry.IsReadOnly = true;
 
         _timerService.MarkTime();
-        _timerService.TimingSession.Target = viewModel.Target;
+        UpdateTarget();
 
         UpdateFontSize();
 
@@ -62,6 +63,20 @@ public partial class TimerPage : ContentPage
         else
         {
             viewModel.Splittext = AppResources.Split;
+        }
+    }
+
+    private void UpdateTarget()
+    {
+        double targetseconds;
+
+        if (double.TryParse(viewModel.Targetsplit?.Replace(',', '.'), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out targetseconds))
+        {
+            _timerService.SetTarget(TimeSpan.FromSeconds(targetseconds));
+        }
+        else
+        {
+            _timerService.SetTarget(TimeSpan.Zero);
         }
     }
 

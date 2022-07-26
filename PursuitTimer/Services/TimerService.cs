@@ -35,6 +35,11 @@ namespace PursuitTimer.Services
             }
         }
 
+        public void SetTarget(TimeSpan target)
+        {
+            TimingSession.Target = target;
+        }
+
         public bool IsRunning()
         {
             return running;

@@ -15,5 +15,15 @@ public partial class TimerViewModel : ObservableObject
     [ObservableProperty]
     private double fontsize = 32;
     [ObservableProperty]
-    private TimeSpan target = TimeSpan.Zero;
+    private string targetsplit = "00.000";
+
+    public TimerViewModel() { }
+
+    public TimerViewModel(TimingSession timingSession)
+    {
+        if (timingSession.Target > TimeSpan.Zero)
+        {
+            targetsplit = timingSession.Target.ToString("ss\\.fff");
+        }
+    }
 }
