@@ -21,8 +21,8 @@ namespace PursuitTimer.Model
 
         public void Reset()
         {
-            _splitTime.Clear();
             StartTime = DateTime.UtcNow;
+            _splitTime = new();
         }
         public void AddSplit()
         {
