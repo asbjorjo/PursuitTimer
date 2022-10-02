@@ -15,12 +15,6 @@
             <TapGestureRecognizer Tapped="OnSplitClicked" />
         </Grid.GestureRecognizers>
 
-        <Entry x:Name="TargetEntry" 
-               FontSize="24"
-               FontFamily="B612Mono"
-               Keyboard="Numeric" 
-               Text="{Binding Targetsplit}" />
-
         <Label
             Grid.Row="1"
             x:Name="LastSplitLabel"

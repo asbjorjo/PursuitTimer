@@ -70,6 +70,15 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oppsett.
+        /// </summary>
+        public static string Setup {
+            get {
+                return ResourceManager.GetString("Setup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Splitt.
         /// </summary>
         public static string Split {

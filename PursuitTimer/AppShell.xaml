@@ -13,6 +13,11 @@
         Route="MainPage" />
 
     <ShellContent
+        Title="{x:Static res:AppResources.Timing}"
+        ContentTemplate="{DataTemplate local:TimerSetupPage}"
+        Route="TimerSetupPage" />
+
+    <ShellContent
         Shell.NavBarIsVisible="False"
         Title="{x:Static res:AppResources.Timing}"
         ContentTemplate="{DataTemplate local:TimerPage}"

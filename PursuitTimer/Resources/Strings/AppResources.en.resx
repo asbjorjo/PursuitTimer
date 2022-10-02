@@ -120,6 +120,9 @@
   <data name="End" xml:space="preserve">
     <value>End</value>
   </data>
+  <data name="Setup" xml:space="preserve">
+    <value>Setup</value>
+  </data>
   <data name="Split" xml:space="preserve">
     <value>Split</value>
   </data>

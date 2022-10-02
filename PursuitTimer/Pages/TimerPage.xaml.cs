@@ -1,7 +1,6 @@
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
-using System.Globalization;
 
 namespace PursuitTimer.Pages;
 
@@ -10,7 +9,7 @@ public partial class TimerPage : ContentPage
     private const double MinRatio = 3.9;
 
     readonly TimerService _timerService;
-    TimerViewModel viewModel => BindingContext as TimerViewModel;
+    TimerViewModel ViewModel => BindingContext as TimerViewModel;
 
     public TimerPage(TimerService timerService)
     {
@@ -33,50 +32,34 @@ public partial class TimerPage : ContentPage
         double ratio = TimerLayout.Width / LastSplitLabel.Height;
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
-        viewModel.Fontsize = fontSize;
+        ViewModel.Fontsize = fontSize;
     }
 
     private void OnSplitClicked(object sender, EventArgs e)
     {
         DeviceDisplay.KeepScreenOn = true;
-        TargetEntry.IsReadOnly = true;
 
         _timerService.MarkTime();
-        UpdateTarget();
 
         UpdateFontSize();
 
         if (_timerService.TimingSession.SplitTimes.Count > 0)
         {
-            var splitTime = _timerService.TimingSession.SplitTimes.Last();
+            var splitTime = _timerService.TimingSession.SplitTimes[_timerService.TimingSession.SplitTimes.Count - 1];
 
-            viewModel.Splittext = splitTime.Split.ToString("ss'.'fff");
+            ViewModel.Splittext = splitTime.Split.ToString("ss'.'fff");
 
             if (_timerService.TimingSession.Target > TimeSpan.Zero)
             {
-                viewModel.Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+                ViewModel.Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
             } else
             {
-                viewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+                ViewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
             }
         }
         else
         {
-            viewModel.Splittext = AppResources.Split;
-        }
-    }
-
-    private void UpdateTarget()
-    {
-        double targetseconds;
-
-        if (double.TryParse(viewModel.Targetsplit?.Replace(',', '.'), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out targetseconds))
-        {
-            _timerService.SetTarget(TimeSpan.FromSeconds(targetseconds));
-        }
-        else
-        {
-            _timerService.SetTarget(TimeSpan.Zero);
+            ViewModel.Splittext = AppResources.Split;
         }
     }
 
@@ -86,7 +69,7 @@ public partial class TimerPage : ContentPage
 
         DeviceDisplay.KeepScreenOn = false;
 
-        SummaryViewModel summaryView = new SummaryViewModel(_timerService.TimingSession);
+        SummaryViewModel summaryView = new(_timerService.TimingSession);
 
         var navigationParameters = new Dictionary<string, object>
         {
@@ -95,8 +78,7 @@ public partial class TimerPage : ContentPage
 
         Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
 
-        TargetEntry.IsReadOnly = false;
-        viewModel.Splittext = AppResources.Start;
-        viewModel.Splitcolor = Colors.Transparent;
+        ViewModel.Splittext = AppResources.Start;
+        ViewModel.Splitcolor = Colors.Transparent;
     }
 }

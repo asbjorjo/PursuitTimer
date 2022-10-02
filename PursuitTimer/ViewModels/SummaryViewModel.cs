@@ -10,7 +10,7 @@ public class SummaryViewModel
         get;
     }
 
-    public List<SplitTime> SplitTimes
+    public IEnumerable<SplitTime> SplitTimes
     {
         get => TimingSession.SplitTimes;
     }

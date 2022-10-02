@@ -8,7 +8,7 @@ namespace PursuitTimer.Model
         private TimeSpan _target = TimeSpan.Zero;
 
         public IReadOnlyList<SplitTime> SplitTimes { get => _splitTime.AsReadOnly(); }
-        public DateTime StartTime { get; } = DateTime.UtcNow;
+        public DateTime StartTime { get; private set; } = DateTime.UtcNow;
         public TimeSpan Target
         { 
             get => _target; 
@@ -19,6 +19,11 @@ namespace PursuitTimer.Model
         }
         public TimeSpan TotalTime { get => _splitTime.Select(x => x.Split).Sum(); }
 
+        public void Reset()
+        {
+            _splitTime.Clear();
+            StartTime = DateTime.UtcNow;
+        }
         public void AddSplit()
         {
             AddSplit(DateTime.UtcNow);

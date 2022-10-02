@@ -8,10 +8,18 @@
     <StackLayout
         x:Name="TimerLayout">
         <Button
+            x:Name="SetupBtn"
+            HeightRequest="64"
+            FontFamily="B612Mono"
+            FontSize="24"
+            Text="{x:Static res:AppResources.Setup}"
+            Clicked="OnSetupClickedAsync"/>
+        <Button
             x:Name="StartBtn"
             HeightRequest="64"
             FontFamily="B612Mono"
             FontSize="24"
-            Text="{x:Static res:AppResources.Timing}"/>
+            Text="{x:Static res:AppResources.Timing}"
+            Clicked="OnStartClickedAsync"/>
     </StackLayout>
 </ContentPage>

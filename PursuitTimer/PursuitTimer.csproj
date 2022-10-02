@@ -54,6 +54,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\TimerSetupPage.xaml.cs">
+	    <DependentUpon>TimerSetupPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -77,6 +80,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\SummaryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\TimerSetupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\TimerPage.xaml">

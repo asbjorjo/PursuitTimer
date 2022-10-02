@@ -14,7 +14,7 @@ namespace PursuitTimer.Services
 
         public void Start()
         {
-            timingSession = new TimingSession();
+            timingSession.Reset();
             running = true;
         }
 
@@ -33,6 +33,11 @@ namespace PursuitTimer.Services
             {
                 timingSession.AddSplit();
             }
+        }
+
+        public void Reset()
+        {
+            timingSession = new();
         }
 
         public void SetTarget(TimeSpan target)
