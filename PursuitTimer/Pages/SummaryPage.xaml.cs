@@ -27,4 +27,9 @@ public partial class SummaryPage : ContentPage
     {
         await Shell.Current.GoToAsync("//TimerPage");
     }
+
+    private async void OnMainClickedAsync(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//MainPage");
+    }
 }

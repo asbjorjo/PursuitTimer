@@ -93,13 +93,28 @@
             Margin="15,0"
             Text="{Binding Path=SummaryView.SumTimes, StringFormat='{0:mm}:{0:ss}.{0:fff}'}"/>
 
-        <Button
-            Grid.Row="2"
-            x:Name="StartBtn"
-            FontFamily="B612Mono"
-            FontSize="24"
-            Text="{x:Static res:AppResources.Timing}"
-            Clicked="OnStartClickedAsync"/>
-
+        <Grid
+            Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="StartBtn"
+                FontFamily="B612Mono"
+                FontSize="24"
+                Text="{x:Static res:AppResources.Timing}"
+                Clicked="OnStartClickedAsync"/>
+            <Button
+                x:Name="MainBtn"
+                Grid.Column="1"
+                FontFamily="B612Mono"
+                FontSize="24"
+                Text="{x:Static res:AppResources.Main}"
+                Clicked="OnMainClickedAsync"/>
+        </Grid>
     </Grid>
 </ContentPage>

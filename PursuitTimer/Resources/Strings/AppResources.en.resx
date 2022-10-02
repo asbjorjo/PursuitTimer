@@ -123,6 +123,9 @@
   <data name="End" xml:space="preserve">
     <value>End</value>
   </data>
+  <data name="Main" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
@@ -130,7 +133,7 @@
     <value>Save</value>
   </data>
   <data name="Setup" xml:space="preserve">
-    <value>Setup</value>
+    <value>Set Target</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Split</value>

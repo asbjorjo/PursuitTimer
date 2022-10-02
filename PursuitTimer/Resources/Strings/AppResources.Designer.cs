@@ -79,6 +79,15 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meny.
+        /// </summary>
+        public static string Main {
+            get {
+                return ResourceManager.GetString("Main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tilbakestill.
         /// </summary>
         public static string Reset {
@@ -97,7 +106,7 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oppsett.
+        ///   Looks up a localized string similar to Sett Mål.
         /// </summary>
         public static string Setup {
             get {

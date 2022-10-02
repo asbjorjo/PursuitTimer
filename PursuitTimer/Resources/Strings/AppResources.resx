@@ -123,6 +123,9 @@
   <data name="End" xml:space="preserve">
     <value>Avslutt</value>
   </data>
+  <data name="Main" xml:space="preserve">
+    <value>Meny</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>Tilbakestill</value>
   </data>
@@ -130,7 +133,7 @@
     <value>Lagre</value>
   </data>
   <data name="Setup" xml:space="preserve">
-    <value>Oppsett</value>
+    <value>Sett Mål</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Splitt</value>
