@@ -70,6 +70,15 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tilbakestill.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oppsett.
         /// </summary>
         public static string Setup {
