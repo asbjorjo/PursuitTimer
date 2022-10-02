@@ -32,11 +32,19 @@ public partial class TimerSetupPage : ContentPage
             _timerService.SetTarget(TimeSpan.Zero);
         }
     }
+    private async void OnResetClickedAsync(object sender, EventArgs e)
+    {
+        viewModel.Targetsplit = string.Empty;
+    }
 
-    private async void OnTimeClickedAsync(object sender, EventArgs e)
+    private async void OnCancelClickedAsync(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//MainPage");
+    }
+    private async void OnSaveClickedAsync(object sender, EventArgs e)
     {
         _timerService.Reset();
         UpdateTarget();
-        await Shell.Current.GoToAsync("//TimerPage");
+        await Shell.Current.GoToAsync("//MainPage");
     }
 }

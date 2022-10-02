@@ -14,12 +14,28 @@
                Text="{Binding Targetsplit}" />
 
         <Button
-            Grid.Row="2"
-            x:Name="StopBtn"
+            x:Name="ResetBtn"
             FontFamily="B612Mono"
             FontSize="24"
-            Text="{x:Static res:AppResources.Timing}"
-            Clicked="OnTimeClickedAsync"/>
+            Text="{x:Static res:AppResources.Reset}"
+            Clicked="OnResetClickedAsync"/>
+
+        <StackLayout
+            x:Name="ConfirmationLayout"
+            Orientation="Horizontal">
+            <Button
+                x:Name="CancelBtn"
+                FontFamily="B612Mono"
+                FontSize="24"
+                Text="{x:Static res:AppResources.Cancel}"
+                Clicked="OnCancelClickedAsync"/>
+            <Button
+                x:Name="SaveBtn"
+                FontFamily="B612Mono"
+                FontSize="24"
+                Text="{x:Static res:AppResources.Save}"
+                Clicked="OnSaveClickedAsync"/>
+        </StackLayout>
 
     </StackLayout>
 </ContentPage>
