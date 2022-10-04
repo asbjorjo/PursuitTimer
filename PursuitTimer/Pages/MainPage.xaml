@@ -6,7 +6,9 @@
              x:Name="TimerPage">
 
     <StackLayout
-        x:Name="TimerLayout">
+        x:Name="TimerLayout"
+        Padding="2"
+        Spacing="2">
         <Button
             x:Name="SetupBtn"
             HeightRequest="64"
