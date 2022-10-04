@@ -4,36 +4,32 @@
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.Pages.TimerSetupPage"
              Title="{x:Static res:AppResources.Setup}">
-    <StackLayout 
-        x:Name="TimerSetupLayout">
-        
-        <Entry x:Name="TargetEntry" 
-               FontSize="24"
-               FontFamily="B612Mono"
-               Keyboard="Numeric" 
-               Text="{Binding Targetsplit}" />
+    <Grid
+        x:Name="TimerSetupLayout"
+        RowDefinitions="50,*,50">
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="0">
+            <Entry 
+                x:Name="TargetEntry"
+                FontSize="24"
+                FontFamily="B612Mono"
+                Keyboard="Numeric" 
+                Text="{Binding Targetsplit}" />
 
             <Button
                 x:Name="ResetBtn"
-                Grid.ColumnSpan="2"
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Reset}"
                 Clicked="OnResetClickedAsync"/>
+        </FlexLayout>
 
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="2">
             <Button
                 x:Name="CancelBtn"
-                Grid.Row="1"
+                FlexLayout.Basis="50%"
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Cancel}"
@@ -41,13 +37,12 @@
                 Clicked="OnCancelClickedAsync"/>
             <Button
                 x:Name="SaveBtn"
-                Grid.Row="1"
-                Grid.Column="1"
+                FlexLayout.Basis="50%"
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Save}"
                 Background="Green"
                 Clicked="OnSaveClickedAsync"/>
-        </Grid>
-    </StackLayout>
+        </FlexLayout>
+    </Grid>
 </ContentPage>
