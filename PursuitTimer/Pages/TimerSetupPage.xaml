@@ -37,6 +37,7 @@
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Cancel}"
+                Background="Red"
                 Clicked="OnCancelClickedAsync"/>
             <Button
                 x:Name="SaveBtn"
@@ -45,6 +46,7 @@
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Save}"
+                Background="Green"
                 Clicked="OnSaveClickedAsync"/>
         </Grid>
     </StackLayout>
