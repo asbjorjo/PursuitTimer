@@ -5,9 +5,9 @@
              x:Class="PursuitTimer.Pages.TimerPage"
              Title="{x:Static res:AppResources.Timing}">    
     <Grid 
-        x:Name="TimerLayout">
+        x:Name="TimerLayout"
+        BackgroundColor="{Binding Splitcolor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="64" />
             <RowDefinition Height="*" />
             <RowDefinition Height="64" />
         </Grid.RowDefinitions>
@@ -16,25 +16,15 @@
         </Grid.GestureRecognizers>
 
         <Label
-            Grid.Row="1"
             x:Name="LastSplitLabel"
             FontFamily="B612Mono"
             FontSize="{Binding Fontsize}"
             VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span
-                          FontFamily="B612Mono"
-                          FontSize="{Binding Fontsize}"
-                          BackgroundColor="{Binding Splitcolor}"
-                          Text="{Binding Splittext}" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+            HorizontalTextAlignment="Center"
+            Text="{Binding Splittext}"/>
 
         <Button
-            Grid.Row="2"
+            Grid.Row="1"
             x:Name="StopBtn"
             FontFamily="B612Mono"
             FontSize="24"
