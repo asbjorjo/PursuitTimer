@@ -21,6 +21,7 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddSingleton<TimerService>();
+        builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<TimerSetupPage>();
         builder.Services.AddTransient<TimerPage>();
 
