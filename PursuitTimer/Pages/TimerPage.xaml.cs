@@ -47,7 +47,7 @@ public partial class TimerPage : ContentPage
         {
             var splitTime = _timerService.TimingSession.SplitTimes[_timerService.TimingSession.SplitTimes.Count - 1];
 
-            ViewModel.Splittext = splitTime.Split.ToString("ss'.'fff");
+            ViewModel.Splittext = splitTime.Split.ToString("ss'.'ff");
 
             if (_timerService.TimingSession.Target > TimeSpan.Zero)
             {
