@@ -17,6 +17,14 @@
             Text="{x:Static res:AppResources.Setup}"
             Clicked="OnSetupClickedAsync"/>
         <Button
+            x:Name="SummaryBtn"
+            HeightRequest="64"
+            FontFamily="B612Mono"
+            FontSize="24"
+            Text="{x:Static res:AppResources.Summary}"
+            IsEnabled="{Binding ShowSummary}"
+            Clicked="OnSumaryClickedAsync"/>
+        <Button
             x:Name="StartBtn"
             HeightRequest="64"
             FontFamily="B612Mono"
