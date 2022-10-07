@@ -38,7 +38,7 @@ namespace PursuitTimer.Services
         public void Reset()
         {
             running = false;
-            timingSession = new();
+            timingSession.Reset();
         }
 
         public void SetTarget(TimeSpan target)
