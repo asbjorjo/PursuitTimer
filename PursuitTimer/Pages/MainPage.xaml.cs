@@ -48,6 +48,8 @@ public partial class MainPage : ContentPage
 
     private async void OnStartClickedAsync(object sender, EventArgs e)
     {
+        _timerService.Reset();
+
         await Shell.Current.GoToAsync("//TimerPage");
     }
 }
