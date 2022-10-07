@@ -80,6 +80,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="32" />
             <RowDefinition Height="64" />
+            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
 
         <ScrollView
@@ -107,14 +108,21 @@
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Timing}"
-                Clicked="OnStartClickedAsync"/>
+                Clicked="OnResumeClickedAsync"/>
             <Button
-                x:Name="MainBtn"
+                x:Name="ReStartBtn"
                 Grid.Column="1"
                 FontFamily="B612Mono"
                 FontSize="24"
-                Text="{x:Static res:AppResources.Main}"
-                Clicked="OnMainClickedAsync"/>
+                Text="{x:Static res:AppResources.Timing}"
+                Clicked="OnRestartClickedAsync"/>
         </Grid>
+        <Button
+            x:Name="MainBtn"
+            Grid.Row="3"
+            FontFamily="B612Mono"
+            FontSize="24"
+            Text="{x:Static res:AppResources.Main}"
+            Clicked="OnMainClickedAsync"/>
     </Grid>
 </ContentPage>
