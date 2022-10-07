@@ -40,8 +40,6 @@ public partial class SummaryPage : ContentPage
 
     private async void OnMainClickedAsync(object sender, EventArgs e)
     {
-        _timerService.Stop();
-
         await Shell.Current.GoToAsync("//MainPage");
     }
 }

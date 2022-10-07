@@ -107,14 +107,14 @@
                 x:Name="StartBtn"
                 FontFamily="B612Mono"
                 FontSize="24"
-                Text="{x:Static res:AppResources.Timing}"
+                Text="{x:Static res:AppResources.Resume}"
                 Clicked="OnResumeClickedAsync"/>
             <Button
                 x:Name="ReStartBtn"
                 Grid.Column="1"
                 FontFamily="B612Mono"
                 FontSize="24"
-                Text="{x:Static res:AppResources.Timing}"
+                Text="{x:Static res:AppResources.Restart}"
                 Clicked="OnRestartClickedAsync"/>
         </Grid>
         <Button
