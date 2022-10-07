@@ -88,11 +88,29 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tilbakestill.
+        ///   Looks up a localized string similar to Nullstill.
         /// </summary>
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start ny.
+        /// </summary>
+        public static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fortsett.
+        /// </summary>
+        public static string Resume {
+            get {
+                return ResourceManager.GetString("Resume", resourceCulture);
             }
         }
         

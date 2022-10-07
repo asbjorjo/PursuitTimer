@@ -127,7 +127,13 @@
     <value>Meny</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Tilbakestill</value>
+    <value>Nullstill</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Start ny</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Fortsett</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Lagre</value>
