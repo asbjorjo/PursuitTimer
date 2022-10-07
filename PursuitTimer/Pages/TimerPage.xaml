@@ -28,8 +28,8 @@
             x:Name="StopBtn"
             FontFamily="B612Mono"
             FontSize="24"
-            Text="{x:Static res:AppResources.End}"
-            Clicked="OnStopClicked"/>
+            Text="{x:Static res:AppResources.Summary}"
+            Clicked="OnStopClickedAsync"/>
 
     </Grid>
 </ContentPage>

@@ -17,7 +17,15 @@ public partial class TimerPage : ContentPage
 
         InitializeComponent();
 
-        BindingContext = new TimerViewModel(timerService.TimingSession);
+        BindingContext = new TimerViewModel();
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        ViewModel.UpdateModel(_timerService.TimingSession);
+        UpdateFontSize();
+
+        base.OnNavigatedTo(args);
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -45,17 +53,7 @@ public partial class TimerPage : ContentPage
 
         if (_timerService.TimingSession.SplitTimes.Count > 0)
         {
-            var splitTime = _timerService.TimingSession.SplitTimes[_timerService.TimingSession.SplitTimes.Count - 1];
-
-            ViewModel.Splittext = splitTime.Split.ToString("ss'.'ff");
-
-            if (_timerService.TimingSession.Target > TimeSpan.Zero)
-            {
-                ViewModel.Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
-            } else
-            {
-                ViewModel.Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
-            }
+            ViewModel.UpdateModel(_timerService.TimingSession);
         }
         else
         {
@@ -63,10 +61,8 @@ public partial class TimerPage : ContentPage
         }
     }
 
-    private void OnStopClicked(object sender, EventArgs e)
+    private async void OnStopClickedAsync(object sender, EventArgs e)
     {
-        _timerService.Stop();
-
         DeviceDisplay.KeepScreenOn = false;
 
         SummaryViewModel summaryView = new(_timerService.TimingSession);
@@ -76,9 +72,6 @@ public partial class TimerPage : ContentPage
             {"SummaryView", summaryView}
         };
 
-        Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
-
-        ViewModel.Splittext = AppResources.Start;
-        ViewModel.Splitcolor = Colors.Transparent;
+        await Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
     }
 }

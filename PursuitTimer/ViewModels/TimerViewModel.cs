@@ -19,11 +19,36 @@ public partial class TimerViewModel : ObservableObject
 
     public TimerViewModel() { }
 
-    public TimerViewModel(TimingSession timingSession)
+    public TimerViewModel(TimingSession session)
+    {
+        UpdateModel(session);
+    }
+
+    public void UpdateModel(TimingSession timingSession)
     {
         if (timingSession.Target > TimeSpan.Zero)
         {
             targetsplit = timingSession.Target.ToString("ss\\.fff");
+        }
+
+        if (timingSession.SplitTimes.Count > 0)
+        {
+            var splitTime = timingSession.SplitTimes[timingSession.SplitTimes.Count - 1];
+
+            Splittext = splitTime.Split.ToString("ss'.'ff");
+
+            if (timingSession.Target > TimeSpan.Zero)
+            {
+                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+            }
+            else
+            {
+                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+            }
+        } else
+        {
+            Splittext = AppResources.Start;
+            Splitcolor = Colors.Transparent;
         }
     }
 }
