@@ -37,6 +37,7 @@ namespace PursuitTimer.Services
 
         public void Reset()
         {
+            running = false;
             timingSession = new();
         }
 
