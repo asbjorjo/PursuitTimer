@@ -16,7 +16,14 @@ public partial class TimerSetupPage : ContentPage
 
         InitializeComponent();
 
-        BindingContext = new TimerViewModel(timerService.TimingSession);
+        BindingContext = new TimerViewModel();
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        viewModel.UpdateModel(_timerService.TimingSession);
     }
 
     private void UpdateTarget()
@@ -39,14 +46,16 @@ public partial class TimerSetupPage : ContentPage
 
     private async void OnCancelClickedAsync(object sender, EventArgs e)
     {
-        BindingContext = new TimerViewModel(_timerService.TimingSession);
+        BindingContext = new TimerViewModel();
+        viewModel.UpdateModel(_timerService.TimingSession);
         await Shell.Current.GoToAsync("//MainPage");
     }
     private async void OnSaveClickedAsync(object sender, EventArgs e)
     {
         _timerService.Reset();
         UpdateTarget();
-        BindingContext = new TimerViewModel(_timerService.TimingSession);
+        BindingContext = new TimerViewModel();
+        viewModel.UpdateModel(_timerService.TimingSession);
         await Shell.Current.GoToAsync("//MainPage");
     }
 }
