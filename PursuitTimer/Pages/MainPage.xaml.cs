@@ -20,14 +20,13 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         _timerService = timerService;
-        BindingContext = this;
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        SummaryBtn.IsEnabled = _timerService.TimingSession.SplitTimes.Count > 0;
+        
         base.OnNavigatedTo(args);
-
-        ShowSummary = _timerService.TimingSession.SplitTimes.Count > 0;
     }
     private async void OnSetupClickedAsync(object sender, EventArgs e)
     {
