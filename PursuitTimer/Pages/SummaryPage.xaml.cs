@@ -1,5 +1,3 @@
-using Android.Views.Animations;
-using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;
