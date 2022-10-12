@@ -22,7 +22,7 @@
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Reset}"
-                Clicked="OnResetClickedAsync"/>
+                Command="{Binding ResetCommand}"/>
         </FlexLayout>
 
         <FlexLayout JustifyContent="SpaceBetween"
@@ -34,7 +34,7 @@
                 FontSize="24"
                 Text="{x:Static res:AppResources.Cancel}"
                 Background="Red"
-                Clicked="OnCancelClickedAsync"/>
+                Command="{Binding CancelCommand}"/>
             <Button
                 x:Name="SaveBtn"
                 FlexLayout.Basis="50%"
@@ -42,7 +42,7 @@
                 FontSize="24"
                 Text="{x:Static res:AppResources.Save}"
                 Background="Green"
-                Clicked="OnSaveClickedAsync"/>
+                Command="{Binding SaveCommand}"/>
         </FlexLayout>
     </Grid>
 </ContentPage>

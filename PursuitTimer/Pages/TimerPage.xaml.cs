@@ -8,24 +8,20 @@ public partial class TimerPage : ContentPage
 {
     private const double MinRatio = 3.9;
 
-    readonly TimerService _timerService;
-    TimerViewModel ViewModel => BindingContext as TimerViewModel;
+    TimerViewModel vm => BindingContext as TimerViewModel;
 
-    public TimerPage(TimerService timerService)
+    public TimerPage(TimerViewModel vm)
     {
-        _timerService = timerService;
-
         InitializeComponent();
 
-        BindingContext = new TimerViewModel();
+        BindingContext = vm;
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnAppearing()
     {
-        ViewModel.UpdateModel(_timerService.TimingSession);
-        UpdateFontSize();
+        base.OnAppearing();
 
-        base.OnNavigatedTo(args);
+        vm.UpdateModel();
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -40,38 +36,13 @@ public partial class TimerPage : ContentPage
         double ratio = TimerLayout.Width / LastSplitLabel.Height;
         double fontSize = ratio < MinRatio ? LastSplitLabel.Height / MinRatio * ratio : LastSplitLabel.Height;
 
-        ViewModel.Fontsize = fontSize;
+        vm.Fontsize = fontSize;
     }
 
     private void OnSplitClicked(object sender, EventArgs e)
     {
-        DeviceDisplay.KeepScreenOn = true;
-
-        _timerService.MarkTime();
+        vm.Split();
 
         UpdateFontSize();
-
-        if (_timerService.TimingSession.SplitTimes.Count > 0)
-        {
-            ViewModel.UpdateModel(_timerService.TimingSession);
-        }
-        else
-        {
-            ViewModel.Splittext = AppResources.Split;
-        }
-    }
-
-    private async void OnStopClickedAsync(object sender, EventArgs e)
-    {
-        DeviceDisplay.KeepScreenOn = false;
-
-        SummaryViewModel summaryView = new(_timerService.TimingSession);
-
-        var navigationParameters = new Dictionary<string, object>
-        {
-            {"SummaryView", summaryView}
-        };
-
-        await Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
     }
 }

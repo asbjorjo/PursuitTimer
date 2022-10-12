@@ -3,19 +3,11 @@ using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;
 
-public partial class MainPage : ContentPage
+public partial class HomePage : ContentPage
 {
-    public static readonly BindableProperty ShowSummaryProperty =
-            BindableProperty.Create("ShowSummary", typeof(bool), typeof(MainPage), false);
-    public bool ShowSummary
-    {
-        get => (bool)GetValue(ShowSummaryProperty);
-        set => SetValue(ShowSummaryProperty, value);
-    }
-
     private readonly TimerService _timerService;
 
-    public MainPage(TimerService timerService)
+    public HomePage(TimerService timerService)
 	{
         InitializeComponent();
 
@@ -35,14 +27,7 @@ public partial class MainPage : ContentPage
 
     private async void OnSumaryClickedAsync(object sender, EventArgs e)
     {
-        SummaryViewModel summaryView = new(_timerService.TimingSession);
-
-        var navigationParameters = new Dictionary<string, object>
-        {
-            {"SummaryView", summaryView}
-        };
-
-        await Shell.Current.GoToAsync("//SummaryPage", navigationParameters);
+        await Shell.Current.GoToAsync($"{nameof(SummaryPage)}");
     }
 
     private async void OnStartClickedAsync(object sender, EventArgs e)

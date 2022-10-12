@@ -1,4 +1,6 @@
-﻿namespace PursuitTimer;
+﻿using PursuitTimer.Pages;
+
+namespace PursuitTimer;
 
 public partial class App : Application
 {
@@ -7,5 +9,10 @@ public partial class App : Application
 		InitializeComponent();
 
 		MainPage = new AppShell();
+
+		Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+		Routing.RegisterRoute(nameof(SummaryPage), typeof(SummaryPage));
+		Routing.RegisterRoute(nameof(TimerPage), typeof(TimerPage));
+		Routing.RegisterRoute(nameof(TimerSetupPage), typeof(TimerSetupPage));
 	}
 }

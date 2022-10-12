@@ -1,11 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PursuitTimer.Model;
+using PursuitTimer.Pages;
 using PursuitTimer.Resources.Strings;
+using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public partial class TimerViewModel : ObservableObject
+public partial class TimerViewModel : ViewModelBase
 {
+    private readonly TimerService _timerService;
+
     [ObservableProperty]
     private Color splitcolor = Colors.Transparent;
     [ObservableProperty]
@@ -14,22 +19,15 @@ public partial class TimerViewModel : ObservableObject
     private string splittext = AppResources.Start;
     [ObservableProperty]
     private double fontsize = 32;
-    [ObservableProperty]
-    private string targetsplit = "00.000";
 
-    public TimerViewModel() { }
-
-    public TimerViewModel(TimingSession session)
+    public TimerViewModel(TimerService timerService)
     {
-        UpdateModel(session);
+        _timerService = timerService;
     }
 
-    public void UpdateModel(TimingSession timingSession)
+    public void UpdateModel()
     {
-        if (timingSession.Target > TimeSpan.Zero)
-        {
-            targetsplit = timingSession.Target.ToString("ss\\.fff");
-        }
+        var timingSession = _timerService.TimingSession;
 
         if (timingSession.SplitTimes.Count > 0)
         {
@@ -50,5 +48,30 @@ public partial class TimerViewModel : ObservableObject
             Splittext = AppResources.Start;
             Splitcolor = Colors.Transparent;
         }
+    }
+
+    [RelayCommand]
+    public void Split()
+    {
+        DeviceDisplay.KeepScreenOn = true;
+
+        _timerService.MarkTime();
+
+        if (_timerService.TimingSession.SplitTimes.Count > 0)
+        {
+            UpdateModel();
+        }
+        else
+        {
+            Splittext = AppResources.Split;
+        }
+    }
+
+    [RelayCommand]
+    async Task Summary()
+    {
+        DeviceDisplay.KeepScreenOn = false;
+
+        await Shell.Current.GoToAsync($"//{nameof(SummaryPage)}");
     }
 }

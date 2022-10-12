@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui;
 using PursuitTimer.Pages;
 using PursuitTimer.Services;
+using PursuitTimer.ViewModels;
 
 namespace PursuitTimer;
 
@@ -20,12 +21,10 @@ public static class MauiProgram
 				fonts.AddFont("B612Mono-Regular.ttf", "B612Mono");
 			});
 
-		builder.Services.AddSingleton<TimerService>();
-        builder.Services.AddTransient<MainPage>();
-		builder.Services.AddTransient<SummaryPage>();
-        builder.Services.AddTransient<TimerSetupPage>();
-        builder.Services.AddTransient<TimerPage>();
-
+		builder.ConfigurePages();
+        builder.ConfigureServices();
+        builder.ConfigureViewModels();
+        
 		return builder.Build();
 	}
 }

@@ -85,14 +85,14 @@
 
         <ScrollView
             Grid.Row="0">
-            <CollectionView ItemsSource="{Binding Path=SummaryView.SplitTimes}" ItemTemplate="{StaticResource SplitSummaryTemplate}" />
+            <CollectionView ItemsSource="{Binding Path=SplitTimes}" ItemTemplate="{StaticResource SplitSummaryTemplate}" />
         </ScrollView>
         <Label
             Grid.Row="1"
             FontFamily="B612Mono"
             FontSize="32"
             Margin="15,0"
-            Text="{Binding Path=SummaryView.SumTimes, StringFormat='{0:mm}:{0:ss}.{0:fff}'}"/>
+            Text="{Binding Path=SumTimes, StringFormat='{0:mm}:{0:ss}.{0:fff}'}"/>
 
         <Grid
             Grid.Row="2">
@@ -104,18 +104,18 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button
-                x:Name="StartBtn"
+                x:Name="ResumeBtn"
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Resume}"
-                Clicked="OnResumeClickedAsync"/>
+                Command="{Binding ResumeCommand}"/>
             <Button
-                x:Name="ReStartBtn"
+                x:Name="RestartBtn"
                 Grid.Column="1"
                 FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Restart}"
-                Clicked="OnRestartClickedAsync"/>
+                Command="{Binding RestartCommand}"/>
         </Grid>
         <Button
             x:Name="MainBtn"
@@ -123,6 +123,6 @@
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Main}"
-            Clicked="OnMainClickedAsync"/>
+            Command="{Binding MainCommand}"/>
     </Grid>
 </ContentPage>

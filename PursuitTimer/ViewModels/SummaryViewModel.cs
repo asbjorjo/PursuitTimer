@@ -1,33 +1,49 @@
-﻿using PursuitTimer.Extensions;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PursuitTimer.Model;
+using PursuitTimer.Pages;
+using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public class SummaryViewModel
+public partial class SummaryViewModel : ViewModelBase
 {
-    public TimingSession TimingSession
+    private readonly TimerService _timerService;
+
+    [ObservableProperty]
+    IEnumerable<SplitTime> splitTimes;
+
+    [ObservableProperty]
+    TimeSpan sumTimes;
+
+    public SummaryViewModel(TimerService timerService)
     {
-        get;
+        _timerService = timerService;
     }
 
-    public IEnumerable<SplitTime> SplitTimes
+    public void Initialize()
     {
-        get => TimingSession.SplitTimes;
+        SplitTimes = _timerService.TimingSession.SplitTimes;
+        SumTimes = _timerService.TimingSession.TotalTime;
     }
 
-    public TimeSpan SumTimes
+    [RelayCommand]
+    async Task Resume()
     {
-        get => TimingSession.TotalTime;
+        await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
     }
 
-    public SummaryViewModel()
+    [RelayCommand]
+    async Task Restart()
     {
-        TimingSession = new();
+        _timerService.Reset();
+
+        await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
     }
 
-    public SummaryViewModel(TimingSession timingSession)
+    [RelayCommand]
+    async Task Main()
     {
-        TimingSession = timingSession;
+        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
     }
-
 }
