@@ -5,35 +5,19 @@ namespace PursuitTimer.Pages;
 
 public partial class HomePage : ContentPage
 {
-    private readonly TimerService _timerService;
+    private HomeViewModel vm => BindingContext as HomeViewModel;
 
-    public HomePage(TimerService timerService)
+    public HomePage(HomeViewModel vm)
 	{
         InitializeComponent();
-
-        _timerService = timerService;
+        BindingContext = vm;
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnAppearing()
     {
-        SummaryBtn.IsEnabled = _timerService.TimingSession.SplitTimes.Count > 0;
-        
-        base.OnNavigatedTo(args);
-    }
-    private async void OnSetupClickedAsync(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//TimerSetupPage");
-    }
+        base.OnAppearing();
+        vm.Initialize();
 
-    private async void OnSumaryClickedAsync(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync($"{nameof(SummaryPage)}");
-    }
-
-    private async void OnStartClickedAsync(object sender, EventArgs e)
-    {
-        _timerService.Reset();
-
-        await Shell.Current.GoToAsync("//TimerPage");
+        SummaryBtn.IsEnabled = vm.HasSummary;
     }
 }

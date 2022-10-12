@@ -15,21 +15,21 @@
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Setup}"
-            Clicked="OnSetupClickedAsync"/>
+            Command="{Binding SetupCommand}"/>
         <Button
             x:Name="SummaryBtn"
             HeightRequest="64"
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Summary}"
-            IsEnabled="False"
-            Clicked="OnSumaryClickedAsync"/>
+            IsEnabled="{Binding HasSummary}"
+            Command="{Binding SummaryCommand}"/>
         <Button
             x:Name="StartBtn"
             HeightRequest="64"
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Timing}"
-            Clicked="OnStartClickedAsync"/>
+            Command="{Binding StartCommand}"/>
     </StackLayout>
 </ContentPage>
