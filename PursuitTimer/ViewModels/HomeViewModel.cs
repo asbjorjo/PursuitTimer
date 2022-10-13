@@ -8,7 +8,9 @@ namespace PursuitTimer.ViewModels
     public partial class HomeViewModel : ViewModelBase
     {
         private readonly TimerService _timerService;
+
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SummaryCommand))]
         private bool hasSummary;
 
         public HomeViewModel(TimerService timerService)
@@ -27,7 +29,7 @@ namespace PursuitTimer.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(TimerSetupPage)}");
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanShowSummary))]
         async Task Summary()
         {
             await Shell.Current.GoToAsync($"//{nameof(SummaryPage)}");
@@ -40,5 +42,7 @@ namespace PursuitTimer.ViewModels
 
             await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
         }
+
+        private bool CanShowSummary() => HasSummary;
     }
 }

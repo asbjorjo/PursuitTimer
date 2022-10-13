@@ -22,7 +22,6 @@
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Summary}"
-            IsEnabled="{Binding HasSummary}"
             Command="{Binding SummaryCommand}"/>
         <Button
             x:Name="StartBtn"

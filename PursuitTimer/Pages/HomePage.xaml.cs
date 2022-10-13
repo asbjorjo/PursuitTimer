@@ -17,7 +17,5 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
         vm.Initialize();
-
-        SummaryBtn.IsEnabled = vm.HasSummary;
     }
 }
