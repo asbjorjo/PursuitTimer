@@ -4,8 +4,7 @@
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.Pages.TimerPage"
              Title="{x:Static res:AppResources.Timing}"
-             BackgroundColor="{Binding Splitcolor}"
-             Padding="2">
+             BackgroundColor="{Binding Splitcolor}">
     <Grid 
         x:Name="TimerLayout">
         <Grid.RowDefinitions>
@@ -31,6 +30,5 @@
             FontSize="24"
             Text="{x:Static res:AppResources.Summary}"
             Command="{Binding SummaryCommand}"/>
-
     </Grid>
 </ContentPage>
