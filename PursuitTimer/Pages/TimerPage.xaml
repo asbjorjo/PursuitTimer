@@ -4,10 +4,10 @@
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.Pages.TimerPage"
              Title="{x:Static res:AppResources.Timing}"
+             BackgroundColor="{Binding Splitcolor}"
              Padding="2">
     <Grid 
-        x:Name="TimerLayout"
-        BackgroundColor="{Binding Splitcolor}">
+        x:Name="TimerLayout">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="64" />
