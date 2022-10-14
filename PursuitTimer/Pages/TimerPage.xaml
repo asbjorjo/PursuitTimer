@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              x:Class="PursuitTimer.Pages.TimerPage"
-             Title="{x:Static res:AppResources.Timing}">    
+             Title="{x:Static res:AppResources.Timing}"
+             Padding="2">
     <Grid 
         x:Name="TimerLayout"
         BackgroundColor="{Binding Splitcolor}">

@@ -5,7 +5,8 @@
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              xmlns:tmplts="clr-namespace:PursuitTimer.Templates"
              x:Class="PursuitTimer.Pages.SummaryPage"
-             Title="{x:Static res:AppResources.Summary}">
+             Title="{x:Static res:AppResources.Summary}"
+             Padding="2">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="neutralTemplate" x:DataType="model:SplitTime">
