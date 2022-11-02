@@ -6,7 +6,7 @@ namespace PursuitTimer.Pages;
 
 public partial class TimerPage : ContentPage
 {
-    private const double MinRatio = 3.9;
+    private const double MinRatio = 3.5;
 
     TimerViewModel vm => BindingContext as TimerViewModel;
 
