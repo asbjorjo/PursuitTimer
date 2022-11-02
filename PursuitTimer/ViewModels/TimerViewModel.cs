@@ -9,6 +9,10 @@ namespace PursuitTimer.ViewModels;
 
 public partial class TimerViewModel : ViewModelBase
 {
+    private static readonly string SplitFormat = "ss'.'ff";
+    private static readonly Color SplitPositive = Colors.Red;
+    private static readonly Color SplitNegative = Colors.Lime;
+
     private readonly TimerService _timerService;
 
     [ObservableProperty]
@@ -33,15 +37,15 @@ public partial class TimerViewModel : ViewModelBase
         {
             var splitTime = timingSession.SplitTimes[timingSession.SplitTimes.Count - 1];
 
-            Splittext = splitTime.Split.ToString("ss'.'ff");
+            Splittext = splitTime.Split.ToString(SplitFormat);
 
             if (timingSession.Target > TimeSpan.Zero)
             {
-                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Red : Colors.Lime;
+                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? SplitPositive : SplitNegative;
             }
             else
             {
-                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Red : Colors.Lime;
+                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNegative;
             }
         } else
         {
