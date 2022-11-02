@@ -18,6 +18,7 @@
         <Label
             x:Name="LastSplitLabel"
             FontFamily="B612Mono"
+            FontAttributes="Bold"
             FontSize="{Binding Fontsize}"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
