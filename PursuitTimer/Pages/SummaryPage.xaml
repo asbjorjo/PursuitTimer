@@ -17,13 +17,11 @@
                     </Grid.ColumnDefinitions>
                     <Label
                             Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="Start"/>
                     <Label  Grid.Column="1"
                             Text="{Binding DeltaPrevious, StringFormat=' {0:ss}.{0:fff}'}" 
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="End"/>
@@ -37,13 +35,11 @@
                     </Grid.ColumnDefinitions>
                     <Label
                             Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="Start"/>
                     <Label  Grid.Column="1"
                             Text="{Binding DeltaPrevious, StringFormat='+{0:ss}.{0:fff}'}" 
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="End"/>
@@ -57,13 +53,11 @@
                     </Grid.ColumnDefinitions>
                     <Label
                             Text="{Binding Split, StringFormat='{0:mm}:{0:ss}.{0:fff}'}" 
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="Start"/>
                     <Label  Grid.Column="1"
                             Text="{Binding DeltaPrevious, StringFormat='-{0:ss}.{0:fff}'}"
-                            FontFamily="B612Mono"
                             FontSize="32"
                             Margin="15,0"
                             HorizontalTextAlignment="End"/>
@@ -90,7 +84,6 @@
         </ScrollView>
         <Label
             Grid.Row="1"
-            FontFamily="B612Mono"
             FontSize="32"
             Margin="15,0"
             Text="{Binding Path=SumTimes, StringFormat='{0:mm}:{0:ss}.{0:fff}'}"/>
@@ -109,14 +102,12 @@
             </Grid.ColumnDefinitions>
             <Button
                 x:Name="ResumeBtn"
-                FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Resume}"
                 Command="{Binding ResumeCommand}"/>
             <Button
                 x:Name="RestartBtn"
                 Grid.Column="1"
-                FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Restart}"
                 Command="{Binding RestartCommand}"/>
@@ -124,7 +115,6 @@
         <Button
             x:Name="MainBtn"
             Grid.Row="3"
-            FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Main}"
             Command="{Binding MainCommand}"

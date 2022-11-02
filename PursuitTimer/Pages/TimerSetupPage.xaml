@@ -14,13 +14,11 @@
             <Entry 
                 x:Name="TargetEntry"
                 FontSize="24"
-                FontFamily="B612Mono"
                 Keyboard="Numeric" 
                 Text="{Binding Targetsplit}" />
 
             <Button
                 x:Name="ResetBtn"
-                FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Reset}"
                 Command="{Binding ResetCommand}"/>
@@ -31,7 +29,6 @@
             <Button
                 x:Name="CancelBtn"
                 FlexLayout.Basis="50%"
-                FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Cancel}"
                 Background="Red"
@@ -39,7 +36,6 @@
             <Button
                 x:Name="SaveBtn"
                 FlexLayout.Basis="50%"
-                FontFamily="B612Mono"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Save}"
                 Background="Green"
