@@ -37,11 +37,11 @@ public partial class TimerViewModel : ViewModelBase
 
             if (timingSession.Target > TimeSpan.Zero)
             {
-                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? Colors.Red : Colors.Lime;
             }
             else
             {
-                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Coral : Colors.LightGreen;
+                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? Colors.Red : Colors.Lime;
             }
         } else
         {
