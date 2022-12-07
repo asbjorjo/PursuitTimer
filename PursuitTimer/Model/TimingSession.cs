@@ -6,6 +6,8 @@ namespace PursuitTimer.Model
     {
         private List<SplitTime> _splitTime = new();
         private TimeSpan _target = TimeSpan.Zero;
+        private TimeSpan _tolerancenegative = TimeSpan.Zero;
+        private TimeSpan _tolerancepositive = TimeSpan.Zero;
 
         public IReadOnlyList<SplitTime> SplitTimes { get => _splitTime.AsReadOnly(); }
         public DateTime StartTime { get; private set; } = DateTime.UtcNow;
@@ -17,6 +19,19 @@ namespace PursuitTimer.Model
                 if (_splitTime.Count == 0) _target = value; 
             } 
         }
+
+        public TimeSpan Tolerance
+        {
+            get => _tolerancenegative;
+            set => _tolerancenegative = value;
+        }
+
+        public TimeSpan TolerancePositive
+        {
+            get => _tolerancepositive;
+            set => _tolerancepositive = value;
+        }
+
         public TimeSpan TotalTime { get => _splitTime.Select(x => x.Split).Sum(); }
 
         public void Reset()
