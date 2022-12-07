@@ -153,7 +153,16 @@
   <data name="Summary" xml:space="preserve">
     <value>Sammendrag</value>
   </data>
+  <data name="Target" xml:space="preserve">
+    <value>Mål</value>
+  </data>
   <data name="Timing" xml:space="preserve">
     <value>Tidtaking</value>
+  </data>
+  <data name="ToleranceNegative" xml:space="preserve">
+    <value>Tillatt under</value>
+  </data>
+  <data name="TolerancePositive" xml:space="preserve">
+    <value>Tillatt over</value>
   </data>
 </root>

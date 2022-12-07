@@ -153,7 +153,16 @@
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
   </data>
+  <data name="Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
   <data name="Timing" xml:space="preserve">
     <value>Timing</value>
+  </data>
+  <data name="ToleranceNegative" xml:space="preserve">
+    <value>Allowed under</value>
+  </data>
+  <data name="TolerancePositive" xml:space="preserve">
+    <value>Allowed over</value>
   </data>
 </root>

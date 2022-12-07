@@ -169,11 +169,38 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mål.
+        /// </summary>
+        public static string Target {
+            get {
+                return ResourceManager.GetString("Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tidtaking.
         /// </summary>
         public static string Timing {
             get {
                 return ResourceManager.GetString("Timing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tillatt under.
+        /// </summary>
+        public static string ToleranceNegative {
+            get {
+                return ResourceManager.GetString("ToleranceNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tillatt over.
+        /// </summary>
+        public static string TolerancePositive {
+            get {
+                return ResourceManager.GetString("TolerancePositive", resourceCulture);
             }
         }
     }
