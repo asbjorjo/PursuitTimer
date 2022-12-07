@@ -11,6 +11,7 @@ namespace PursuitTimer.Services
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<TimerService>();
+            builder.Services.AddTransient<ISettingsService, SettingsService>();
 
             return builder;
         }
