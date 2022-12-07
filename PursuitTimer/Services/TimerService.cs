@@ -1,4 +1,5 @@
 ﻿using PursuitTimer.Model;
+using System.Globalization;
 
 namespace PursuitTimer.Services
 {
@@ -44,6 +45,48 @@ namespace PursuitTimer.Services
         public void SetTarget(TimeSpan target)
         {
             TimingSession.Target = target;
+        }
+
+        public bool SetTarget(string target)
+        {
+            double targetseconds;
+
+            bool validTarget = double.TryParse(target?.Replace(',', '.'), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out targetseconds);
+
+            if (validTarget)
+            {
+                timingSession.Target = TimeSpan.FromSeconds(targetseconds);
+            }
+
+            return validTarget;
+        }
+
+        public bool SetTolerance(string tolerance)
+        {
+            double toleranceseconds;
+
+            bool validTolerance = double.TryParse(tolerance?.Replace(',', '.'), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out toleranceseconds);
+
+            if (validTolerance)
+            {
+                timingSession.Tolerance = TimeSpan.FromSeconds(toleranceseconds);
+            }
+
+            return validTolerance;
+        }
+
+        public bool SetTolerancePositive(string tolerance)
+        {
+            double toleranceseconds;
+
+            bool validTolerance = double.TryParse(tolerance?.Replace(',', '.'), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out toleranceseconds);
+
+            if (validTolerance)
+            {
+                timingSession.TolerancePositive = TimeSpan.FromSeconds(toleranceseconds);
+            }
+
+            return validTolerance;
         }
 
         public bool IsRunning()
