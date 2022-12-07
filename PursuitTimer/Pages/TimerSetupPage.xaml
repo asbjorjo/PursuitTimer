@@ -7,16 +7,44 @@
              Padding="2">
     <Grid
         x:Name="TimerSetupLayout"
-        RowDefinitions="50,*,50">
+        RowDefinitions="50,50,50,50,*,50">
 
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="0">
+            <Label 
+                Text="{x:Static res:AppResources.Target}"
+                FontSize="24"/>
             <Entry 
                 x:Name="TargetEntry"
                 FontSize="24"
                 Keyboard="Numeric" 
                 Text="{Binding Targetsplit}" />
+        </FlexLayout>
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="1">
+            <Label 
+                Text="{x:Static res:AppResources.ToleranceNegative}"
+                FontSize="24"/>
+            <Entry 
+                x:Name="ToleranceEntry"
+                FontSize="24"
+                Keyboard="Numeric" 
+                Text="{Binding Targettolerance}" />
+        </FlexLayout>
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="2">
+            <Label 
+                Text="{x:Static res:AppResources.TolerancePositive}"
+                FontSize="24"/>
+            <Entry 
+                x:Name="TolerancePositiveEntry"
+                FontSize="24"
+                Keyboard="Numeric" 
+                Text="{Binding Targettolerancepositive}" />
+        </FlexLayout>
 
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="3">
             <Button
                 x:Name="ResetBtn"
                 FontSize="24"
@@ -25,7 +53,7 @@
         </FlexLayout>
 
         <FlexLayout JustifyContent="SpaceBetween"
-                    Grid.Row="2">
+                    Grid.Row="5">
             <Button
                 x:Name="CancelBtn"
                 FlexLayout.Basis="50%"

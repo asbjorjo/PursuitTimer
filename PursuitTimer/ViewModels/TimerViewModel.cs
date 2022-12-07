@@ -11,9 +11,11 @@ public partial class TimerViewModel : ViewModelBase
 {
     private static readonly string SplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
-    private static readonly Color SplitNegative = Colors.Lime;
+    private static readonly Color SplitNegative = Colors.Yellow;
+    private static readonly Color SplitNeutral = Colors.Lime;
 
     private readonly TimerService _timerService;
+    private readonly ISettingsService _settingsService;
 
     [ObservableProperty]
     private Color splitcolor = Colors.Transparent;
@@ -24,13 +26,17 @@ public partial class TimerViewModel : ViewModelBase
     [ObservableProperty]
     private double fontsize = 32;
 
-    public TimerViewModel(TimerService timerService)
+    public TimerViewModel(TimerService timerService, ISettingsService settingsService)
     {
         _timerService = timerService;
+        _settingsService = settingsService;
     }
 
     public void UpdateModel()
     {
+        _timerService.SetTarget(_settingsService.Get<string>("Targetsplit"));
+        _timerService.SetTolerance(_settingsService.Get<string>("Targettolerance"));
+
         var timingSession = _timerService.TimingSession;
 
         if (timingSession.SplitTimes.Count > 0)
@@ -41,7 +47,16 @@ public partial class TimerViewModel : ViewModelBase
 
             if (timingSession.Target > TimeSpan.Zero)
             {
-                Splitcolor = splitTime.DeltaTarget > TimeSpan.Zero ? SplitPositive : SplitNegative;
+                if (splitTime.DeltaTarget < TimeSpan.Zero - timingSession.Tolerance)
+                {
+                    Splitcolor = SplitNegative;
+                } else if (splitTime.DeltaTarget < timingSession.TolerancePositive)
+                {
+                    Splitcolor = SplitNeutral;
+                } else
+                {
+                    Splitcolor = SplitPositive;
+                }
             }
             else
             {
