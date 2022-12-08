@@ -51,7 +51,7 @@ public partial class TimerViewModel : ViewModelBase
                 if (splitTime.DeltaTarget < TimeSpan.Zero - timingSession.Tolerance)
                 {
                     Splitcolor = SplitNegative;
-                } else if (splitTime.DeltaTarget < timingSession.TolerancePositive)
+                } else if (timingSession.Tolerance > TimeSpan.Zero && splitTime.DeltaTarget < timingSession.TolerancePositive)
                 {
                     Splitcolor = SplitNeutral;
                 } else
@@ -61,7 +61,7 @@ public partial class TimerViewModel : ViewModelBase
             }
             else
             {
-                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNegative;
+                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
             }
         } else
         {
