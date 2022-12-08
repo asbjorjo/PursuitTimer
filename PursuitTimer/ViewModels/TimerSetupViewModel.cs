@@ -58,7 +58,7 @@ namespace PursuitTimer.ViewModels
         {
             Targetsplit = "00.00";
             Targettolerance = "0.00";
-            Targettolerance = "0.00";
+            Targettolerancepositive = "0.00";
         }
 
         [RelayCommand]
