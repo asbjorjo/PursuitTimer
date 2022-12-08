@@ -46,7 +46,7 @@ public partial class TimerViewModel : ViewModelBase
 
             Splittext = splitTime.Split.ToString(SplitFormat);
 
-            if (_settingsService.Get<bool>("Monochrome")) 
+            if (!_settingsService.Get<bool>("Monochrome")) 
             {
                 if (timingSession.Target > TimeSpan.Zero)
                 {
