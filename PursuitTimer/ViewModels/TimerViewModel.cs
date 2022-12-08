@@ -48,15 +48,15 @@ public partial class TimerViewModel : ViewModelBase
 
             if (timingSession.Target > TimeSpan.Zero)
             {
-                if (splitTime.DeltaTarget < TimeSpan.Zero - timingSession.Tolerance)
+                if (splitTime.DeltaTarget > timingSession.TolerancePositive)
                 {
-                    Splitcolor = SplitNegative;
-                } else if (timingSession.Tolerance > TimeSpan.Zero && splitTime.DeltaTarget < timingSession.TolerancePositive)
+                    Splitcolor = SplitPositive;
+                } else if (timingSession.Tolerance == TimeSpan.Zero || splitTime.DeltaTarget > TimeSpan.Zero - timingSession.Tolerance)
                 {
                     Splitcolor = SplitNeutral;
                 } else
                 {
-                    Splitcolor = SplitPositive;
+                    Splitcolor = SplitNegative;
                 }
             }
             else
