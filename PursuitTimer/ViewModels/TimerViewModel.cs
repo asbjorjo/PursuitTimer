@@ -36,6 +36,7 @@ public partial class TimerViewModel : ViewModelBase
     {
         _timerService.SetTarget(_settingsService.Get<string>("Targetsplit"));
         _timerService.SetTolerance(_settingsService.Get<string>("Targettolerance"));
+        _timerService.SetTolerancePositive(_settingsService.Get<string>("Targettolerancepositive"));
 
         var timingSession = _timerService.TimingSession;
 
