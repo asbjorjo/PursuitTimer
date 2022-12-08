@@ -45,6 +45,12 @@
 
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="3">
+            <Switch
+                x:Name="MonochromeSwitch"
+                FontSize="24"
+                Text="Nøytral bakgrunn"
+                IsToggled="{Binding Monochrome}"
+            />
             <Button
                 x:Name="ResetBtn"
                 FontSize="24"

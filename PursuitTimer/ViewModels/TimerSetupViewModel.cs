@@ -19,6 +19,8 @@ namespace PursuitTimer.ViewModels
         private string targettolerance = "0.00";
         [ObservableProperty]
         private string targettolerancepositive = "0.00";
+        [ObservableProperty]
+        private bool monochrome = false;
         private readonly TimerService _timerService;
         private readonly ISettingsService _settingsService;
 
@@ -33,6 +35,7 @@ namespace PursuitTimer.ViewModels
             Targetsplit = _timerService.TimingSession.Target > TimeSpan.Zero ? _timerService.TimingSession.Target.ToString("ss'.'ff") : _settingsService.Get(nameof(Targetsplit), Targetsplit);
             Targettolerance = _timerService.TimingSession.Tolerance > TimeSpan.Zero ? _timerService.TimingSession.Tolerance.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerance), Targettolerance);
             Targettolerancepositive = _timerService.TimingSession.TolerancePositive > TimeSpan.Zero ? _timerService.TimingSession.TolerancePositive.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerancepositive), Targettolerancepositive);
+            Monochrome = _settingsService.Get(nameof(Monochrome), Monochrome);
         }
 
         private void UpdateTarget()
@@ -59,6 +62,7 @@ namespace PursuitTimer.ViewModels
             Targetsplit = "00.00";
             Targettolerance = "0.00";
             Targettolerancepositive = "0.00";
+            Monochrome = false;
         }
 
         [RelayCommand]
@@ -72,6 +76,7 @@ namespace PursuitTimer.ViewModels
         {
             _timerService.Reset();
             UpdateTarget();
+            _settingsService.Save(nameof(Monochrome), Monochrome);
 
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
