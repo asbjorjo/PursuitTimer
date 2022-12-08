@@ -45,10 +45,12 @@
 
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="3">
+            <Label
+                FontSize="24"
+                Text="Disable split colours"
+            />
             <Switch
                 x:Name="MonochromeSwitch"
-                FontSize="24"
-                Text="Nøytral bakgrunn"
                 IsToggled="{Binding Monochrome}"
             />
             <Button
