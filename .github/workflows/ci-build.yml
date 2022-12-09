@@ -78,11 +78,11 @@ jobs:
         run: |
           dotnet workload install ios --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
-      - name: Restore Dependencies
-        run: |
-          dotnet restore PursuitTimer -r ios-arm64
-          dotnet restore PursuitTimer -r iossimulator-arm64
-          dotnet restore PursuitTimer -r iossimulator-x86
+      # - name: Restore Dependencies
+      #   run: |
+      #     dotnet restore PursuitTimer -r ios-arm64
+      #     dotnet restore PursuitTimer -r iossimulator-arm64
+      #     dotnet restore PursuitTimer -r iossimulator-x86
 
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v1
@@ -100,9 +100,9 @@ jobs:
 
       - name: Build MAUI iOS
         run: |
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r ios-arm64 --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-arm64 --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-x86 --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet build PursuitTimer -c Debug -f net7.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-x86 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Publish MAUI iOS
         run: dotnet publish PursuitTimer -c Debug -f:net7.0-ios /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
