@@ -93,6 +93,12 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
+		<RuntimeIdentifiers>ios-arm64;iossimulator-arm64;iossimulator-x86</RuntimeIdentifiers>
+		<CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
+		<CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
 		<AndroidKeyStore>True</AndroidKeyStore>
 		<AndroidSigningKeyStore>pursuittimer.keystore</AndroidSigningKeyStore>

@@ -57,7 +57,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.APPSTORE_SERVICE_ACCOUNT }}
           packageName: me.veloti.pursuittimer
-          releaseFiles: PursuitTimer/bin/Debug/net7.0-android/publish/me.veloti.pursuittimer-Signed.aab
+          releaseFiles: PursuitTimer/bin/Debug/net7.0-android/publish/me.veloti.pursuittimer-Signed.apk
           track: beta
           status: completed
 
@@ -79,7 +79,7 @@ jobs:
           dotnet workload install ios --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
       - name: Restore Dependencies
-        run: dotnet restore PursuitTimer -r ios-arm64
+        run: dotnet restore PursuitTimer -f net7.0-ios
 
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v1
@@ -99,7 +99,7 @@ jobs:
         run: dotnet build PursuitTimer -c Debug -f net7.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet publish PursuitTimer -c Debug -f:net7.0-ios /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
@@ -119,54 +119,3 @@ jobs:
           API_PRIVATE_KEYS_DIR: .
         run: xcrun altool --upload-package PursuitTimer/bin/Debug/net7.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --bundle-short-version-string $VERSION --bundle-version ${{ github.run_number}}.${{ github.run_attempt }} --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
         #run: xcrun altool --upload-app -f PursuitTimer/bin/Release/net6.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
-
-# MAUI iOS Simulator Build
-  build-iossimulator:
-    runs-on: macos-12
-    name: iOS Simulator Build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup .NET 7
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 7.0.x
-
-      - name: Install MAUI Workloads
-        run: |
-          dotnet workload install ios --ignore-failed-sources
-          dotnet workload install maui --ignore-failed-sources
-      - name: Restore Dependencies
-        run: dotnet restore PursuitTimer -r iossimulator
-
-      - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v1
-        with:
-          #p12-file-base64: ${{ secrets.CERTIFICATES_P12_BASE64 }}
-          p12-filepath: 'DistributionCertVeloTimePursuitTimer.p12'
-          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-      - name: Download Apple Provisioning Profiles
-        uses: Apple-Actions/download-provisioning-profiles@v1
-        with:
-          bundle-id: 'me.veloti.pursuittimer'
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-
-      - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Debug -f net7.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-
-      - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r iossimulator /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-
-      - name: Upload iOS Artifact
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: ios-ci-build
-          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.app/
-      - name: Upload iOS Package
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: ios-ci-package
-          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.ipa
