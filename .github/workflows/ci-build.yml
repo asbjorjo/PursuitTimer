@@ -123,7 +123,7 @@ jobs:
 # MAUI iOS Simulator Build
   build-iossimulator:
     runs-on: macos-12
-    name: iOS Build
+    name: iOS Simulator Build
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -155,18 +155,18 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Release -f net7.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet build PursuitTimer -c Debug -f net7.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net7.0-ios -r iossimulator /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r iossimulator /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-build
-          path: PursuitTimer/bin/Release/net7.0-ios/**/*.app/
+          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.app/
       - name: Upload iOS Package
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-package
-          path: PursuitTimer/bin/Release/net7.0-ios/**/*.ipa
+          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.ipa
