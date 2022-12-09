@@ -7,7 +7,7 @@
              Padding="2">
     <Grid
         x:Name="TimerSetupLayout"
-        RowDefinitions="50,50,50,50.50,*,50">
+        RowDefinitions="50,50,50,50,50,*,50">
 
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="0">
