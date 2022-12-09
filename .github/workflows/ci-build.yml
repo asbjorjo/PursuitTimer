@@ -106,9 +106,9 @@ jobs:
 
       - name: Publish MAUI iOS
         run: |
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r iossimulator-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r iossimulator-x86 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:iossimulator-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:iossimulator-x86 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
