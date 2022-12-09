@@ -7,7 +7,7 @@
              Padding="2">
     <Grid
         x:Name="TimerSetupLayout"
-        RowDefinitions="50,50,50,50,*,50">
+        RowDefinitions="50,50,50,50.50,*,50">
 
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="0">
@@ -47,13 +47,17 @@
                     Grid.Row="3">
             <Label
                 FontSize="24"
-                Text="Disable split colours"
+                Text="{x:Static res:AppResources.MonochromeSetting}"
             />
             <Switch
                 x:Name="MonochromeSwitch"
                 IsToggled="{Binding Monochrome}"
             />
-            <Button
+        </FlexLayout>
+
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="4">
+                <Button
                 x:Name="ResetBtn"
                 FontSize="24"
                 Text="{x:Static res:AppResources.Reset}"
@@ -61,7 +65,7 @@
         </FlexLayout>
 
         <FlexLayout JustifyContent="SpaceBetween"
-                    Grid.Row="5">
+                    Grid.Row="6">
             <Button
                 x:Name="CancelBtn"
                 FlexLayout.Basis="50%"

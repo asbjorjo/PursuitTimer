@@ -126,6 +126,9 @@
   <data name="Main" xml:space="preserve">
     <value>Meny</value>
   </data>
+  <data name="MonochromeSetting" xml:space="preserve">
+    <value>Skru av farger</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>Nullstill</value>
   </data>
