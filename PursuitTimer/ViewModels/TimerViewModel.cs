@@ -46,22 +46,25 @@ public partial class TimerViewModel : ViewModelBase
 
             Splittext = splitTime.Split.ToString(SplitFormat);
 
-            if (timingSession.Target > TimeSpan.Zero)
+            if (!_settingsService.Get<bool>("Monochrome")) 
             {
-                if (splitTime.DeltaTarget > timingSession.TolerancePositive)
+                if (timingSession.Target > TimeSpan.Zero)
                 {
-                    Splitcolor = SplitPositive;
-                } else if (timingSession.Tolerance == TimeSpan.Zero || splitTime.DeltaTarget > TimeSpan.Zero - timingSession.Tolerance)
-                {
-                    Splitcolor = SplitNeutral;
-                } else
-                {
-                    Splitcolor = SplitNegative;
+                    if (splitTime.DeltaTarget > timingSession.TolerancePositive)
+                    {
+                        Splitcolor = SplitPositive;
+                    } else if (timingSession.Tolerance == TimeSpan.Zero || splitTime.DeltaTarget > TimeSpan.Zero - timingSession.Tolerance)
+                    {
+                        Splitcolor = SplitNeutral;
+                    } else
+                    {
+                        Splitcolor = SplitNegative;
+                    }
                 }
-            }
-            else
-            {
-                Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
+                else
+                {
+                    Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
+                }
             }
         } else
         {

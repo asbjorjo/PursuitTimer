@@ -86,7 +86,16 @@ namespace PursuitTimer.Resources.Strings {
                 return ResourceManager.GetString("Main", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Skru av farger.
+        /// </summary>
+        public static string MonochromeSetting {
+            get {
+                return ResourceManager.GetString("MonochromeSetting", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Nullstill.
         /// </summary>
