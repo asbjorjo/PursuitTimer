@@ -21,7 +21,8 @@
             FontSize="{Binding Fontsize}"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
-            Text="{Binding Splittext}"/>
+            Text="{Binding Splittext}"
+            TextColor="{Binding Splittextcolor}"/>
 
         <Button
             Grid.Row="1"

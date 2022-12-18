@@ -1,5 +1,3 @@
-using PursuitTimer.Resources.Strings;
-using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;
@@ -22,6 +20,8 @@ public partial class TimerPage : ContentPage
         base.OnAppearing();
 
         vm.UpdateModel();
+
+        LastSplitLabel.TextColor = vm.Splittextcolor;
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -44,5 +44,7 @@ public partial class TimerPage : ContentPage
         vm.Split();
 
         UpdateFontSize();
+
+        LastSplitLabel.TextColor = vm.Splittextcolor;
     }
 }
