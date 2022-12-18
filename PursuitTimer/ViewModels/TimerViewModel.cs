@@ -26,6 +26,21 @@ public partial class TimerViewModel : ViewModelBase
     [ObservableProperty]
     private double fontsize = 32;
 
+    public Color Splittextcolor
+    {
+        get
+        {
+            var splittextcolor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+
+            if (_timerService.TimingSession.SplitTimes.Count > 0)
+            {
+                splittextcolor = Splitcolor.GetLuminosity() < (Math.Sqrt(1.05 * 0.05)) - 0.05 ? Colors.White : Colors.Black;
+            }
+
+            return splittextcolor;
+        }
+    }
+
     public TimerViewModel(TimerService timerService, ISettingsService settingsService)
     {
         _timerService = timerService;
@@ -66,7 +81,8 @@ public partial class TimerViewModel : ViewModelBase
                     Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
                 }
             }
-        } else
+        }
+        else
         {
             Splittext = AppResources.Start;
             Splitcolor = Colors.Transparent;
