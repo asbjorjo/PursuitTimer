@@ -49,7 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	</ItemGroup>
 
@@ -94,7 +94,7 @@
 	</ItemGroup>
 
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
-		<RuntimeIdentifiers>ios-arm64;iossimulator-arm64;iossimulator-x86</RuntimeIdentifiers>
+		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
 		<CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
 		<CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
 	</PropertyGroup>
