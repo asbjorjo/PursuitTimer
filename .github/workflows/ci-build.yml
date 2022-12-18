@@ -2,13 +2,11 @@ name: CI Build
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
     paths-ignore:
       - '**/*.md'
       - '**/*.gitignore'
       - '**/*.gitattributes'
-  pull_request:
-    branches: [ develop, master ]
   workflow_dispatch:
 permissions:
   contents: read
@@ -41,23 +39,23 @@ jobs:
         run: dotnet restore PursuitTimer
 
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Debug -f net7.0-android --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}${{ github.run_attempt }} /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
+        run: dotnet build PursuitTimer -c Release -f net7.0-android --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}${{ github.run_attempt }} /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Debug -f net7.0-android --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}${{ github.run_attempt }}
+        run: dotnet publish PursuitTimer -c Release -f net7.0-android --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}${{ github.run_attempt }}
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: android-ci-build
-          path: PursuitTimer/bin/Debug/net7.0-android/*Signed.a*
+          path: PursuitTimer/bin/Release/net7.0-android/*Signed.a*
 
       - name: Publish to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.APPSTORE_SERVICE_ACCOUNT }}
           packageName: me.veloti.pursuittimer
-          releaseFiles: PursuitTimer/bin/Debug/net7.0-android/publish/me.veloti.pursuittimer-Signed.apk
+          releaseFiles: PursuitTimer/bin/Release/net7.0-android/publish/me.veloti.pursuittimer-Signed.aab
           track: beta
           status: completed
 
@@ -78,11 +76,8 @@ jobs:
         run: |
           dotnet workload install ios --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
-      # - name: Restore Dependencies
-      #   run: |
-      #     dotnet restore PursuitTimer -r ios-arm64
-      #     dotnet restore PursuitTimer -r iossimulator-arm64
-      #     dotnet restore PursuitTimer -r iossimulator-x86
+      - name: Restore Dependencies
+        run: dotnet restore PursuitTimer -r ios-arm64
 
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v1
@@ -99,33 +94,26 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: |
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet build PursuitTimer -c Debug -f net7.0-ios -r iossimulator-x86 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet build PursuitTimer -c Release -f net7.0-ios --no-restore /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Publish MAUI iOS
-        run: |
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:iossimulator-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
-          dotnet publish PursuitTimer -c Debug -f:net7.0-ios -r:iossimulator-x86 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
+        run: dotnet publish PursuitTimer -c Release -f:net7.0-ios -r ios-arm64 /p:ApplicationDisplayVersion=$VERSION /p:ApplicationVersion=${{ github.run_number}}.${{ github.run_attempt }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-build
-          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.app/
+          path: PursuitTimer/bin/Release/net7.0-ios/**/*.app/
       - name: Upload iOS Package
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-package
-          path: PursuitTimer/bin/Debug/net7.0-ios/**/*.ipa
+          path: PursuitTimer/bin/Release/net7.0-ios/**/*.ipa
 
       - name: Make appstore key ready
         run: echo "${{ secrets.APPSTORE_PRIVATE_KEY }}" > Authkey_${{ secrets.APPSTORE_KEY_ID }}.p8
       - name: Publish to App Store
         env:
           API_PRIVATE_KEYS_DIR: .
-        run: xcrun altool --upload-package PursuitTimer/bin/Debug/net7.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --bundle-short-version-string $VERSION --bundle-version ${{ github.run_number}}.${{ github.run_attempt }} --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+        run: xcrun altool --upload-package PursuitTimer/bin/Release/net7.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --bundle-short-version-string $VERSION --bundle-version ${{ github.run_number}}.${{ github.run_attempt }} --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
         #run: xcrun altool --upload-app -f PursuitTimer/bin/Release/net6.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
-
