@@ -49,13 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-<<<<<<< HEAD
 	  <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-=======
-	  <PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
->>>>>>> d866ac7 (Bump CommunityToolkit.Mvvm from 8.1.0 to 8.2.1)
 	</ItemGroup>
 
 	<ItemGroup>
