@@ -43,16 +43,16 @@ jobs:
         run: dotnet restore PursuitTimer
 
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Release -f net7.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
+        run: dotnet build PursuitTimer -c Release -f net8.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Release -f net7.0-android --no-restore
+        run: dotnet publish PursuitTimer -c Release -f net8.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: android-ci-build
-          path: PursuitTimer/bin/Release/net7.0-android/*Signed.a*
+          path: PursuitTimer/bin/Release/net8.0-android/*Signed.a*
 
       # - name: Publish to Play Store
       #   uses: r0adkll/upload-google-play@v1
