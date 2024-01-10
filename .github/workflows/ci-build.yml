@@ -76,10 +76,10 @@ jobs:
         uses: dotnet/nbgv@master
         id: nbgv
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 8.0.x
+      # - name: Setup .NET 8
+      #   uses: actions/setup-dotnet@v2
+      #   with:
+      #     dotnet-version: 8.0.x
 
       - name: Install MAUI Workloads
         run: |
