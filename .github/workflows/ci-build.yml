@@ -76,10 +76,10 @@ jobs:
         uses: dotnet/nbgv@master
         id: nbgv
 
-      - name: Setup .NET 7
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
 
       - name: Install MAUI Workloads
         run: |
@@ -103,21 +103,21 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Release -f net7.0-ios --no-restore
+        run: dotnet build PursuitTimer -c Release -f net8.0-ios --no-restore
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net7.0-ios -r ios-arm64
+        run: dotnet publish PursuitTimer -c Release -f:net8.0-ios -r ios-arm64
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-build
-          path: PursuitTimer/bin/Release/net7.0-ios/**/*.app/
+          path: PursuitTimer/bin/Release/net8.0-ios/**/*.app/
       - name: Upload iOS Package
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-package
-          path: PursuitTimer/bin/Release/net7.0-ios/**/*.ipa
+          path: PursuitTimer/bin/Release/net8.0-ios/**/*.ipa
 
       # - name: Make appstore key ready
       #   run: echo "${{ secrets.APPSTORE_PRIVATE_KEY }}" > Authkey_${{ secrets.APPSTORE_KEY_ID }}.p8
