@@ -32,7 +32,7 @@ public partial class TimerViewModel : ViewModelBase
         {
             var splittextcolor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
 
-            if (_timerService.TimingSession.SplitTimes.Count > 0)
+            if (_timerService.TimingSession.SplitTimes.Count > 0 && !_settingsService.Get<bool>("Monochrome"))
             {
                 splittextcolor = Splitcolor.GetLuminosity() < (Math.Sqrt(1.05 * 0.05)) - 0.05 ? Colors.White : Colors.Black;
             }
