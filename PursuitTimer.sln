@@ -8,12 +8,16 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		IOSsimulator|Any CPU = IOSsimulator|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F8328C60-47E3-4D27-9844-524C6F086D1C}.IOSsimulator|Any CPU.ActiveCfg = IOSsimulator|Any CPU
+		{F8328C60-47E3-4D27-9844-524C6F086D1C}.IOSsimulator|Any CPU.Build.0 = IOSsimulator|Any CPU
+		{F8328C60-47E3-4D27-9844-524C6F086D1C}.IOSsimulator|Any CPU.Deploy.0 = IOSsimulator|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8328C60-47E3-4D27-9844-524C6F086D1C}.Release|Any CPU.Deploy.0 = Release|Any CPU
