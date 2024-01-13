@@ -57,7 +57,7 @@ namespace PursuitTimer.ViewModels
         }
 
         [RelayCommand]
-        async Task Reset()
+        void Reset()
         {
             Targetsplit = "00.00";
             Targettolerance = "0.00";
