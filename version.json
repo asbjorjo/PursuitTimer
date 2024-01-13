@@ -3,7 +3,7 @@
   "version": "1.1.0.0",
   "publicReleaseRefSpec": [
     "^refs/heads/master$",
-    "^refs/heads/v\\d+(?:\\.\\d+)?$"
+    "^refs/tags/v\\d+\\.\\d+"
   ],
   "release": {
     "branchName": "release/v{version}",
@@ -11,6 +11,7 @@
     "firstUnstableTag": "alpha"
   },
   "cloudBuild": {
+    "setVersionVariables": true,
     "buildNumber": {
       "enabled": true
     }
