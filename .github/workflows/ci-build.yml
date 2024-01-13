@@ -114,4 +114,4 @@ jobs:
       - name: Publish to App Store
         env:
           API_PRIVATE_KEYS_DIR: .
-        run: xcrun altool --upload-package PursuitTimer/bin/Release/net8.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }} --bundle-version ${{ steps.nbgv.outputs.CloudBuildNumber }} --bundle-short-version-string ${{ steps.nbgv.outputs.SemVer2 }}
+        run: xcrun altool --upload-package PursuitTimer/bin/Release/net8.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }} --bundle-version ${{ steps.nbgv.outputs.SemVer2 }} --bundle-short-version-string ${{ steps.nbgv.outputs.SemVer2 }}
