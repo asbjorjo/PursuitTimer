@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
-using PursuitTimer.Pages;
 using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels
