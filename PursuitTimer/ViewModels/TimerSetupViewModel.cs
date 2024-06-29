@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Messages;
 using PursuitTimer.Pages;
 using PursuitTimer.Services;
 
@@ -8,19 +10,19 @@ namespace PursuitTimer.ViewModels
     public partial class TimerSetupViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string targetsplit = "00.00";
+        private double targetsplit = default;
         [ObservableProperty]
-        private string targettolerance = "0.00";
+        private double targettolerance = default;
         [ObservableProperty]
-        private string targettolerancepositive = "0.00";
+        private double targettolerancepositive = default;
         [ObservableProperty]
         private bool monochrome = false;
-        private readonly TimerService _timerService;
+        private readonly INavigationService _navigationService;
         private readonly ISettingsService _settingsService;
 
-        public TimerSetupViewModel(TimerService timerService, ISettingsService settingsService)
+        public TimerSetupViewModel(INavigationService navigationService, ISettingsService settingsService)
         {
-            _timerService = timerService;
+            _navigationService = navigationService;
             _settingsService = settingsService;
         }
 
@@ -37,21 +39,28 @@ namespace PursuitTimer.ViewModels
             _settingsService.Save(nameof(Targetsplit), Targetsplit);
             _settingsService.Save(nameof(Targettolerance), Targettolerance);
             _settingsService.Save(nameof(Targettolerancepositive), Targettolerancepositive);
+
+            StrongReferenceMessenger.Default.Send(new TargetsChangedMessage(new Model.Targets
+            {
+                Target = TimeSpan.FromSeconds(Targetsplit),
+                Negative = TimeSpan.FromSeconds(Targettolerance),
+                Positive = TimeSpan.FromSeconds(Targettolerancepositive)
+            }));
         }
 
         [RelayCommand]
         void Reset()
         {
-            Targetsplit = "00.00";
-            Targettolerance = "0.00";
-            Targettolerancepositive = "0.00";
+            Targetsplit = default;
+            Targettolerance = default;
+            Targettolerancepositive = default;
             Monochrome = false;
         }
 
         [RelayCommand]
         async Task Cancel()
         {
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await _navigationService.NavgigateToAsync("//Home");
         }
 
         [RelayCommand]
@@ -60,7 +69,7 @@ namespace PursuitTimer.ViewModels
             SaveTargets();
             _settingsService.Save(nameof(Monochrome), Monochrome);
 
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await _navigationService.NavgigateToAsync("//Home");
         }
     }
 }

@@ -1,24 +1,26 @@
 ﻿namespace PursuitTimer.Services
 {
-    public class SettingsService : ISettingsService
+    public sealed class SettingsService : ISettingsService
     {
+        private IPreferences AppSettings = Preferences.Default;
+
         public T Get<T>(string key)
         {
             T defaultValue = default;
 
-            return Get<T>(key, defaultValue);
+            return Get(key, defaultValue);
         }
 
         public T Get<T>(string key, T defaultValue)
         {
-            var value = Preferences.Default.Get<T>(key, defaultValue);
+            var value = AppSettings.Get(key, defaultValue);
 
             return value;
         }
 
         public void Save<T>(string key, T value)
         {
-            Preferences.Default.Set<T>(key, value);
+            AppSettings.Set(key, value);
         }
     }
 }

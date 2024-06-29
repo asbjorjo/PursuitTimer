@@ -18,7 +18,7 @@
                 x:Name="TargetEntry"
                 FontSize="24"
                 Keyboard="Numeric" 
-                Text="{Binding Targetsplit}" />
+                Text="{Binding Targetsplit, StringFormat='{0:F2}'}" />
         </FlexLayout>
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="1">
@@ -29,7 +29,7 @@
                 x:Name="ToleranceEntry"
                 FontSize="24"
                 Keyboard="Numeric" 
-                Text="{Binding Targettolerance}" />
+                Text="{Binding Targettolerance, StringFormat='{0:F2}'}" />
         </FlexLayout>
         <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="2">
@@ -40,7 +40,7 @@
                 x:Name="TolerancePositiveEntry"
                 FontSize="24"
                 Keyboard="Numeric" 
-                Text="{Binding Targettolerancepositive}" />
+                Text="{Binding Targettolerancepositive, StringFormat='{0:F2}'}" />
         </FlexLayout>
 
         <FlexLayout JustifyContent="SpaceBetween"

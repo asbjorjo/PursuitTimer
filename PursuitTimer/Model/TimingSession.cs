@@ -5,31 +5,34 @@ namespace PursuitTimer.Model
     public class TimingSession
     {
         private List<SplitTime> _splitTime = new();
-        private TimeSpan _target = TimeSpan.Zero;
-        private TimeSpan _tolerancenegative = TimeSpan.Zero;
-        private TimeSpan _tolerancepositive = TimeSpan.Zero;
+        private Targets _targets = new();
 
         public IReadOnlyList<SplitTime> SplitTimes { get => _splitTime.AsReadOnly(); }
         public DateTime StartTime { get; private set; } = DateTime.UtcNow;
         public TimeSpan Target
         { 
-            get => _target; 
+            get => _targets.Target; 
             set 
             { 
-                if (_splitTime.Count == 0) _target = value; 
+                if (_splitTime.Count == 0) _targets.Target = value; 
             } 
+        }
+
+        public Targets Targets {
+            get => _targets;
+            set => _targets = value;
         }
 
         public TimeSpan Tolerance
         {
-            get => _tolerancenegative;
-            set => _tolerancenegative = value;
+            get => _targets.Negative;
+            set => _targets.Positive = value;
         }
 
         public TimeSpan TolerancePositive
         {
-            get => _tolerancepositive;
-            set => _tolerancepositive = value;
+            get => _targets.Positive;
+            set => _targets.Positive = value;
         }
 
         public TimeSpan TotalTime { get => _splitTime.Select(x => x.Split).Sum(); }

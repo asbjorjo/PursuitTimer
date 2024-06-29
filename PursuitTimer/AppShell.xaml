@@ -10,21 +10,21 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:HomePage}"
-        Route="HomePage" />
+        Route="Home" />
 
     <ShellContent
         Title="{x:Static res:AppResources.Timing}"
         ContentTemplate="{DataTemplate local:TimerSetupPage}"
-        Route="TimerSetupPage" />
+        Route="TimerSetup" />
 
     <ShellContent
         Shell.NavBarIsVisible="False"
         Title="{x:Static res:AppResources.Timing}"
         ContentTemplate="{DataTemplate local:TimerPage}"
-        Route="TimerPage" />
+        Route="Timing" />
 
     <ShellContent 
         Title="{x:Static res:AppResources.Summary}"
         ContentTemplate="{DataTemplate local:SummaryPage}"
-        Route="SummaryPage"/>
+        Route="Summary"/>
 </Shell>

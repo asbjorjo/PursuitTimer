@@ -7,7 +7,7 @@
             builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<SummaryViewModel>();
             builder.Services.AddTransient<TimerSetupViewModel>();
-            builder.Services.AddTransient<TimerViewModel>();
+            builder.Services.AddSingleton<TimerViewModel>();
 
             return builder;
         }
