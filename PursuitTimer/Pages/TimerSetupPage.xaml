@@ -56,15 +56,6 @@
         </FlexLayout>
 
         <FlexLayout JustifyContent="SpaceBetween"
-                    Grid.Row="4">
-                <Button
-                x:Name="ResetBtn"
-                FontSize="24"
-                Text="{x:Static res:AppResources.Reset}"
-                Command="{Binding ResetCommand}"/>
-        </FlexLayout>
-
-        <FlexLayout JustifyContent="SpaceBetween"
                     Grid.Row="6">
             <Button
                 x:Name="CancelBtn"

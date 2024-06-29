@@ -90,6 +90,10 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
                         Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
                     }
                 }
+                else
+                {
+                    Splitcolor = Colors.Transparent;
+                }
             }
             else
             {
@@ -134,7 +138,7 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
     {
         DeviceDisplay.KeepScreenOn = false;
 
-        await _navigationService.NavgigateToAsync("//Summary");
+        await _navigationService.NavgigateToAsync("Summary");
     }
 
     public void Receive(TargetsChangedMessage message)

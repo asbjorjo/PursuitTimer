@@ -5,26 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PursuitTimer.Pages"
     xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomePage}"
-        Route="Home" />
-
-    <ShellContent
-        Title="{x:Static res:AppResources.Timing}"
+    <TabBar Route="Timing">
+        <ShellContent
+        Title="{x:Static res:AppResources.Setup}"
         ContentTemplate="{DataTemplate local:TimerSetupPage}"
-        Route="TimerSetup" />
+        Route="Setup" />
 
-    <ShellContent
-        Shell.NavBarIsVisible="False"
+        <ShellContent
         Title="{x:Static res:AppResources.Timing}"
         ContentTemplate="{DataTemplate local:TimerPage}"
-        Route="Timing" />
+        Route="Timer" />
 
-    <ShellContent 
+        <ShellContent 
         Title="{x:Static res:AppResources.Summary}"
         ContentTemplate="{DataTemplate local:SummaryPage}"
         Route="Summary"/>
+    </TabBar>
 </Shell>

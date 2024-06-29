@@ -34,7 +34,7 @@ namespace PursuitTimer.ViewModels
             Targetsplit = targets.Target.TotalSeconds;
             Targettolerance = targets.Negative.TotalSeconds;
             Targettolerancepositive = targets.Positive.TotalSeconds;
-            Monochrome = _settingsService.Get(nameof(Monochrome), Monochrome);
+            Monochrome = _settingsService.Get("Monochrome", Monochrome);
         }
 
         private void SaveTargets()
@@ -63,16 +63,16 @@ namespace PursuitTimer.ViewModels
         [RelayCommand]
         async Task Cancel()
         {
-            await _navigationService.NavgigateToAsync("//Home");
+            await _navigationService.NavgigateToAsync("//Timing/Timer");
         }
 
         [RelayCommand]
         async Task Save()
         {
             SaveTargets();
-            _settingsService.Save(nameof(Monochrome), Monochrome);
+            _settingsService.Save("Monochrome", Monochrome);
 
-            await _navigationService.NavgigateToAsync("//Home");
+            await _navigationService.NavgigateToAsync("//Timing/Timer");
         }
     }
 }

@@ -36,7 +36,7 @@ namespace PursuitTimer.ViewModels
         [RelayCommand(CanExecute = nameof(CanShowSummary))]
         async Task Summary()
         {
-            await _navigationService.NavgigateToAsync("//Summary");
+            await _navigationService.NavgigateToAsync("//Timing/Summary");
         }
 
         [RelayCommand]

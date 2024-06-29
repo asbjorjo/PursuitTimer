@@ -10,7 +10,7 @@ namespace PursuitTimer.Services
 
         public Task InitializeAsync()
         {
-            return NavgigateToAsync("//Home");
+            return NavgigateToAsync("//Timing/Timer");
         }
 
         public Task NavgigateToAsync(string route, IDictionary<string, object> routeParameters = null)
