@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
 using PursuitTimer.Pages;
 using PursuitTimer.Services;
@@ -28,24 +29,26 @@ namespace PursuitTimer.ViewModels
 
         internal void Initialize()
         {
-            Targetsplit = _settingsService.Get(nameof(Targetsplit), Targetsplit);
-            Targettolerance = _settingsService.Get(nameof(Targettolerance), Targettolerance);
-            Targettolerancepositive = _settingsService.Get(nameof(Targettolerancepositive), Targettolerancepositive);
+            var targets = _settingsService.GetTargets();
+
+            Targetsplit = targets.Target.TotalSeconds;
+            Targettolerance = targets.Negative.TotalSeconds;
+            Targettolerancepositive = targets.Positive.TotalSeconds;
             Monochrome = _settingsService.Get(nameof(Monochrome), Monochrome);
         }
 
         private void SaveTargets()
         {
-            _settingsService.Save(nameof(Targetsplit), Targetsplit);
-            _settingsService.Save(nameof(Targettolerance), Targettolerance);
-            _settingsService.Save(nameof(Targettolerancepositive), Targettolerancepositive);
-
-            StrongReferenceMessenger.Default.Send(new TargetsChangedMessage(new Model.Targets
+            var targets = new Model.Targets
             {
                 Target = TimeSpan.FromSeconds(Targetsplit),
                 Negative = TimeSpan.FromSeconds(Targettolerance),
                 Positive = TimeSpan.FromSeconds(Targettolerancepositive)
-            }));
+            };
+
+            _settingsService.SaveTargets(targets);
+
+            StrongReferenceMessenger.Default.Send(new TargetsChangedMessage(targets));
         }
 
         [RelayCommand]

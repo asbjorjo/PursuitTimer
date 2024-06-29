@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
 using PursuitTimer.Model;
-using PursuitTimer.Pages;
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 
@@ -42,6 +42,8 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
         _settingsService = settingsService;
         
         StrongReferenceMessenger.Default.RegisterAll(this);
+
+        _timingSession.Targets = _settingsService.GetTargets();
     }
 
     public Color Textcolor()
