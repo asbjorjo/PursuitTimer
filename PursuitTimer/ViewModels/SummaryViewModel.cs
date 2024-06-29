@@ -6,7 +6,7 @@ using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public partial class SummaryViewModel : ViewModelBase
+public partial class SummaryViewModel : ObservableObject
 {
     private readonly TimerService _timerService;
 

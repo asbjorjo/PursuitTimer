@@ -7,7 +7,7 @@ using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public partial class TimerViewModel : ViewModelBase
+public partial class TimerViewModel : ObservableObject
 {
     private static readonly string SplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
@@ -49,10 +49,6 @@ public partial class TimerViewModel : ViewModelBase
 
     public void UpdateModel()
     {
-        _timerService.SetTarget(_settingsService.Get<string>("Targetsplit"));
-        _timerService.SetTolerance(_settingsService.Get<string>("Targettolerance"));
-        _timerService.SetTolerancePositive(_settingsService.Get<string>("Targettolerancepositive"));
-
         var timingSession = _timerService.TimingSession;
 
         if (timingSession.SplitTimes.Count > 0)
@@ -102,6 +98,8 @@ public partial class TimerViewModel : ViewModelBase
         }
         else
         {
+            _timerService.Start();
+
             Splittext = AppResources.Split;
         }
     }

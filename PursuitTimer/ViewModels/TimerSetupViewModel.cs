@@ -2,16 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using PursuitTimer.Pages;
 using PursuitTimer.Services;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PursuitTimer.ViewModels
 {
-    public partial class TimerSetupViewModel : ViewModelBase
+    public partial class TimerSetupViewModel : ObservableObject
     {
         [ObservableProperty]
         private string targetsplit = "00.00";
@@ -32,28 +26,17 @@ namespace PursuitTimer.ViewModels
 
         internal void Initialize()
         {
-            Targetsplit = _timerService.TimingSession.Target > TimeSpan.Zero ? _timerService.TimingSession.Target.ToString("ss'.'ff") : _settingsService.Get(nameof(Targetsplit), Targetsplit);
-            Targettolerance = _timerService.TimingSession.Tolerance > TimeSpan.Zero ? _timerService.TimingSession.Tolerance.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerance), Targettolerance);
-            Targettolerancepositive = _timerService.TimingSession.TolerancePositive > TimeSpan.Zero ? _timerService.TimingSession.TolerancePositive.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerancepositive), Targettolerancepositive);
+            Targetsplit = _settingsService.Get(nameof(Targetsplit), Targetsplit);
+            Targettolerance = _settingsService.Get(nameof(Targettolerance), Targettolerance);
+            Targettolerancepositive = _settingsService.Get(nameof(Targettolerancepositive), Targettolerancepositive);
             Monochrome = _settingsService.Get(nameof(Monochrome), Monochrome);
         }
 
-        private void UpdateTarget()
+        private void SaveTargets()
         {
-            if (_timerService.SetTarget(Targetsplit))
-            {
-                _settingsService.Save(nameof(Targetsplit), Targetsplit);
-            }
-
-            if (_timerService.SetTolerance(Targettolerance))
-            {
-                _settingsService.Save(nameof(Targettolerance), Targettolerance);
-            }
-
-            if (_timerService.SetTolerancePositive(Targettolerancepositive))
-            {
-                _settingsService.Save(nameof(Targettolerancepositive), Targettolerancepositive);
-            }
+            _settingsService.Save(nameof(Targetsplit), Targetsplit);
+            _settingsService.Save(nameof(Targettolerance), Targettolerance);
+            _settingsService.Save(nameof(Targettolerancepositive), Targettolerancepositive);
         }
 
         [RelayCommand]
@@ -74,8 +57,7 @@ namespace PursuitTimer.ViewModels
         [RelayCommand]
         async Task Save()
         {
-            _timerService.Reset();
-            UpdateTarget();
+            SaveTargets();
             _settingsService.Save(nameof(Monochrome), Monochrome);
 
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");

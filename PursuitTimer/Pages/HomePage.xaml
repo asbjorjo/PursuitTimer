@@ -24,11 +24,11 @@
             Text="{x:Static res:AppResources.Summary}"
             Command="{Binding SummaryCommand}"/>
         <Button
-            x:Name="StartBtn"
+            x:Name="TimingBtn"
             HeightRequest="64"
             FontFamily="B612Mono"
             FontSize="24"
             Text="{x:Static res:AppResources.Timing}"
-            Command="{Binding StartCommand}"/>
+            Command="{Binding TimingCommand}"/>
     </StackLayout>
 </ContentPage>

@@ -5,7 +5,7 @@ using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels
 {
-    public partial class HomeViewModel : ViewModelBase
+    public partial class HomeViewModel : ObservableObject
     {
         private readonly TimerService _timerService;
 
@@ -36,10 +36,8 @@ namespace PursuitTimer.ViewModels
         }
 
         [RelayCommand]
-        async Task Start()
+        async Task Timing()
         {
-            _timerService.Reset();
-
             await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
         }
 
