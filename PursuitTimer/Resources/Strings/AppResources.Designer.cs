@@ -61,6 +61,15 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Om.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avbryt.
         /// </summary>
         public static string Cancel {
@@ -86,7 +95,7 @@ namespace PursuitTimer.Resources.Strings {
                 return ResourceManager.GetString("Main", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Skru av farger.
         /// </summary>
@@ -95,7 +104,7 @@ namespace PursuitTimer.Resources.Strings {
                 return ResourceManager.GetString("MonochromeSetting", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Nullstill.
         /// </summary>
