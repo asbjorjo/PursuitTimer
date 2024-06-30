@@ -39,14 +39,16 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent" Version="3.0.0" />
+    <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent.Filled" Version="3.0.0" />
     <PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Compile Update="Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\TimerSetupPage.xaml.cs">
       <DependentUpon>TimerSetupPage.xaml</DependentUpon>
@@ -71,6 +73,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="Pages\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Pages\SummaryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
