@@ -9,7 +9,6 @@
         x:Name="TimerLayout">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
         <Grid.GestureRecognizers>
             <TapGestureRecognizer Tapped="OnSplitClicked" />
