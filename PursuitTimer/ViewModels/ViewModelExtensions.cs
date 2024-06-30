@@ -4,7 +4,6 @@
     {
         public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<SummaryViewModel>();
             builder.Services.AddTransient<TimerSetupViewModel>();
             builder.Services.AddSingleton<TimerViewModel>();

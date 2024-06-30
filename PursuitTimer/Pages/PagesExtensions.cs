@@ -10,7 +10,6 @@ namespace PursuitTimer.Pages
     {
         public static MauiAppBuilder ConfigurePages(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<SummaryPage>();
             builder.Services.AddTransient<TimerSetupPage>();
             builder.Services.AddTransient<TimerPage>();
