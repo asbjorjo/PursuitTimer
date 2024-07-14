@@ -3,34 +3,34 @@
     x:Class="PursuitTimer.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:PursuitTimer.Pages"
+    xmlns:pages="clr-namespace:PursuitTimer.Pages"
     xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
     xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
-    Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
     <TabBar Route="Timing">
         <ShellContent
-        Title="{x:Static res:AppResources.Setup}"
-        Icon="{mi:Fluent Icon=Settings32}"
-        ContentTemplate="{DataTemplate local:TimerSetupPage}"
-        Route="Setup" />
+        Title="{x:Static res:AppResources.Timing}"
+        ContentTemplate="{DataTemplate pages:TimerPage}"
+        Icon="{mi:Fluent Icon=Timer32}"
+        Route="Timer"/>
 
         <ShellContent
-        Title="{x:Static res:AppResources.Timing}"
-        ContentTemplate="{DataTemplate local:TimerPage}"
-        Icon="{mi:Fluent Icon=Timer32}"
-        Route="Timer" />
-
-        <ShellContent 
         Title="{x:Static res:AppResources.Summary}"
-        ContentTemplate="{DataTemplate local:SummaryPage}"
+        ContentTemplate="{DataTemplate pages:SummaryPage}"
         Icon="{mi:Fluent Icon=DataTrending32}"
-        Route="Summary"/>
+        Route="Summary"
+        IsVisible="{Binding IsRunning}"/>
+
+        <ShellContent
+        Title="{x:Static res:AppResources.Setup}"
+        Icon="{mi:Fluent Icon=Settings32}"
+        ContentTemplate="{DataTemplate pages:TimerSetupPage}"
+        Route="Setup" />
 
         <ShellContent 
         Title="{x:Static res:AppResources.About}"
-        ContentTemplate="{DataTemplate local:AboutPage}"
+        ContentTemplate="{DataTemplate pages:AboutPage}"
         Icon="{mi:Fluent Icon=Info28}"
         Route="About"/>
     </TabBar>
