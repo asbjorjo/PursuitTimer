@@ -19,16 +19,16 @@ public partial class TimerPage : ContentPage
     {
         base.OnAppearing();
 
-        vm.UpdateModel();
+        vm.UpdateView();
 
-        LastSplitLabel.TextColor = vm.Splittextcolor;
+        DeviceDisplay.KeepScreenOn = true;
     }
 
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
 
-        UpdateFontSize();
+           UpdateFontSize();
     }
 
     private void UpdateFontSize()
@@ -46,5 +46,12 @@ public partial class TimerPage : ContentPage
         UpdateFontSize();
 
         LastSplitLabel.TextColor = vm.Splittextcolor;
+    }
+
+    protected override void OnDisappearing()
+    {
+        vm.UpdateView();
+
+        base.OnDisappearing();
     }
 }

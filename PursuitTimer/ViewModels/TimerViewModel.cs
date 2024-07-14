@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
 using PursuitTimer.Model;
+using PursuitTimer.Pages;
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 
@@ -20,8 +21,8 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
     private readonly TimingSession _timingSession = new();
     private readonly INavigationService _navigationService;
     private readonly ISettingsService _settingsService;
-
-    private bool _running = false;
+    private readonly ITimingSessionService _sessionService;
+    private bool _running => _timingSession.IsRunning;
 
     [ObservableProperty]
     private Color splitcolor = Colors.Transparent;
@@ -36,12 +37,15 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
 
     public bool Reset { get; set; }
 
-    public TimerViewModel(INavigationService navigationService, ISettingsService settingsService)
+    public TimerViewModel(INavigationService navigationService, ISettingsService settingsService, ITimingSessionService sessionService)
     {
         _navigationService = navigationService;
         _settingsService = settingsService;
+        _sessionService = sessionService;
         
         StrongReferenceMessenger.Default.RegisterAll(this);
+
+        _timingSession = _sessionService.LoadTimingSession();
 
         _timingSession.Targets = _settingsService.GetTargets();
     }
@@ -58,9 +62,15 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
         return splittextcolor;
     }
 
-    public void UpdateModel()
+    public void UpdateView()
     {
-        if (_running && ! Reset)
+        if (Reset)
+        {
+            _timingSession.Reset();
+            Reset = false;
+        }
+
+        if (_running)
         {
             if (_timingSession.SplitTimes.Count > 0)
             {
@@ -90,10 +100,6 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
                         Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
                     }
                 }
-                else
-                {
-                    Splitcolor = Colors.Transparent;
-                }
             }
             else
             {
@@ -104,6 +110,8 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
         {
             Splittext = AppResources.Start;
             Splitcolor = Colors.Transparent;
+
+            DeviceDisplay.KeepScreenOn = false;
         }
 
         Splittextcolor = Textcolor();
@@ -112,25 +120,10 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
     [RelayCommand]
     public void Split()
     {
-        DeviceDisplay.KeepScreenOn = true;
+        _timingSession.AddSplit();
 
-        if (Reset)
-        {
-            _running = false;
-            Reset = false;
-        }
-
-        if (_running)
-        {
-            _timingSession.AddSplit();
-        }
-        else
-        {
-            _timingSession.Reset();
-            _running = true;
-        }
-
-        UpdateModel();
+        UpdateView();
+        _sessionService.SaveTimingSession(_timingSession);
     }
 
     [RelayCommand]

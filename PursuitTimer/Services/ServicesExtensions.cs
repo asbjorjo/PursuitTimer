@@ -4,8 +4,9 @@
     {
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<ISettingsService, SettingsService>();
             builder.Services.AddSingleton<INavigationService, NavigationService>();
+            builder.Services.AddTransient<ISettingsService, SettingsService>();
+            builder.Services.AddSingleton<ITimingSessionService, TimingSessionService>();
 
             return builder;
         }
