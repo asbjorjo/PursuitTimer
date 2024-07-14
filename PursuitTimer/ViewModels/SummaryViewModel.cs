@@ -30,20 +30,8 @@ public partial class SummaryViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Resume()
-    {
-        await _navigationService.NavgigateToAsync("..");
-    }
-
-    [RelayCommand]
     async Task Restart()
     {
         await _navigationService.NavgigateToAsync("//Timing/Timer", new Dictionary<string, object> { { "Reset", true} });
-    }
-
-    [RelayCommand]
-    async Task Main()
-    {
-        await _navigationService.NavgigateToAsync("..");
     }
 }
