@@ -1,3 +1,4 @@
+using PursuitTimer.Resources.Strings;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;
@@ -13,6 +14,7 @@ public partial class TimerPage : ContentPage
         InitializeComponent();
 
         BindingContext = vm;
+        vm.IsActive = true;
     }
 
     protected override void OnAppearing()
@@ -53,5 +55,23 @@ public partial class TimerPage : ContentPage
         vm.UpdateView();
 
         base.OnDisappearing();
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        var location = Shell.Current.CurrentState.Location;
+
+        if (location.OriginalString.EndsWith("/Reset")) {
+            vm.Reset = true;
+        }
+
+        base.OnNavigatedTo(args);
+    }
+
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        base.OnNavigatedFrom(args);
+
+        vm.Label = AppResources.Timing;
     }
 }

@@ -23,7 +23,7 @@ public partial class SummaryViewModel : ObservableObject
 
     public void Initialize()
     {
-        TimingSession timingSession = StrongReferenceMessenger.Default.Send<TimingSessionRequestMessage>();
+        TimingSession timingSession = WeakReferenceMessenger.Default.Send<TimingSessionRequestMessage>();
 
         SplitTimes = timingSession.SplitTimes;
         SumTimes = timingSession.TotalTime;

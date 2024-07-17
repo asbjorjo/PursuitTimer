@@ -1,17 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
 using PursuitTimer.Model;
-using PursuitTimer.Pages;
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
 [QueryProperty(nameof(Reset), "Reset")]
-public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChangedMessage>, IRecipient<TimingSessionRequestMessage>
+public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsChangedMessage>, IRecipient<TimingSessionRequestMessage>, IRecipient<TabReselectedMessage>
 {
     private static readonly string SplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
@@ -33,21 +33,27 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
     [ObservableProperty]
     private double fontsize = 32;
     [ObservableProperty]
-    public Color splittextcolor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+    public Color splittextcolor = Application.Current?.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+    [ObservableProperty]
+    private string label = AppResources.Timing;
+    [ObservableProperty]
+    private bool running = false;
+    [ObservableProperty]
+    private bool hasIntermediate = false;
 
     public bool Reset { get; set; }
 
-    public TimerViewModel(INavigationService navigationService, ISettingsService settingsService, ITimingSessionService sessionService)
+    public TimerViewModel(INavigationService navigationService, ISettingsService settingsService, ITimingSessionService sessionService) : base()
     {
         _navigationService = navigationService;
         _settingsService = settingsService;
         _sessionService = sessionService;
         
-        StrongReferenceMessenger.Default.RegisterAll(this);
-
         _timingSession = _sessionService.LoadTimingSession();
 
         _timingSession.Targets = _settingsService.GetTargets();
+
+        IsActive = true;
     }
 
     public Color Textcolor()
@@ -72,6 +78,11 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
 
         if (_running)
         {
+            //_navigationView.SettingsActive = false;
+            //_navigationView.AboutActive = false;
+            //_navigationView.TimerLabel = AppResources.Reset;
+            Label = AppResources.Reset;
+
             if (_timingSession.SplitTimes.Count > 0)
             {
                 var splitTime = _timingSession.SplitTimes[_timingSession.SplitTimes.Count - 1];
@@ -100,6 +111,7 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
                         Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
                     }
                 }
+                HasIntermediate = true;
             }
             else
             {
@@ -108,12 +120,16 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
         }
         else
         {
+            HasIntermediate = false;
+            Label = AppResources.Timing;
+
             Splittext = AppResources.Start;
             Splitcolor = Colors.Transparent;
 
             DeviceDisplay.KeepScreenOn = false;
         }
 
+        Running = _running;
         Splittextcolor = Textcolor();
     }
 
@@ -142,5 +158,14 @@ public partial class TimerViewModel : ObservableObject, IRecipient<TargetsChange
     public void Receive(TimingSessionRequestMessage message)
     {
         message.Reply(_timingSession);
+    }
+
+    public void Receive(TabReselectedMessage message)
+    {
+        string target = message.Value;
+        if (target.EndsWith("Timer")) {
+            Reset = true;
+            UpdateView();
+        }
     }
 }

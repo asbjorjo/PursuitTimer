@@ -74,7 +74,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="32" />
-            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
 
         <ScrollView
@@ -100,12 +99,5 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
         </Grid>
-        <Button
-            x:Name="RestartBtn"
-            Grid.Row="3"
-            FontSize="24"
-            Text="{x:Static res:AppResources.Restart}"
-            Command="{Binding RestartCommand}"
-            Margin="0,2,0,0"/>
     </Grid>
 </ContentPage>

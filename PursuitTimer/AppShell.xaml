@@ -6,32 +6,54 @@
     xmlns:pages="clr-namespace:PursuitTimer.Pages"
     xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
     xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.NavBarIsVisible="False">
 
-    <TabBar Route="Timing">
-        <ShellContent
-        Title="{x:Static res:AppResources.Timing}"
-        ContentTemplate="{DataTemplate pages:TimerPage}"
-        Icon="{mi:Fluent Icon=Timer32}"
-        Route="Timer"/>
+    <Shell.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <TabBar 
+        Route="Timing"
+        BindingContext="{Binding TimerView}">
+        <Tab
+            Title="{Binding Label, Mode=OneWay}"
+            Route="Timer"
+            Icon="{mi:Fluent Icon=Timer32}">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:TimerPage}"/>
+        </Tab>
 
-        <ShellContent
-        Title="{x:Static res:AppResources.Summary}"
-        ContentTemplate="{DataTemplate pages:SummaryPage}"
-        Icon="{mi:Fluent Icon=DataTrending32}"
-        Route="Summary"
-        IsVisible="{Binding IsRunning}"/>
+        <Tab
+            Title="{x:Static res:AppResources.Summary}"
+            Route="Summary"
+            Icon="{mi:Fluent Icon=DataTrending32}"
+            IsEnabled="{Binding HasIntermediate}">
+            <ShellContent
+                Title="{x:Static res:AppResources.Summary}"
+                ContentTemplate="{DataTemplate pages:SummaryPage}"/>
+        </Tab>
+        
+        <Tab 
+            Title="{x:Static res:AppResources.Setup}"
+            Route="Setup"
+            Icon="{mi:Fluent Icon=Settings32}"
+            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
+            <ShellContent
+                Title="{x:Static res:AppResources.Setup}"
+                ContentTemplate="{DataTemplate pages:TimerSetupPage}"/>
+        </Tab>
 
-        <ShellContent
-        Title="{x:Static res:AppResources.Setup}"
-        Icon="{mi:Fluent Icon=Settings32}"
-        ContentTemplate="{DataTemplate pages:TimerSetupPage}"
-        Route="Setup" />
-
-        <ShellContent 
-        Title="{x:Static res:AppResources.About}"
-        ContentTemplate="{DataTemplate pages:AboutPage}"
-        Icon="{mi:Fluent Icon=Info28}"
-        Route="About"/>
+        <Tab 
+            Title="{x:Static res:AppResources.About}"
+            Route="About"
+            Icon="{mi:Fluent Icon=Info28}"
+            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
+            <ShellContent 
+                Title="{x:Static res:AppResources.About}"
+                ContentTemplate="{DataTemplate pages:AboutPage}"/>
+        </Tab>
     </TabBar>
 </Shell>

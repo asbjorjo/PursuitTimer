@@ -47,7 +47,7 @@ namespace PursuitTimer.ViewModels
 
             _settingsService.SaveTargets(targets);
 
-            StrongReferenceMessenger.Default.Send(new TargetsChangedMessage(targets));
+            WeakReferenceMessenger.Default.Send(new TargetsChangedMessage(targets));
         }
 
         [RelayCommand]
