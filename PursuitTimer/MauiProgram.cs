@@ -28,7 +28,14 @@ public static class MauiProgram
 		builder.ConfigurePages();
         builder.ConfigureServices();
         builder.ConfigureViewModels();
-        
-		return builder.Build();
+
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+#if ANDROID
+		    handlers.AddHandler(typeof(Shell), typeof(Your.Namespace.AndroidShellRenderer));
+#endif
+        });
+
+            return builder.Build();
 	}
 }
