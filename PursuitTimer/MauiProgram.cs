@@ -36,6 +36,10 @@ public static class MauiProgram
 #endif
         });
 
-            return builder.Build();
+		var app = builder.Build();
+
+		_ = app.Services.GetRequiredService<MessageSnoopService>();
+
+		return app;
 	}
 }
