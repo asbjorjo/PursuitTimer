@@ -78,9 +78,6 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
 
         if (_running)
         {
-            //_navigationView.SettingsActive = false;
-            //_navigationView.AboutActive = false;
-            //_navigationView.TimerLabel = AppResources.Reset;
             Label = AppResources.Reset;
 
             if (_timingSession.SplitTimes.Count > 0)
