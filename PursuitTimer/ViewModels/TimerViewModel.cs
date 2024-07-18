@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Messaging.Messages;
 using PursuitTimer.Extensions;
 using PursuitTimer.Messages;
 using PursuitTimer.Model;
@@ -25,20 +24,28 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
     private bool _running => _timingSession.IsRunning;
 
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private Color splitcolor = Colors.Transparent;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private SplitTime splittime;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private string splittext = AppResources.Start;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private double fontsize = 32;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     public Color splittextcolor = Application.Current?.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private string label = AppResources.Timing;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private bool running = false;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private bool hasIntermediate = false;
 
     public bool Reset { get; set; }
@@ -128,6 +135,7 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
 
         Running = _running;
         Splittextcolor = Textcolor();
+        _sessionService.SaveTimingSession(_timingSession);
     }
 
     [RelayCommand]
@@ -136,7 +144,6 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
         _timingSession.AddSplit();
 
         UpdateView();
-        _sessionService.SaveTimingSession(_timingSession);
     }
 
     [RelayCommand]
