@@ -7,18 +7,46 @@
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
-    <VerticalStackLayout>
-        <Label>
-            <Label.Text>
-                Thank you for using PursuitTimer!
+    <StackLayout>
+        <Label
+            HorizontalOptions="Fill"
+            VerticalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Thank you for using PursuitTimer!"/>
+
+                    <Span Text="An application written by Asbjørn L. Johansen.
                 
-                An application written by Asbjørn L. Johansen.
-                
-                For any issues, suggestions or comments please e-mail asbjorjo@gmail.com
-                
-                Source code avaialable at https://github.com/asbjorjo/PursuitTimer
-            </Label.Text>
+For any issues, suggestions or comments please e-mail "/>
+                    <Span 
+                        Text="asbjorjo@gmail.com"
+                        TextColor="Blue"
+                        TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LinkCommand}"
+                          CommandParameter="mailto:asbjorjo@gmail.com"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="."/>
+
+                    <Span Text="Source code avaialable at "/>
+                    <Span 
+                        Text="https://github.com/asbjorjo/PursuitTimer"
+                        TextColor="Blue"
+                        TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LinkCommand}"
+                                                  CommandParameter="https://github.com/asbjorjo/PursuitTimer"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
         </Label>
-        <Label Text="{Binding Version}"/>
-    </VerticalStackLayout>
+        <Label
+            HorizontalOptions="Fill"
+            VerticalOptions="End"
+            HorizontalTextAlignment="End"
+            Text="{Binding Version}"/>
+    </StackLayout>
 </ContentPage>

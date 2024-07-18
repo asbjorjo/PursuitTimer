@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace PursuitTimer.ViewModels
 {
@@ -10,6 +11,12 @@ namespace PursuitTimer.ViewModels
         public AboutViewModel()
         {
             version = AppInfo.Current.VersionString;
+        }
+
+        [RelayCommand]
+        async Task Link(string link)
+        {
+            await Launcher.OpenAsync(link);
         }
     }
 }
