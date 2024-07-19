@@ -1,5 +1,4 @@
-﻿
-namespace PursuitTimer.Services
+﻿namespace PursuitTimer.Services
 {
     public class NavigationService : INavigationService
     {
