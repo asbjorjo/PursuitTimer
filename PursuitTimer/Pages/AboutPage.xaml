@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PursuitTimer.ViewModels"
-    x:Class="PursuitTimer.Pages.AboutPage"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="PursuitTimer.Pages.AboutPage"
              Title="About">
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
@@ -16,20 +17,22 @@
                 <FormattedString>
                     <Span Text="Thank you for using PursuitTimer!"/>
 
-                    <Span Text="An application written by Asbjørn L. Johansen.
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
                 
-For any issues, suggestions or comments please e-mail "/>
+                    <Span Text="For any issues or suggestions, please submit a "/>
                     <Span 
-                        Text="asbjorjo@gmail.com"
+                        Text="GitHub issue"
                         TextColor="Blue"
                         TextDecorations="Underline">
                         <Span.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding LinkCommand}"
-                          CommandParameter="mailto:asbjorjo@gmail.com"/>
+                          CommandParameter="https://github.com/asbjorjo/PursuitTimer/issues/new"/>
                         </Span.GestureRecognizers>
                     </Span>
                     <Span Text="."/>
 
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    
                     <Span Text="Source code avaialable at "/>
                     <Span 
                         Text="https://github.com/asbjorjo/PursuitTimer"
