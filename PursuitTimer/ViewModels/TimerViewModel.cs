@@ -47,6 +47,11 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
     private bool hasIntermediate = false;
+    
+    public bool ShowChanges {
+        get => _settingsService.Get("Showchanges", true);
+        set => _settingsService.Save("Showchanges", value);
+    }
 
     public bool Reset { get; set; }
 

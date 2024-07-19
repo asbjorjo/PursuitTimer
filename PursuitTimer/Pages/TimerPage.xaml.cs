@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Views;
+using PursuitTimer.Popups;
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.ViewModels;
 
@@ -20,6 +22,12 @@ public partial class TimerPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        if (vm.ShowChanges)
+        {
+            this.ShowPopup(new ChangesPopup());
+            vm.ShowChanges = false;
+        }
 
         vm.UpdateView();
 
