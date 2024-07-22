@@ -49,8 +49,8 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
     private bool hasIntermediate = false;
     
     public bool ShowChanges {
-        get => _settingsService.Get("Showchanges", true);
-        set => _settingsService.Save("Showchanges", value);
+        get => _settingsService.ShowChanges();
+        set { if (value) _settingsService.ChangesShown(); }
     }
 
     public bool Reset { get; set; }
