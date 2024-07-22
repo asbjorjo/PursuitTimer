@@ -50,7 +50,7 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
     
     public bool ShowChanges {
         get => _settingsService.ShowChanges();
-        set { if (value) _settingsService.ChangesShown(); }
+        set { if (!value) _settingsService.ChangesShown(); }
     }
 
     public bool Reset { get; set; }
