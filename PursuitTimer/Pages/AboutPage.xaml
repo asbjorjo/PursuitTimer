@@ -11,15 +11,42 @@
     <StackLayout>
         <Label
             HorizontalOptions="Fill"
-            VerticalOptions="FillAndExpand"
-            HorizontalTextAlignment="Start">
+            VerticalOptions="Start"
+            HorizontalTextAlignment="Start"
+            FontSize="Title">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="Thank you for using PursuitTimer!"/>
 
                     <Span Text="{x:Static system:Environment.NewLine}"/>
-                
-                    <Span Text="For any issues or suggestions, please submit a "/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label
+            HorizontalOptions="Fill"
+            VerticalOptions="StartAndExpand"
+            HorizontalTextAlignment="Start"
+            FontSize="Body">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span>
+                        <Span.Text>
+                            The aim of the app is to provide basic visual feedback to riders
+                            on a velodrome.
+                        </Span.Text>
+                    </Span>
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    <Span>
+                        <Span.Text>
+                            The idea orignated with riders at the Vår Energi Arena Sola
+                            velodrome in Sola, Norway.
+                        </Span.Text>
+                    </Span>
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    <Span Text="{x:Static system:Environment.NewLine}"/>
+                    <Span Text="For any issues or suggestions for features and improvements, please submit a "/>
                     <Span 
                         Text="GitHub issue"
                         TextColor="Blue"
@@ -30,19 +57,6 @@
                         </Span.GestureRecognizers>
                     </Span>
                     <Span Text="."/>
-
-                    <Span Text="{x:Static system:Environment.NewLine}"/>
-                    
-                    <Span Text="Source code avaialable at "/>
-                    <Span 
-                        Text="https://github.com/asbjorjo/PursuitTimer"
-                        TextColor="Blue"
-                        TextDecorations="Underline">
-                        <Span.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LinkCommand}"
-                                                  CommandParameter="https://github.com/asbjorjo/PursuitTimer"/>
-                        </Span.GestureRecognizers>
-                    </Span>
                 </FormattedString>
             </Label.FormattedText>
         </Label>
@@ -50,6 +64,7 @@
             HorizontalOptions="Fill"
             VerticalOptions="End"
             HorizontalTextAlignment="End"
+            FontSize="Small"
             Text="{Binding Version}"/>
     </StackLayout>
 </ContentPage>
