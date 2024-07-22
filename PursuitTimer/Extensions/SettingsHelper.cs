@@ -3,7 +3,7 @@ using PursuitTimer.Services;
 
 namespace PursuitTimer.Extensions
 {
-    public static class SettingsTargetHelper
+    public static class SettingsHelper
     {
         public static Targets GetTargets(this ISettingsService settingsService)
         {
@@ -20,6 +20,15 @@ namespace PursuitTimer.Extensions
             settingsService.Save("Targetsplit", targets.Target.TotalSeconds);
             settingsService.Save("Targettolerance", targets.Negative.TotalSeconds);
             settingsService.Save("Targettolerancepositive", targets.Positive.TotalSeconds);
+        }
+
+        public static bool ShowChanges(this ISettingsService settingsService) {
+            return settingsService.Get("Lastversion", string.Empty) != AppInfo.VersionString;
+        }
+
+        public static void ChangesShown(this ISettingsService settingsService)
+        {
+            settingsService.Save("Lastversion", AppInfo.VersionString); 
         }
     }
 }
