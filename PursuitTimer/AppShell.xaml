@@ -16,9 +16,9 @@
     </Shell.Resources>
     
     <TabBar 
-        Route="Timing"
-        BindingContext="{Binding TimerView}">
+        Route="Timing">
         <Tab
+            BindingContext="{Binding TimerView}"
             Title="{Binding Label, Mode=OneWay}"
             Route="Timer"
             Icon="{mi:Fluent Icon=Timer32}">
@@ -27,6 +27,7 @@
         </Tab>
 
         <Tab
+            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.Summary}"
             Route="Summary"
             Icon="{mi:Fluent Icon=DataTrending32}"
@@ -37,6 +38,7 @@
         </Tab>
         
         <Tab 
+            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.Setup}"
             Route="Setup"
             Icon="{mi:Fluent Icon=Settings32}"
@@ -47,6 +49,7 @@
         </Tab>
 
         <Tab 
+            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.About}"
             Route="About"
             Icon="{mi:Fluent Icon=Info28}"
