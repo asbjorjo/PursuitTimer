@@ -133,7 +133,7 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
             Label = AppResources.Timing;
 
             Splittext = AppResources.Start;
-            Splitcolor = Colors.Transparent;
+            Splitcolor = Application.Current.RequestedTheme == AppTheme.Light ? Colors.White : Colors.Black;
 
             DeviceDisplay.KeepScreenOn = false;
         }
