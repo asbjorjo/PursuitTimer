@@ -31,16 +31,14 @@
                 <FormattedString>
                     <Span>
                         <Span.Text>
-                            The aim of the app is to provide basic visual feedback to riders
-                            on a velodrome.
+                            The aim of the app is to provide basic visual feedback to riders on a velodrome.                           
                         </Span.Text>
                     </Span>
                     <Span Text="{x:Static system:Environment.NewLine}"/>
                     <Span Text="{x:Static system:Environment.NewLine}"/>
                     <Span>
                         <Span.Text>
-                            The idea orignated with riders at the Vår Energi Arena Sola
-                            velodrome in Sola, Norway.
+                            The idea orignated with riders at the Vår Energi Arena Sola velodrome in Sola, Norway.                           
                         </Span.Text>
                     </Span>
                     <Span Text="{x:Static system:Environment.NewLine}"/>
