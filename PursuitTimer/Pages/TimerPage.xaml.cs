@@ -32,13 +32,20 @@ public partial class TimerPage : ContentPage
         vm.UpdateView();
 
         DeviceDisplay.KeepScreenOn = true;
+
+        Application.Current.RequestedThemeChanged += ThemeChangedEventHandler;
+    }
+
+    void ThemeChangedEventHandler(object senbder, AppThemeChangedEventArgs a)
+    {
+        vm.UpdateView();
     }
 
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
 
-           UpdateFontSize();
+        UpdateFontSize();
     }
 
     private void UpdateFontSize()
@@ -61,6 +68,8 @@ public partial class TimerPage : ContentPage
     protected override void OnDisappearing()
     {
         vm.UpdateView();
+
+        Application.Current.RequestedThemeChanged -= ThemeChangedEventHandler;
 
         base.OnDisappearing();
     }
