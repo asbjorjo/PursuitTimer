@@ -30,8 +30,8 @@
                             <Setter Property="Icon">
                                 <Setter.Value>
                                     <FontImageSource Size="32"
-                                                     Color="{DynamicResource Primary}"
-                                                     Glyph="{mi:Fluent Icon=Timer32, IconColor={DynamicResource Primary}}"/>
+                                                     Color="{DynamicResource Magenta}"
+                                                     Glyph="{mi:Fluent Icon=Timer32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -40,7 +40,7 @@
                                 <Setter.Value>
                                     <FontImageSource Size="32"
                                                      Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                                                     Glyph="{mi:Fluent Icon=Timer32, IconColor={DynamicResource Primary}}"/>
+                                                     Glyph="{mi:Fluent Icon=Timer32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -64,8 +64,8 @@
                             <Setter Property="Icon">
                                 <Setter.Value>
                                     <FontImageSource Size="32"
-                                                     Color="{DynamicResource Primary}"
-                                                     Glyph="{mi:Fluent Icon=DataTrending32, IconColor={DynamicResource Primary}}"/>
+                                                     Color="{DynamicResource Magenta}"
+                                                     Glyph="{mi:Fluent Icon=DataTrending32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -74,7 +74,7 @@
                                 <Setter.Value>
                                     <FontImageSource Size="32"
                                                      Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                                                     Glyph="{mi:Fluent Icon=DataTrending32, IconColor={DynamicResource Primary}}"/>
+                                                     Glyph="{mi:Fluent Icon=DataTrending32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -98,8 +98,8 @@
                             <Setter Property="Icon">
                                 <Setter.Value>
                                     <FontImageSource Size="32"
-                                                     Color="{DynamicResource Primary}"
-                                                     Glyph="{mi:Fluent Icon=Settings32, IconColor={DynamicResource Primary}}"/>
+                                                     Color="{DynamicResource Magenta}"
+                                                     Glyph="{mi:Fluent Icon=Settings32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -108,7 +108,7 @@
                                 <Setter.Value>
                                     <FontImageSource Size="32"
                                                      Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                                                     Glyph="{mi:Fluent Icon=Settings32, IconColor={DynamicResource Primary}}"/>
+                                                     Glyph="{mi:Fluent Icon=Settings32}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -132,8 +132,8 @@
                             <Setter Property="Icon">
                                 <Setter.Value>
                                     <FontImageSource Size="32"
-                                                     Color="{DynamicResource Primary}"
-                                                     Glyph="{mi:Fluent Icon=Info28, IconColor={DynamicResource Primary}}"/>
+                                                     Color="{DynamicResource Magenta}"
+                                                     Glyph="{mi:Fluent Icon=Info28}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -142,7 +142,7 @@
                                 <Setter.Value>
                                     <FontImageSource Size="32"
                                                      Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                                                     Glyph="{mi:Fluent Icon=Info28, IconColor={DynamicResource Primary}}"/>
+                                                     Glyph="{mi:Fluent Icon=Info28}"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
