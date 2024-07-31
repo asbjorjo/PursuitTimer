@@ -36,6 +36,7 @@ public class CustomShellBottomNavViewAppearanceTracker : ShellBottomNavViewAppea
 
     public override void SetAppearance(BottomNavigationView bottomView, IShellAppearanceElement appearance)
     {
+        base.SetAppearance(bottomView, appearance);
         if (_subscribedItemReselected) return;
         bottomView.ItemReselected += ItemReselected;
         _subscribedItemReselected = true;
