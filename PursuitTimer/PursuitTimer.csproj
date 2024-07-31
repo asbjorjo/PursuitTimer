@@ -47,6 +47,9 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AppShelliOS.xaml.cs">
+      <DependentUpon>AppShelliOS.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="AppShelliOS.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Pages\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

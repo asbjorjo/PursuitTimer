@@ -9,6 +9,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell(navigationService, navigationViewModel);
-	}
+		//MainPage = new AppShell(navigationService, navigationViewModel);
+        MainPage = DeviceInfo.Platform == DevicePlatform.iOS ? new AppShelliOS(navigationService,navigationViewModel) : new AppShell(navigationService, navigationViewModel);
+    }
 }
