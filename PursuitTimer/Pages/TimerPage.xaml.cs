@@ -61,8 +61,6 @@ public partial class TimerPage : ContentPage
         vm.Split();
 
         UpdateFontSize();
-
-        LastSplitLabel.TextColor = vm.Splittextcolor;
     }
 
     protected override void OnDisappearing()
