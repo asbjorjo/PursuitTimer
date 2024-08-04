@@ -1,84 +1,77 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PursuitTimer.Pages;
+using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Extensions;
+using PursuitTimer.Messages;
 using PursuitTimer.Services;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PursuitTimer.ViewModels
 {
-    public partial class TimerSetupViewModel : ViewModelBase
+    public partial class TimerSetupViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string targetsplit = "00.00";
+        private double targetsplit = default;
         [ObservableProperty]
-        private string targettolerance = "0.00";
+        private double targettolerance = default;
         [ObservableProperty]
-        private string targettolerancepositive = "0.00";
+        private double targettolerancepositive = default;
         [ObservableProperty]
         private bool monochrome = false;
-        private readonly TimerService _timerService;
+        private readonly INavigationService _navigationService;
         private readonly ISettingsService _settingsService;
 
-        public TimerSetupViewModel(TimerService timerService, ISettingsService settingsService)
+        public TimerSetupViewModel(INavigationService navigationService, ISettingsService settingsService)
         {
-            _timerService = timerService;
+            _navigationService = navigationService;
             _settingsService = settingsService;
         }
 
         internal void Initialize()
         {
-            Targetsplit = _timerService.TimingSession.Target > TimeSpan.Zero ? _timerService.TimingSession.Target.ToString("ss'.'ff") : _settingsService.Get(nameof(Targetsplit), Targetsplit);
-            Targettolerance = _timerService.TimingSession.Tolerance > TimeSpan.Zero ? _timerService.TimingSession.Tolerance.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerance), Targettolerance);
-            Targettolerancepositive = _timerService.TimingSession.TolerancePositive > TimeSpan.Zero ? _timerService.TimingSession.TolerancePositive.ToString("s'.'ff") : _settingsService.Get(nameof(Targettolerancepositive), Targettolerancepositive);
-            Monochrome = _settingsService.Get(nameof(Monochrome), Monochrome);
+            var targets = _settingsService.GetTargets();
+
+            Targetsplit = targets.Target.TotalSeconds;
+            Targettolerance = targets.Negative.TotalSeconds;
+            Targettolerancepositive = targets.Positive.TotalSeconds;
+            Monochrome = _settingsService.Get("Monochrome", Monochrome);
         }
 
-        private void UpdateTarget()
+        private void SaveTargets()
         {
-            if (_timerService.SetTarget(Targetsplit))
+            var targets = new Model.Targets
             {
-                _settingsService.Save(nameof(Targetsplit), Targetsplit);
-            }
+                Target = TimeSpan.FromSeconds(Targetsplit),
+                Negative = TimeSpan.FromSeconds(Targettolerance),
+                Positive = TimeSpan.FromSeconds(Targettolerancepositive)
+            };
 
-            if (_timerService.SetTolerance(Targettolerance))
-            {
-                _settingsService.Save(nameof(Targettolerance), Targettolerance);
-            }
+            _settingsService.SaveTargets(targets);
 
-            if (_timerService.SetTolerancePositive(Targettolerancepositive))
-            {
-                _settingsService.Save(nameof(Targettolerancepositive), Targettolerancepositive);
-            }
+            WeakReferenceMessenger.Default.Send(new TargetsChangedMessage(targets));
         }
 
         [RelayCommand]
-        async Task Reset()
+        void Reset()
         {
-            Targetsplit = "00.00";
-            Targettolerance = "0.00";
-            Targettolerancepositive = "0.00";
+            Targetsplit = default;
+            Targettolerance = default;
+            Targettolerancepositive = default;
             Monochrome = false;
         }
 
         [RelayCommand]
         async Task Cancel()
         {
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await _navigationService.NavgigateToAsync("//Timing/Timer");
         }
 
         [RelayCommand]
         async Task Save()
         {
-            _timerService.Reset();
-            UpdateTarget();
-            _settingsService.Save(nameof(Monochrome), Monochrome);
+            SaveTargets();
+            _settingsService.Save("Monochrome", Monochrome);
 
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await _navigationService.NavgigateToAsync("//Timing/Timer");
         }
     }
 }

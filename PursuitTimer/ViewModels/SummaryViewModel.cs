@@ -1,49 +1,37 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Messages;
 using PursuitTimer.Model;
-using PursuitTimer.Pages;
 using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public partial class SummaryViewModel : ViewModelBase
+public partial class SummaryViewModel : ObservableObject
 {
-    private readonly TimerService _timerService;
-
     [ObservableProperty]
     IEnumerable<SplitTime> splitTimes;
 
     [ObservableProperty]
     TimeSpan sumTimes;
+    private INavigationService _navigationService;
 
-    public SummaryViewModel(TimerService timerService)
+    public SummaryViewModel(INavigationService navigationService)
     {
-        _timerService = timerService;
+        _navigationService = navigationService;
     }
 
     public void Initialize()
     {
-        SplitTimes = _timerService.TimingSession.SplitTimes;
-        SumTimes = _timerService.TimingSession.TotalTime;
-    }
+        TimingSession timingSession = WeakReferenceMessenger.Default.Send<TimingSessionRequestMessage>();
 
-    [RelayCommand]
-    async Task Resume()
-    {
-        await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
+        SplitTimes = timingSession.SplitTimes;
+        SumTimes = timingSession.TotalTime;
     }
 
     [RelayCommand]
     async Task Restart()
     {
-        _timerService.Reset();
-
-        await Shell.Current.GoToAsync($"//{nameof(TimerPage)}");
-    }
-
-    [RelayCommand]
-    async Task Main()
-    {
-        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+        await _navigationService.NavgigateToAsync("//Timing/Timer", new Dictionary<string, object> { { "Reset", true} });
     }
 }

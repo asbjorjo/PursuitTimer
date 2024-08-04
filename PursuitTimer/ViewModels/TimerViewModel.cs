@@ -1,109 +1,154 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using PursuitTimer.Extensions;
+using PursuitTimer.Messages;
 using PursuitTimer.Model;
-using PursuitTimer.Pages;
 using PursuitTimer.Resources.Strings;
 using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
-public partial class TimerViewModel : ViewModelBase
+[QueryProperty(nameof(Reset), "Reset")]
+public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsChangedMessage>, IRecipient<TimingSessionRequestMessage>, IRecipient<TabReselectedMessage>
 {
     private static readonly string SplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
     private static readonly Color SplitNegative = Colors.Yellow;
     private static readonly Color SplitNeutral = Colors.Lime;
 
-    private readonly TimerService _timerService;
+    private readonly TimingSession _timingSession = new();
+    private readonly INavigationService _navigationService;
     private readonly ISettingsService _settingsService;
+    private readonly ITimingSessionService _sessionService;
+    private bool _running => _timingSession.IsRunning;
 
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private Color splitcolor = Colors.Transparent;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private SplitTime splittime;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private string splittext = AppResources.Start;
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     private double fontsize = 32;
-
-    public Color Splittextcolor
-    {
-        get
-        {
-            var splittextcolor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
-
-            if (_timerService.TimingSession.SplitTimes.Count > 0 && !_settingsService.Get<bool>("Monochrome"))
-            {
-                splittextcolor = Splitcolor.GetLuminosity() < (Math.Sqrt(1.05 * 0.05)) - 0.05 ? Colors.White : Colors.Black;
-            }
-
-            return splittextcolor;
-        }
+    [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
+    public Color splittextcolor = Application.Current?.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+    [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
+    private string label = AppResources.Timing;
+    [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
+    private bool running = false;
+    [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
+    private bool hasIntermediate = false;
+    
+    public bool ShowChanges {
+        get => _settingsService.ShowChanges();
+        set { if (!value) _settingsService.ChangesShown(); }
     }
 
-    public TimerViewModel(TimerService timerService, ISettingsService settingsService)
+    public bool Reset { get; set; }
+
+    public TimerViewModel(INavigationService navigationService, ISettingsService settingsService, ITimingSessionService sessionService) : base()
     {
-        _timerService = timerService;
+        _navigationService = navigationService;
         _settingsService = settingsService;
+        _sessionService = sessionService;
+        
+        _timingSession = _sessionService.LoadTimingSession();
+
+        _timingSession.Targets = _settingsService.GetTargets();
+
+        IsActive = true;
     }
 
-    public void UpdateModel()
+    public Color Textcolor()
     {
-        _timerService.SetTarget(_settingsService.Get<string>("Targetsplit"));
-        _timerService.SetTolerance(_settingsService.Get<string>("Targettolerance"));
-        _timerService.SetTolerancePositive(_settingsService.Get<string>("Targettolerancepositive"));
+        var splittextcolor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
 
-        var timingSession = _timerService.TimingSession;
-
-        if (timingSession.SplitTimes.Count > 0)
+        if (!Reset && _timingSession.SplitTimes.Count > 0 && !_settingsService.Get<bool>("Monochrome"))
         {
-            var splitTime = timingSession.SplitTimes[timingSession.SplitTimes.Count - 1];
+            splittextcolor = Splitcolor.GetLuminosity() < (Math.Sqrt(1.05 * 0.05)) - 0.05 ? Colors.White : Colors.Black;
+        }
 
-            Splittext = splitTime.Split.ToString(SplitFormat);
+        return splittextcolor;
+    }
 
-            if (!_settingsService.Get<bool>("Monochrome")) 
+    public void UpdateView()
+    {
+        if (Reset)
+        {
+            _timingSession.Reset();
+            Reset = false;
+        }
+
+        if (_running)
+        {
+            Label = AppResources.Reset;
+
+            if (_timingSession.SplitTimes.Count > 0)
             {
-                if (timingSession.Target > TimeSpan.Zero)
+                var splitTime = _timingSession.SplitTimes[_timingSession.SplitTimes.Count - 1];
+
+                Splittext = splitTime.Split.ToString(SplitFormat);
+
+                if (!_settingsService.Get<bool>("Monochrome"))
                 {
-                    if (splitTime.DeltaTarget > timingSession.TolerancePositive)
+                    if (_timingSession.Target > TimeSpan.Zero)
                     {
-                        Splitcolor = SplitPositive;
-                    } else if (timingSession.Tolerance == TimeSpan.Zero || splitTime.DeltaTarget > TimeSpan.Zero - timingSession.Tolerance)
+                        if (splitTime.DeltaTarget > _timingSession.TolerancePositive)
+                        {
+                            Splitcolor = SplitPositive;
+                        }
+                        else if (_timingSession.Tolerance == TimeSpan.Zero || splitTime.DeltaTarget > TimeSpan.Zero - _timingSession.Tolerance)
+                        {
+                            Splitcolor = SplitNeutral;
+                        }
+                        else
+                        {
+                            Splitcolor = SplitNegative;
+                        }
+                    }
+                    else
                     {
-                        Splitcolor = SplitNeutral;
-                    } else
-                    {
-                        Splitcolor = SplitNegative;
+                        Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
                     }
                 }
-                else
-                {
-                    Splitcolor = splitTime.DeltaPrevious > TimeSpan.Zero ? SplitPositive : SplitNeutral;
-                }
+                HasIntermediate = true;
+            }
+            else
+            {
+                Splittext = AppResources.Split;
             }
         }
         else
         {
+            HasIntermediate = false;
+            Label = AppResources.Timing;
+
             Splittext = AppResources.Start;
-            Splitcolor = Colors.Transparent;
+            Splitcolor = Application.Current.RequestedTheme == AppTheme.Light ? Colors.White : Colors.Black;
+
+            DeviceDisplay.KeepScreenOn = false;
         }
+
+        Running = _running;
+        Splittextcolor = Textcolor();
+        _sessionService.SaveTimingSession(_timingSession);
     }
 
     [RelayCommand]
     public void Split()
     {
-        DeviceDisplay.KeepScreenOn = true;
+        _timingSession.AddSplit();
 
-        _timerService.MarkTime();
-
-        if (_timerService.TimingSession.SplitTimes.Count > 0)
-        {
-            UpdateModel();
-        }
-        else
-        {
-            Splittext = AppResources.Split;
-        }
+        UpdateView();
     }
 
     [RelayCommand]
@@ -111,6 +156,25 @@ public partial class TimerViewModel : ViewModelBase
     {
         DeviceDisplay.KeepScreenOn = false;
 
-        await Shell.Current.GoToAsync($"//{nameof(SummaryPage)}");
+        await _navigationService.NavgigateToAsync("Summary");
+    }
+
+    public void Receive(TargetsChangedMessage message)
+    {
+        _timingSession.Targets = message.Value;
+    }
+
+    public void Receive(TimingSessionRequestMessage message)
+    {
+        message.Reply(_timingSession);
+    }
+
+    public void Receive(TabReselectedMessage message)
+    {
+        string target = message.Value;
+        if (target.EndsWith("Timer")) {
+            Reset = true;
+            UpdateView();
+        }
     }
 }

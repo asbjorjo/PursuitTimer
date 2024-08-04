@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace PursuitTimer.Services
 {
@@ -10,8 +7,10 @@ namespace PursuitTimer.Services
     {
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<TimerService>();
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
             builder.Services.AddTransient<ISettingsService, SettingsService>();
+            builder.Services.AddSingleton<ITimingSessionService, TimingSessionService>();
+            builder.Services.AddSingleton(x => new MessageSnoopService(WeakReferenceMessenger.Default));
 
             return builder;
         }

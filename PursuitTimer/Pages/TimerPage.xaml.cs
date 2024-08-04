@@ -1,3 +1,6 @@
+using CommunityToolkit.Maui.Views;
+using PursuitTimer.Popups;
+using PursuitTimer.Resources.Strings;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer.Pages;
@@ -13,15 +16,29 @@ public partial class TimerPage : ContentPage
         InitializeComponent();
 
         BindingContext = vm;
+        vm.IsActive = true;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        vm.UpdateModel();
+        if (vm.ShowChanges)
+        {
+            this.ShowPopup(new ChangesPopup());
+            vm.ShowChanges = false;
+        }
 
-        LastSplitLabel.TextColor = vm.Splittextcolor;
+        vm.UpdateView();
+
+        DeviceDisplay.KeepScreenOn = true;
+
+        Application.Current.RequestedThemeChanged += ThemeChangedEventHandler;
+    }
+
+    void ThemeChangedEventHandler(object senbder, AppThemeChangedEventArgs a)
+    {
+        vm.UpdateView();
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -44,7 +61,32 @@ public partial class TimerPage : ContentPage
         vm.Split();
 
         UpdateFontSize();
+    }
 
-        LastSplitLabel.TextColor = vm.Splittextcolor;
+    protected override void OnDisappearing()
+    {
+        vm.UpdateView();
+
+        Application.Current.RequestedThemeChanged -= ThemeChangedEventHandler;
+
+        base.OnDisappearing();
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        var location = Shell.Current.CurrentState.Location;
+
+        if (location.OriginalString.EndsWith("/Reset")) {
+            vm.Reset = true;
+        }
+
+        base.OnNavigatedTo(args);
+    }
+
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        base.OnNavigatedFrom(args);
+
+        vm.Label = AppResources.Timing;
     }
 }

@@ -5,13 +5,13 @@ using PursuitTimer.ViewModels;
 
 namespace PursuitTimer;
 
-public partial class AppShell : Shell
+public partial class AppShelliOS : Shell
 {
     private bool _isPopToRootInProgress;
     private INavigationService _navigationService;
     AppShellViewModel vm => BindingContext as AppShellViewModel;
 
-    public AppShell(INavigationService navigationService, AppShellViewModel navigationViewModel)
+    public AppShelliOS(INavigationService navigationService, AppShellViewModel navigationViewModel)
     {
         _navigationService = navigationService;
 

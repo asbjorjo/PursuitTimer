@@ -1,18 +1,15 @@
-﻿using PursuitTimer.Pages;
+﻿using PursuitTimer.Services;
+using PursuitTimer.ViewModels;
 
 namespace PursuitTimer;
 
 public partial class App : Application
 {
-	public App()
+	public App(INavigationService navigationService, AppShellViewModel navigationViewModel)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
-
-		Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-		Routing.RegisterRoute(nameof(SummaryPage), typeof(SummaryPage));
-		Routing.RegisterRoute(nameof(TimerPage), typeof(TimerPage));
-		Routing.RegisterRoute(nameof(TimerSetupPage), typeof(TimerSetupPage));
-	}
+		//MainPage = new AppShell(navigationService, navigationViewModel);
+        MainPage = DeviceInfo.Platform == DevicePlatform.iOS ? new AppShelliOS(navigationService,navigationViewModel) : new AppShell(navigationService, navigationViewModel);
+    }
 }

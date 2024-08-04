@@ -1,4 +1,6 @@
 using CommunityToolkit.Maui;
+using MauiIcons.Fluent;
+using MauiIcons.Fluent.Filled;
 using PursuitTimer.Pages;
 using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
@@ -13,6 +15,8 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+			.UseFluentMauiIcons()
+			.UseFluentFilledMauiIcons()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -24,7 +28,18 @@ public static class MauiProgram
 		builder.ConfigurePages();
         builder.ConfigureServices();
         builder.ConfigureViewModels();
-        
-		return builder.Build();
+
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+#if ANDROID
+		    handlers.AddHandler(typeof(Shell), typeof(Your.Namespace.AndroidShellRenderer));
+#endif
+        });
+
+		var app = builder.Build();
+
+		_ = app.Services.GetRequiredService<MessageSnoopService>();
+
+		return app;
 	}
 }
