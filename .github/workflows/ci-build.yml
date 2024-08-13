@@ -56,12 +56,12 @@ jobs:
 
 # MAUI iOS Build
   build-ios:
-    runs-on: macos-13
+    runs-on: macos-latest
     name: iOS Build
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '15.1'
+          xcode-version: 'latest-stable'
 
       - name: Checkout
         uses: actions/checkout@v3
