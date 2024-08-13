@@ -93,13 +93,10 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Release -f net8.0-ios --no-restore -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
+        run: dotnet build PursuitTimer -c Release -f net8.0-ios -r ios-arm64 --no-restore -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
-      - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net8.0-ios -r ios-arm64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
-
-      - name: Publish MAUI iOS simulator
-        run: dotnet publish PursuitTimer -c Release -f:net8.0-ios -r iossimulator-x64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
+      - name: Build MAUI iOS simulator
+        run: dotnet build PursuitTimer -c Release -f:net8.0-ios -r iossimulator-x64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
