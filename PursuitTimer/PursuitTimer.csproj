@@ -125,7 +125,7 @@
 	<MtouchInterpreter>all</MtouchInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-	<MtouchUseLlvm>False</MtouchUseLlvm>
+	<NoSymbolStrip>true</NoSymbolStrip>
 	<MtouchInterpreter>all</MtouchInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
