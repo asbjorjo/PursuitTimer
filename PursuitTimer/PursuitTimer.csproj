@@ -26,9 +26,9 @@
     <Configurations>Debug;Release;IOSsimulator</Configurations>
     <!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+  <!--<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
 	<UseInterpreter>true</UseInterpreter>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <ItemGroup>
     <!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" ForegroundFile="Resources\Images\cycling_track_pictogram.svg" ForegroundScale="0.70" TintColor="#FFFFFF" />
@@ -46,8 +46,8 @@
     <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent.Filled" Version="3.0.0" />
     <PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="AppShelliOS.xaml.cs">
@@ -99,7 +99,7 @@
     </MauiXaml>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.139" />
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.141" />
   </ItemGroup>
   <!--<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
 		<RuntimeIdentifier>iossimulator-x86</RuntimeIdentifier>
@@ -119,5 +119,8 @@
     <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
     <CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
     <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='IOSsimulator|net8.0-ios|AnyCPU'">
+    <MtouchUseLlvm>True</MtouchUseLlvm>
   </PropertyGroup>
 </Project>
