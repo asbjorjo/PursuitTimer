@@ -26,6 +26,9 @@
     <Configurations>Debug;Release;IOSsimulator</Configurations>
     <!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
   </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+	<UseInterpreter>true</UseInterpreter>
+  </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" ForegroundFile="Resources\Images\cycling_track_pictogram.svg" ForegroundScale="0.70" TintColor="#FFFFFF" />
