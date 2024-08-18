@@ -121,6 +121,12 @@
     <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='IOSsimulator|net8.0-ios|AnyCPU'">
-    <MtouchUseLlvm>True</MtouchUseLlvm>
+    <MtouchUseLlvm>False</MtouchUseLlvm>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+	<MtouchUseLlvm>False</MtouchUseLlvm>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	<MtouchUseLlvm>False</MtouchUseLlvm>
   </PropertyGroup>
 </Project>
