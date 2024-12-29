@@ -12,10 +12,13 @@ namespace PursuitTimer.ViewModels;
 [QueryProperty(nameof(Reset), "Reset")]
 public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsChangedMessage>, IRecipient<TimingSessionRequestMessage>, IRecipient<TabReselectedMessage>
 {
-    private static readonly string SplitFormat = "ss'.'ff";
+    private const double MinRatio = 3.5;
+    private const string SplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
     private static readonly Color SplitNegative = Colors.Yellow;
     private static readonly Color SplitNeutral = Colors.Lime;
+
+    private bool _isNavigatedTo;
 
     private readonly TimingSession _timingSession = new();
     private readonly INavigationService _navigationService;
@@ -25,29 +28,36 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
 
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private Color splitcolor = Colors.Transparent;
+    public partial Color Splitcolor { get; set; } = Colors.Transparent;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private SplitTime splittime;
+    public partial SplitTime Splittime { get; set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private string splittext = AppResources.Start;
+    public partial string Splittext { get; set; } = AppResources.Start;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private double fontsize = 32;
+    public partial double Fontsize { get; set; } = 32;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    public Color splittextcolor = Application.Current?.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+    public partial Color Splittextcolor { get; set; } = Application.Current?.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private string label = AppResources.Timing;
+    public partial string Label { get; set; } = AppResources.Timing;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private bool running = false;
+    public partial bool Running { get; set; } = false;
+
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
-    private bool hasIntermediate = false;
-    
+    public partial bool HasIntermediate { get; set; } = false;
+
     public bool ShowChanges {
         get => _settingsService.ShowChanges();
         set { if (!value) _settingsService.ChangesShown(); }
@@ -78,6 +88,12 @@ public partial class TimerViewModel : ObservableRecipient, IRecipient<TargetsCha
         }
 
         return splittextcolor;
+    }
+
+    public void UpdateFontSize(double width, double height)
+    {
+        double ratio = width / height;
+        Fontsize = ratio < MinRatio ? height / MinRatio * ratio : height;
     }
 
     public void UpdateView()

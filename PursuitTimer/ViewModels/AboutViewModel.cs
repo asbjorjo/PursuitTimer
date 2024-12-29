@@ -6,11 +6,11 @@ namespace PursuitTimer.ViewModels
     public partial class AboutViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string version;
+        public partial string Version { get; set; }
 
         public AboutViewModel()
         {
-            version = AppInfo.Current.VersionString;
+            Version = AppInfo.Current.VersionString;
         }
 
         [RelayCommand]

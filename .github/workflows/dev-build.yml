@@ -19,7 +19,7 @@ env:
 jobs:
 # MAUI Android Build
   build-android:
-    runs-on: windows-2022
+    runs-on: windows-latest
     name: Android Build
     steps:
       - name: Checkout
@@ -34,16 +34,16 @@ jobs:
         run: dotnet restore PursuitTimer
 
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Release -f net8.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
+        run: dotnet build PursuitTimer -c Release -f net9.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
-        run: dotnet publish PursuitTimer -c Release -f net8.0-android --no-restore
+        run: dotnet publish PursuitTimer -c Release -f net9.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: android-ci-build
-          path: PursuitTimer/bin/Release/net8.0-android/*Signed.a*
+          path: PursuitTimer/bin/Release/net9.0-android/*Signed.a*
 
       - name: Publish to Play Store
         uses: r0adkll/upload-google-play@v1
@@ -93,30 +93,30 @@ jobs:
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
       - name: Build MAUI iOS
-        run: dotnet build PursuitTimer -c Release -f net8.0-ios -r ios-arm64 --no-restore -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
+        run: dotnet build PursuitTimer -c Release -f net9.0-ios -r ios-arm64 --no-restore -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
       - name: Build MAUI iOS simulator
-        run: dotnet build PursuitTimer -c Release -f:net8.0-ios -r iossimulator-x64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
+        run: dotnet build PursuitTimer -c Release -f:net9.0-ios -r iossimulator-x64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
       - name: Publish MAUI iOS
-        run: dotnet publish PursuitTimer -c Release -f:net8.0-ios -r ios-arm64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
+        run: dotnet publish PursuitTimer -c Release -f:net9.0-ios -r ios-arm64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-build
-          path: PursuitTimer/bin/Release/net8.0-ios/**/*.app/
+          path: PursuitTimer/bin/Release/net9.0-ios/**/*.app/
       - name: Upload iOS Package
         uses: actions/upload-artifact@v3.0.0
         with:
           name: ios-ci-package
-          path: PursuitTimer/bin/Release/net8.0-ios/**/*.ipa
+          path: PursuitTimer/bin/Release/net9.0-ios/**/*.ipa
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
         with: 
           app-type: ios
-          app-path: 'PursuitTimer/bin/Release/net8.0-ios/ios-arm64/publish/PursuitTimer.ipa' 
+          app-path: 'PursuitTimer/bin/Release/net9.0-ios/ios-arm64/publish/PursuitTimer.ipa' 
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}

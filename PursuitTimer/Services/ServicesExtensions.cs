@@ -10,7 +10,9 @@ namespace PursuitTimer.Services
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             builder.Services.AddTransient<ISettingsService, SettingsService>();
             builder.Services.AddSingleton<ITimingSessionService, TimingSessionService>();
+            #if DEBUG
             builder.Services.AddSingleton(x => new MessageSnoopService(WeakReferenceMessenger.Default));
+            #endif
 
             return builder;
         }

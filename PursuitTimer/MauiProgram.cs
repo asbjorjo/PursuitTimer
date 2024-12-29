@@ -31,14 +31,16 @@ public static class MauiProgram
 
         builder.ConfigureMauiHandlers(handlers =>
         {
-#if ANDROID
+			#if ANDROID
 		    handlers.AddHandler(typeof(Shell), typeof(Your.Namespace.AndroidShellRenderer));
-#endif
+			#endif
         });
 
 		var app = builder.Build();
 
+		#if DEBUG
 		_ = app.Services.GetRequiredService<MessageSnoopService>();
+		#endif
 
 		return app;
 	}

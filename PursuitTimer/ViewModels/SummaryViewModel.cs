@@ -3,22 +3,19 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using PursuitTimer.Messages;
 using PursuitTimer.Model;
-using PursuitTimer.Services;
 
 namespace PursuitTimer.ViewModels;
 
 public partial class SummaryViewModel : ObservableObject
 {
     [ObservableProperty]
-    IEnumerable<SplitTime> splitTimes;
+    public partial IEnumerable<SplitTime> SplitTimes { get; set; }
 
     [ObservableProperty]
-    TimeSpan sumTimes;
-    private INavigationService _navigationService;
+    public partial TimeSpan SumTimes { get; set; }
 
-    public SummaryViewModel(INavigationService navigationService)
+    public SummaryViewModel()
     {
-        _navigationService = navigationService;
     }
 
     public void Initialize()
@@ -32,6 +29,7 @@ public partial class SummaryViewModel : ObservableObject
     [RelayCommand]
     async Task Restart()
     {
-        await _navigationService.NavgigateToAsync("//Timing/Timer", new Dictionary<string, object> { { "Reset", true} });
+        await Shell.Current.GoToAsync("//Timing/Timer", new Dictionary<string, object> { { "Reset", true } });
+        //await _navigationService.NavgigateToAsync("//Timing/Timer", new Dictionary<string, object> { { "Reset", true} });
     }
 }
