@@ -5,18 +5,18 @@ namespace PursuitTimer.ViewModels
     public partial class ChangesViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string version;
+        public partial string Version { get; set; }
 
         [ObservableProperty]
-        private string heading;
+        public partial string Heading { get; set; }
 
         [ObservableProperty]
-        private List<string> changes;
+        public partial List<string> Changes { get; set; }
 
         public ChangesViewModel() {
-            version = AppInfo.VersionString;
-            heading = "This version represents a major overhaul of the UI. The basic functionality is the same as before, but there are significant changes to the navigation:";
-            changes = new List<string>
+            Version = AppInfo.VersionString;
+            Heading = "This version represents a major overhaul of the UI. The basic functionality is the same as before, but there are significant changes to the navigation:";
+            Changes = new List<string>
             {
                 "Navigation is now by icons at bottom of screen.",
                 "Reset of timer is done by pressing \"Reset\" when timer view is active.",

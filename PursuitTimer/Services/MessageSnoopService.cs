@@ -10,7 +10,7 @@ namespace PursuitTimer.Services
         public MessageSnoopService(IMessenger messenger) {
             _messenger = messenger;
 
-            messenger.RegisterAll(this);
+            _messenger.RegisterAll(this);
         }
 
         public void Receive(PropertyChangedMessage<bool> message)

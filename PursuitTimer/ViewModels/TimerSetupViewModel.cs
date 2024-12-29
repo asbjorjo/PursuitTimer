@@ -10,13 +10,17 @@ namespace PursuitTimer.ViewModels
     public partial class TimerSetupViewModel : ObservableObject
     {
         [ObservableProperty]
-        private double targetsplit = default;
+        public partial double Targetsplit { get; set; } = default;
+
         [ObservableProperty]
-        private double targettolerance = default;
+        public partial double Targettolerance { get; set; } = default;
+
         [ObservableProperty]
-        private double targettolerancepositive = default;
+        public partial double Targettolerancepositive { get; set; } = default;
+
         [ObservableProperty]
-        private bool monochrome = false;
+        public partial bool Monochrome { get; set; } = false;
+
         private readonly INavigationService _navigationService;
         private readonly ISettingsService _settingsService;
 

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="PursuitTimer.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:PursuitTimer.Pages"
+    xmlns:pageModels="clr-namespace:PursuitTimer.ViewModels"
     xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
     xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="PursuitTimer.AppShell"
+    x:DataType="pageModels:AppShellViewModel"
     Shell.NavBarIsVisible="False">
 
     <Shell.Resources>
@@ -18,8 +20,7 @@
     <TabBar 
         Route="Timing">
         <Tab
-            BindingContext="{Binding TimerView}"
-            Title="{Binding Label, Mode=OneWay}"
+            Title="{Binding TimerLabel, Mode=OneWay}"
             Route="Timer"
             Icon="{mi:Fluent Icon=Timer32}">
             <ShellContent
@@ -27,7 +28,6 @@
         </Tab>
 
         <Tab
-            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.Summary}"
             Route="Summary"
             Icon="{mi:Fluent Icon=DataTrending32}"
@@ -38,22 +38,20 @@
         </Tab>
         
         <Tab 
-            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.Setup}"
             Route="Setup"
             Icon="{mi:Fluent Icon=Settings32}"
-            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
+            IsEnabled="{Binding TimerRunning, Converter={StaticResource InvertedBoolConverter}}">
             <ShellContent
                 Title="{x:Static res:AppResources.Setup}"
                 ContentTemplate="{DataTemplate pages:TimerSetupPage}"/>
         </Tab>
 
         <Tab 
-            BindingContext="{Binding TimerView}"
             Title="{x:Static res:AppResources.About}"
             Route="About"
             Icon="{mi:Fluent Icon=Info28}"
-            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
+            IsEnabled="{Binding TimerRunning, Converter={StaticResource InvertedBoolConverter}}">
             <ShellContent 
                 Title="{x:Static res:AppResources.About}"
                 ContentTemplate="{DataTemplate pages:AboutPage}"/>

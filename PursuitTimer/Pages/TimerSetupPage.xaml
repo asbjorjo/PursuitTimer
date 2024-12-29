@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
+             xmlns:pageModels="clr-namespace:PursuitTimer.ViewModels"
              x:Class="PursuitTimer.Pages.TimerSetupPage"
+             x:DataType="pageModels:TimerSetupViewModel"
              Title="{x:Static res:AppResources.Setup}"
              Padding="2">
     <Grid

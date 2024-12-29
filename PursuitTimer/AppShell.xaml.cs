@@ -1,33 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using PursuitTimer.Messages;
-using PursuitTimer.Services;
 using PursuitTimer.ViewModels;
 
 namespace PursuitTimer;
 
 public partial class AppShell : Shell
 {
-    private bool _isPopToRootInProgress;
-    private INavigationService _navigationService;
-    AppShellViewModel vm => BindingContext as AppShellViewModel;
-
-    public AppShell(INavigationService navigationService, AppShellViewModel navigationViewModel)
+    public AppShell(AppShellViewModel model)
     {
-        _navigationService = navigationService;
-
         InitializeComponent();
 
-        BindingContext = navigationViewModel;
-    }
-
-    protected override async void OnParentSet()
-    {   
-        base.OnParentSet();
-
-        if (Parent is not null)
-        {
-            await _navigationService.InitializeAsync();
-        }
+        BindingContext = model;
     }
 
     protected override void OnNavigating(ShellNavigatingEventArgs args)
