@@ -123,4 +123,13 @@
     <CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
     <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
+    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
+    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='IOSsimulator|net9.0-ios|AnyCPU'">
+    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+  </PropertyGroup>
 </Project>
