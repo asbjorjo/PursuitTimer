@@ -120,16 +120,8 @@
     <CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
     <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='IOSsimulator|net8.0-ios|AnyCPU'">
-    <MtouchUseLlvm>False</MtouchUseLlvm>
-	<MtouchInterpreter>all</MtouchInterpreter>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-	<NoSymbolStrip>true</NoSymbolStrip>
-	<MtouchInterpreter>all</MtouchInterpreter>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
-	<MtouchUseLlvm>False</MtouchUseLlvm>
-	<MtouchInterpreter>all</MtouchInterpreter>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+    <CodesignKey>Apple Development: Created via API (4CD8647G25)</CodesignKey>
+    <CodesignProvision>VS: me.veloti.pursuittimer Development</CodesignProvision>
   </PropertyGroup>
 </Project>
