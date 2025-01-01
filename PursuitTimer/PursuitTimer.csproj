@@ -56,11 +56,6 @@
 	  <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (QA594WD8SD)</CodesignKey>
-	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\Images\cycling_track_pictogram.svg" Color="#512BD4">
