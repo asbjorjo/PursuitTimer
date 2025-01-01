@@ -11,7 +11,7 @@ public static class ChangesPopupExtension
     {
         if (_show)
         {
-            bool alreadyshown = false;// = Preferences.Default.Get(KeyChanges, string.Empty) == AppInfo.VersionString;
+            bool alreadyshown = Preferences.Default.Get(KeyChanges, string.Empty) == AppInfo.VersionString;
 
             if (!alreadyshown)
             {
