@@ -39,8 +39,15 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore PursuitTimer
 
+      - name: Decode Keystore
+        env:
+          ENCODED_STRING: ${{ secrets.PLAYSTORE_KEYSTORE }}
+        run: |
+          echo $ENCODED_STRING > keystore-b64.txt
+          base64 -d keystore-b64.txt > keystore.jks
+        
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Release -f net9.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
+        run: dotnet build PursuitTimer -c Release -f net9.0-android --no-restore /p:AndroidSigningKeyStore=keystore.jks /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
         run: dotnet publish PursuitTimer -c Release -f net9.0-android --no-restore
