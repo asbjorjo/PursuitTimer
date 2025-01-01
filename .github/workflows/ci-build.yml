@@ -56,7 +56,7 @@ jobs:
 
 # MAUI iOS Build
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-15
     name: iOS Build
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
