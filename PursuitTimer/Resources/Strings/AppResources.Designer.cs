@@ -151,7 +151,7 @@ namespace PursuitTimer.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Splitt.
+        ///   Looks up a localized string similar to Split.
         /// </summary>
         public static string Split {
             get {

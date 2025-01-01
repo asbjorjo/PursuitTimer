@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace PursuitTimer.Messages
+namespace PursuitTimer.Messages;
+
+public class TabReselectedMessage : ValueChangedMessage<string>
 {
-    public class TabReselectedMessage : ValueChangedMessage<string>
+    public TabReselectedMessage(string value) : base(value)
     {
-        public TabReselectedMessage(string value) : base(value)
-        {
-        }
     }
 }

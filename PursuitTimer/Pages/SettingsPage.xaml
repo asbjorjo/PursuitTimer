@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:strings="clr-namespace:PursuitTimer.Resources.Strings"
+             xmlns:pageModels="clr-namespace:PursuitTimer.Pages.Models"
+             x:Class="PursuitTimer.Pages.SettingsPage"
+             x:DataType="pageModels:SettingsPageModel"
+             Title="Settings"
+             HideSoftInputOnTapped="True">
+    
+    <ContentPage.BindingContext>
+        <pageModels:SettingsPageModel/>
+    </ContentPage.BindingContext>
+
+    <Grid
+        RowDefinitions="50,50,50,50,50,*,50">
+
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="0">
+            <Label 
+                Text="{x:Static strings:AppResources.Target}"
+                FontSize="24"/>
+            <Entry 
+                x:Name="TargetEntry"
+                FontSize="24"
+                Keyboard="Numeric" 
+                Text="{Binding Target, StringFormat='{0:F2}'}" />
+        </FlexLayout>
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="1">
+            <Label 
+                Text="{x:Static strings:AppResources.ToleranceNegative}"
+                FontSize="24"/>
+            <Entry 
+                x:Name="ToleranceEntry"
+                FontSize="24"
+                Keyboard="Numeric" 
+                Text="{Binding ToleranceUnder, StringFormat='{0:F2}'}" />
+        </FlexLayout>
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="2">
+            <Label 
+                Text="{x:Static strings:AppResources.TolerancePositive}"
+                FontSize="24"/>
+            <Entry 
+                x:Name="TolerancePositiveEntry"
+                FontSize="24"
+                Keyboard="Numeric" 
+                Text="{Binding ToleranceOver, StringFormat='{0:F2}'}" />
+        </FlexLayout>
+
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="3">
+            <Label
+                FontSize="24"
+                Text="{x:Static strings:AppResources.MonochromeSetting}"
+            />
+            <Switch
+                x:Name="MonochromeSwitch"
+                IsToggled="{Binding Monochrome}"
+            />
+        </FlexLayout>
+
+        <FlexLayout JustifyContent="SpaceBetween"
+                    Grid.Row="6">
+            <Button
+                x:Name="CancelBtn"
+                FlexLayout.Basis="50%"
+                FontSize="24"
+                Text="{x:Static strings:AppResources.Cancel}"
+                Background="Red"
+                Command="{Binding CancelCommand}"/>
+            <Button
+                x:Name="SaveBtn"
+                FlexLayout.Basis="50%"
+                FontSize="24"
+                Text="{x:Static strings:AppResources.Save}"
+                Background="Green"
+                Command="{Binding SaveCommand}"/>
+        </FlexLayout>
+    </Grid></ContentPage>

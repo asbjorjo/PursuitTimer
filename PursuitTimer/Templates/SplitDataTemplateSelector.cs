@@ -1,6 +1,4 @@
-﻿using PursuitTimer.Model;
-
-namespace PursuitTimer.Templates;
+﻿namespace PursuitTimer.Templates;
 
 public class SplitDataTemplateSelector : DataTemplateSelector
 {
@@ -10,7 +8,7 @@ public class SplitDataTemplateSelector : DataTemplateSelector
 
     protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
     {
-        SplitTime splitTime = (SplitTime)item;
+        TimingSplit splitTime = (TimingSplit)item;
 
         if  (splitTime.DeltaPrevious > TimeSpan.Zero)
         {

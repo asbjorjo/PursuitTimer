@@ -1,21 +1,16 @@
-using PursuitTimer.ViewModels;
-
 namespace PursuitTimer.Pages;
 
 public partial class SummaryPage : ContentPage
 {
-    SummaryViewModel vm => BindingContext as SummaryViewModel;
+    SummaryPageModel vm => (SummaryPageModel)BindingContext;
 
-    public SummaryPage(SummaryViewModel vm)
+    public SummaryPage()
 	{
         InitializeComponent();
-        BindingContext = vm;
     }
 
     protected override void OnAppearing()
     {
-        base.OnAppearing();
-
         vm.Initialize();
     }
 }

@@ -2,134 +2,98 @@
   <PropertyGroup>
 	<LangVersion>preview</LangVersion>
   </PropertyGroup>
+
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
-    <!--<TargetFrameworks>$(TargetFrameworks);net8.0-maccatalyst</TargetFrameworks>-->
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
-    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PursuitTimer</RootNamespace>
-    <UseMaui>true</UseMaui>
-    <SingleProject>true</SingleProject>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <!-- Display name -->
-    <ApplicationTitle>PursuitTimer</ApplicationTitle>
-    <!-- App Identifier -->
-    <ApplicationId>me.veloti.pursuittimer</ApplicationId>
-    <ApplicationIdGuid>432694D3-56BD-42AE-8484-94F9F7449D19</ApplicationIdGuid>
-    <!-- Versions -->
-    <!--<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>-->
-  	<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-    <!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>-->
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-    <Configurations>Debug;Release;IOSsimulator</Configurations>
-    <!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
-  </PropertyGroup>
-  <!--<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-	<UseInterpreter>true</UseInterpreter>
-  </PropertyGroup>-->
-  <ItemGroup>
-    <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" ForegroundFile="Resources\Images\cycling_track_pictogram.svg" ForegroundScale="0.70" TintColor="#FFFFFF" />
-    <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\cycling_track_pictogram_white.svg" Color="#512BD4" BaseSize="256,256" />
-    <!-- Images -->
-    <MauiImage Include="Resources\Images\*" />
-    <!-- Custom Fonts -->
-    <MauiFont Include="Resources\Fonts\*" />
-    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent" Version="4.0.0" />
-    <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent.Filled" Version="4.0.0" />
-    <PackageReference Include="CommunityToolkit.Maui" Version="10.0.0" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="AppShelliOS.xaml.cs">
-      <DependentUpon>AppShelliOS.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\TimerSetupPage.xaml.cs">
-      <DependentUpon>TimerSetupPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Strings\AppResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\SummaryPage.xaml.cs">
-      <DependentUpon>SummaryPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Strings\AppResources.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <MauiXaml Update="AppShelliOS.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\AboutPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\SummaryPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\TimerSetupPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\TimerPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Popups\ChangesPopup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.112" />
-  </ItemGroup>
-  <!--<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
-		<RuntimeIdentifier>iossimulator-x86</RuntimeIdentifier>
-		-->
-  <!--<CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>-->
-  <!--
-		-->
-  <!--<CodesignProvision>pursuittimer.veloti.me</CodesignProvision>-->
-  <!--
-	</PropertyGroup>-->
-  <PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
-    <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>pursuittimer.keystore</AndroidSigningKeyStore>
-    <AndroidSigningKeyAlias>me.veloti.pursuittimer.play</AndroidSigningKeyAlias>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-    <CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
-    <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='IOSsimulator|net9.0-ios|AnyCPU'">
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-  </PropertyGroup>
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>PursuitTimer</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>PursuitTimer</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>me.veloti.pursuittimer</ApplicationId>
+		<ApplicationIdGuid>432694D3-56BD-42AE-8484-94F9F7449D19</ApplicationIdGuid>
+
+	<!-- Versions -->
+		<!--<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>-->
+		<!--<ApplicationVersion>1</ApplicationVersion>-->
+
+		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
+		<WindowsPackageType>None</WindowsPackageType>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningKeyStore>pursuittimer.keystore</AndroidSigningKeyStore>
+	  <AndroidSigningKeyAlias>me.veloti.pursuittimer.play</AndroidSigningKeyAlias>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
+	  <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+	  <CodesignKey>iPhone Distribution: Asbjoern Lund Johansen (LZB5K8V86V)</CodesignKey>
+	  <CodesignProvision>pursuittimer.veloti.me</CodesignProvision>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+	  <CodesignKey>Apple Development: Created via API (QA594WD8SD)</CodesignKey>
+	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\Images\cycling_track_pictogram.svg" Color="#512BD4">
+		  <ForegroundScale>0.70</ForegroundScale>
+		  <TintColor>#FFFFFF</TintColor>
+		</MauiIcon>
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\cycling_track_pictogram_white.svg">
+			<Color>#512BD4</Color>
+			<BaseSize>256,256</BaseSize>
+		</MauiSplashScreen>
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+        <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent" Version="4.0.0" />
+        <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent.Filled" Version="4.0.0" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="10.0.0" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<MauiXaml Update="Pages\SummaryPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.112" />
+	</ItemGroup>
 </Project>

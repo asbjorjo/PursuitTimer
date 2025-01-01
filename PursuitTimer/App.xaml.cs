@@ -1,21 +1,16 @@
-﻿using PursuitTimer.ViewModels;
-
-namespace PursuitTimer;
-
-public partial class App : Application
+﻿namespace PursuitTimer
 {
-	AppShellViewModel _appShellViewModel;
-
-	public App(IServiceProvider serviceProvider)
-	{
-		InitializeComponent();
-
-		_appShellViewModel = serviceProvider.GetService<AppShellViewModel>();
-	}
-
-    protected override Window CreateWindow(IActivationState activationState)
+    public partial class App : Application
     {
-		//return new Window(DeviceInfo.Platform == DevicePlatform.iOS ? new AppShelliOS() : new AppShell());
-		return new Window(new AppShell(_appShellViewModel));
+        public App()
+        {
+            InitializeComponent();
+        }
+
+#nullable enable
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
+        }
     }
 }

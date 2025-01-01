@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:PursuitTimer.Model"
-             xmlns:pageModel="clr-namespace:PursuitTimer.ViewModels"
+             xmlns:model="clr-namespace:PursuitTimer.Models"
+             xmlns:pageModels="clr-namespace:PursuitTimer.Pages.Models"
              xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
              xmlns:tmplts="clr-namespace:PursuitTimer.Templates"
              x:Class="PursuitTimer.Pages.SummaryPage"
-             x:DataType="pageModel:SummaryViewModel"
+             x:DataType="pageModels:SummaryPageModel"
              Title="{x:Static res:AppResources.Summary}"
              Padding="2">
+    <ContentPage.BindingContext>
+        <pageModels:SummaryPageModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="neutralTemplate" x:DataType="model:SplitTime">
+            <DataTemplate x:Key="neutralTemplate" x:DataType="model:TimingSplit">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
@@ -29,7 +33,7 @@
                             HorizontalTextAlignment="End"/>
                 </Grid>
             </DataTemplate>
-            <DataTemplate x:Key="positiveTemplate" x:DataType="model:SplitTime">
+            <DataTemplate x:Key="positiveTemplate" x:DataType="model:TimingSplit">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
@@ -47,7 +51,7 @@
                             HorizontalTextAlignment="End"/>
                 </Grid>
             </DataTemplate>
-            <DataTemplate x:Key="negativeTemplate" x:DataType="model:SplitTime">
+            <DataTemplate x:Key="negativeTemplate" x:DataType="model:TimingSplit">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
