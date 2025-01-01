@@ -46,4 +46,9 @@ public partial class SettingsPageModel : ObservableObject
     {
         await Shell.Current.GoToAsync("//PursuitTimer/Timing");
     }
+
+    internal void Appearing()
+    {
+        InitSettings();
+    }
 }
