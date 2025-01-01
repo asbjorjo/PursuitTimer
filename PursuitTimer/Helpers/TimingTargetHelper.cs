@@ -2,7 +2,6 @@
 
 public static class TimingTargetHelper
 {
-    private static readonly IPreferences _preferences = Preferences.Default;
     private const string SharedName = "me.veloti.pursuittimer";
 
     private const string KeyTarget = "TimingTarget";
@@ -11,6 +10,7 @@ public static class TimingTargetHelper
 
     public static TimingTarget GetTimingTarget()
     {
+        IPreferences _preferences = Preferences.Default;
         double target = _preferences.Get<double>(KeyTarget, default, SharedName);
         double over = _preferences.Get<double>(KeyToleranceOver, default, SharedName);
         double under = _preferences.Get<double>(KeyToleranceUnder, default, SharedName);
@@ -25,6 +25,7 @@ public static class TimingTargetHelper
 
     public static void SaveTimingTarget(TimingTarget value)
     {
+        IPreferences _preferences = Preferences.Default;
         _preferences.Set(KeyTarget, value.Target.TotalSeconds, SharedName);
         _preferences.Set(KeyToleranceOver, value.ToleranceOver.TotalSeconds, SharedName);
         _preferences.Set(KeyToleranceUnder, value.ToleranceUnder.TotalSeconds, SharedName);
