@@ -11,9 +11,9 @@ public static class TimingTargetHelper
     public static TimingTarget GetTimingTarget()
     {
         IPreferences _preferences = Preferences.Default;
-        double target = _preferences.Get<double>(KeyTarget, default, SharedName);
-        double over = _preferences.Get<double>(KeyToleranceOver, default, SharedName);
-        double under = _preferences.Get<double>(KeyToleranceUnder, default, SharedName);
+        double target = _preferences.Get<double>(KeyTarget, default);
+        double over = _preferences.Get<double>(KeyToleranceOver, default);
+        double under = _preferences.Get<double>(KeyToleranceUnder, default);
 
         return new TimingTarget
         {
@@ -26,8 +26,8 @@ public static class TimingTargetHelper
     public static void SaveTimingTarget(TimingTarget value)
     {
         IPreferences _preferences = Preferences.Default;
-        _preferences.Set(KeyTarget, value.Target.TotalSeconds, SharedName);
-        _preferences.Set(KeyToleranceOver, value.ToleranceOver.TotalSeconds, SharedName);
-        _preferences.Set(KeyToleranceUnder, value.ToleranceUnder.TotalSeconds, SharedName);
+        _preferences.Set(KeyTarget, value.Target.TotalSeconds);
+        _preferences.Set(KeyToleranceOver, value.ToleranceOver.TotalSeconds);
+        _preferences.Set(KeyToleranceUnder, value.ToleranceUnder.TotalSeconds);
     }
 }
