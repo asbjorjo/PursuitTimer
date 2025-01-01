@@ -11,8 +11,6 @@ public partial class SettingsPage : ContentPage
 
     protected override void OnAppearing()
     {
-        model.InitSettings();
-
-        base.OnAppearing();
+        model.Appearing();
     }
 }

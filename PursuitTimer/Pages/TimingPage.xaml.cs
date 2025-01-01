@@ -24,6 +24,7 @@ public partial class TimingPage : ContentPage
     protected override void OnAppearing()
     {
         model.Appearing();
+        this.ShowChanges();
     }
 
     protected override void OnDisappearing()
