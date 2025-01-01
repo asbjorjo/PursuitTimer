@@ -91,9 +91,6 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<MauiXaml Update="Pages\SummaryPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 	    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.112" />
 	</ItemGroup>
 </Project>
