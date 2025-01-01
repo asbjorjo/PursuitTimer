@@ -39,15 +39,8 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore PursuitTimer
 
-      - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.PLAYSTORE_KEYSTORE }}
-        run: |
-          echo $ENCODED_STRING > keystore-b64.txt
-          base64 -d keystore-b64.txt > PursuitTimer/keystore.jks
-        
       - name: Build MAUI Android
-        run: dotnet build PursuitTimer -c Release -f net9.0-android --no-restore /p:AndroidSigningKeyStore=keystore.jks /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
+        run: dotnet build PursuitTimer -c Release -f net9.0-android --no-restore /p:AndroidSigningKeyPass=${{ secrets.PLAYSTORE_PASS }} /p:AndroidSigningStorePass=${{ secrets.PLAYSTORE_PASS }}
 
       - name: Publish MAUI Android
         run: dotnet publish PursuitTimer -c Release -f net9.0-android --no-restore
@@ -139,9 +132,3 @@ jobs:
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-      # - name: Make appstore key ready
-      #   run: echo "${{ secrets.APPSTORE_PRIVATE_KEY }}" > Authkey_${{ secrets.APPSTORE_KEY_ID }}.p8
-      # - name: Publish to App Store
-      #   env:
-      #     API_PRIVATE_KEYS_DIR: .
-      #   run: xcrun altool --upload-package PursuitTimer/bin/Release/net8.0-ios/ios-arm64/publish/PursuitTimer.ipa --type ios --apple-id 1630437751 --bundle-id me.velotimer.pursuittimer --apiKey ${{ secrets.APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }} --bundle-version ${{ steps.nbgv.outputs.CloudBuildNumber }} --bundle-short-version-string ${{ steps.nbgv.outputs.SemVer2 }}
