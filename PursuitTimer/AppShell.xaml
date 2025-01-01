@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="PursuitTimer.AppShell"
+    x:DataType="local:AppShellModel"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:PursuitTimer.Pages"
     xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
-    xmlns:res="clr-namespace:PursuitTimer.Resources.Strings"
+    xmlns:local="clr-namespace:PursuitTimer"
+    xmlns:pages="clr-namespace:PursuitTimer.Pages"
+    xmlns:strings="clr-namespace:PursuitTimer.Resources.Strings"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Flyout"
+    Title="PursuitTimer"
     Shell.NavBarIsVisible="False">
+
+    <Shell.BindingContext>
+        <local:AppShellModel />
+    </Shell.BindingContext>
 
     <Shell.Resources>
         <ResourceDictionary>
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </Shell.Resources>
-    
-    <TabBar 
-        Route="Timing">
-        <Tab
-            BindingContext="{Binding TimerView}"
-            Title="{Binding Label, Mode=OneWay}"
-            Route="Timer"
-            Icon="{mi:Fluent Icon=Timer32}">
-            <ShellContent
-                ContentTemplate="{DataTemplate pages:TimerPage}"/>
-        </Tab>
 
+    <TabBar Route="PursuitTimer">
         <Tab
-            BindingContext="{Binding TimerView}"
-            Title="{x:Static res:AppResources.Summary}"
+            Title="{Binding TimingLabel, Mode=OneWay}"
+            Route="Timing"
+            Icon="{mi:Fluent Icon=Timer32}">
+            <ShellContent 
+                ContentTemplate="{DataTemplate pages:TimingPage}"/>
+        </Tab>
+        <Tab
+            Title="{x:Static strings:AppResources.Summary}"
             Route="Summary"
-            Icon="{mi:Fluent Icon=DataTrending32}"
-            IsEnabled="{Binding HasIntermediate}">
+            Icon="{mi:Fluent Icon=DataTrending32}">
             <ShellContent
-                Title="{x:Static res:AppResources.Summary}"
                 ContentTemplate="{DataTemplate pages:SummaryPage}"/>
         </Tab>
-        
-        <Tab 
-            BindingContext="{Binding TimerView}"
-            Title="{x:Static res:AppResources.Setup}"
-            Route="Setup"
+        <Tab
+            Title="{x:Static strings:AppResources.Setup}"
             Icon="{mi:Fluent Icon=Settings32}"
-            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
-            <ShellContent
-                Title="{x:Static res:AppResources.Setup}"
-                ContentTemplate="{DataTemplate pages:TimerSetupPage}"/>
-        </Tab>
-
-        <Tab 
-            BindingContext="{Binding TimerView}"
-            Title="{x:Static res:AppResources.About}"
-            Route="About"
-            Icon="{mi:Fluent Icon=Info28}"
-            IsEnabled="{Binding Running, Converter={StaticResource InvertedBoolConverter}}">
+            IsEnabled="{Binding TimerRunning, Converter={StaticResource InvertedBoolConverter}}">
             <ShellContent 
-                Title="{x:Static res:AppResources.About}"
-                ContentTemplate="{DataTemplate pages:AboutPage}"/>
+               ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+        </Tab>
+        <Tab
+            Title="{x:Static strings:AppResources.About}"
+            Icon="{mi:Fluent Icon=Info28}"
+            IsEnabled="{Binding TimerRunning, Converter={StaticResource InvertedBoolConverter}}">
+            <ShellContent 
+               ContentTemplate="{DataTemplate pages:AboutPage}"/>
         </Tab>
     </TabBar>
 </Shell>

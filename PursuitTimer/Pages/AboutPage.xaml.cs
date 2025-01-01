@@ -2,7 +2,7 @@ namespace PursuitTimer.Pages;
 
 public partial class AboutPage : ContentPage
 {
-    public AboutPage()
+	public AboutPage()
 	{
 		InitializeComponent();
 	}
