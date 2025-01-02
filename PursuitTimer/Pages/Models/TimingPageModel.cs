@@ -2,7 +2,7 @@
 
 namespace PursuitTimer.Pages.Models;
 
-public partial class TimingPageModel : ObservableRecipient, IRecipient<TimingTargetChangedMessage>, IRecipient<TabReselectedMessage>, IRecipient<TimingSessionRequestMessage>
+public partial class TimingPageModel : ObservableRecipient, IRecipient<TimingTargetChangedMessage>, IRecipient<TabReselectedMessage>, IRecipient<TimingSessionRequestMessage>, IRecipient<SettingsChangedMessage>
 {
     private const string TimingSplitFormat = "ss'.'ff";
     private static readonly Color SplitPositive = Colors.Red;
@@ -33,9 +33,8 @@ public partial class TimingPageModel : ObservableRecipient, IRecipient<TimingTar
 
     public void InitSession()
     {
-        IPreferences preferences = Preferences.Default;
-
         _session = TimingSessionHelper.GetTimingSession();
+        _monochrome = SettingsHelper.GetMonochrome();
 
         UpdateState();
     }
@@ -157,5 +156,10 @@ public partial class TimingPageModel : ObservableRecipient, IRecipient<TimingTar
     public void Receive(TimingSessionRequestMessage message)
     {
         message.Reply(_session);
+    }
+
+    public void Receive(SettingsChangedMessage message)
+    {
+        _monochrome = message.Value.Monochrome;
     }
 }
