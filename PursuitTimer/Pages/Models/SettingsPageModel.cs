@@ -1,4 +1,5 @@
-﻿using PursuitTimer.Helpers;
+﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+using PursuitTimer.Helpers;
 
 namespace PursuitTimer.Pages.Models;
 
@@ -36,6 +37,11 @@ public partial class SettingsPageModel : ObservableObject
         };
 
         TimingTargetHelper.SaveTimingTarget(target);
+        if (Monochrome != SettingsHelper.GetMonochrome())
+        {
+            SettingsHelper.SaveMonochrome(Monochrome);
+            WeakReferenceMessenger.Default.Send(new SettingsChangedMessage(new TimingSettings(Monochrome)));
+        }
 
         WeakReferenceMessenger.Default.Send(new TimingTargetChangedMessage(target));
         await Shell.Current.GoToAsync("//PursuitTimer/Timing");
