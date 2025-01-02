@@ -19,6 +19,7 @@ public partial class SettingsPageModel : ObservableObject
 
     public void InitSettings()
     {
+        Monochrome = SettingsHelper.GetMonochrome();
         TimingTarget target = TimingTargetHelper.GetTimingTarget();
 
         Target = target.Target.TotalSeconds;
