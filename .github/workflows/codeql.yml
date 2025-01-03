@@ -58,7 +58,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        fetch-depth: ${{ (matrix.language == 'csharp' && 0) || 1 }}
+        fetch-depth: ${{ (matrix.language != 'csharp' && 1) || 0 }}
 
     - name: Setup dotnet
       uses: actions/setup-dotnet@v4
