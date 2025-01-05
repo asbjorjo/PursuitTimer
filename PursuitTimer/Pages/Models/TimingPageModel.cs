@@ -135,11 +135,14 @@ public partial class TimingPageModel : ObservableRecipient, IRecipient<TimingTar
 
     internal void Appearing()
     {
+        DeviceDisplay.Current.KeepScreenOn = true;
         Messenger.Send(new TimingVisibilityChangedMessage(true));
     }
 
     internal void Disappearing()
     {
+        if (!_session.IsRunning) DeviceDisplay.Current.KeepScreenOn = false;
+
         Messenger.Send(new TimingVisibilityChangedMessage(false));
     }
 

@@ -14,14 +14,10 @@ public partial class ChangesPageModel : ObservableObject
     public ChangesPageModel()
     {
         Version = AppInfo.VersionString;
-        Heading = "This version represents a major overhaul of the UI. The basic functionality is the same as before, but there are significant changes to the navigation:";
+        Heading = "A minor, but maybe useful feature is back:";
         Changes = new List<ChangeItem>
         {
-            new("Navigation is now by icons at bottom of screen."),
-            new("Reset of timer is done by pressing \"Reset\" when timer view is active."),
-            new("Summary can only be shown after first split."),
-            new("Settings and About will deactive during timing."),
-            new("The timing session is saved so that if the app crashes it is loaded on restart.")
+            new("Request device keep screen on while timing is running or timing screen is active.")
         };
     }
 }
