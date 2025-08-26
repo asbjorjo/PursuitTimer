@@ -104,12 +104,12 @@ jobs:
         run: dotnet publish PursuitTimer -c Release -f:net9.0-ios -r ios-arm64 -p:ApplicationVersion=${{ steps.nbgv.outputs.CloudBuildNumber }}
 
       - name: Upload iOS Artifact
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v4.0.0
         with:
           name: ios-ci-build
           path: PursuitTimer/bin/Release/net9.0-ios/**/*.app/
       - name: Upload iOS Package
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v4.0.0
         with:
           name: ios-ci-package
           path: PursuitTimer/bin/Release/net9.0-ios/**/*.ipa
