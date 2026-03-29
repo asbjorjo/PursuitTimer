@@ -38,8 +38,6 @@ jobs:
       - name: validate-project
         run: |
           dotnet restore PursuitTimer -r ios-arm64
-          echo "valid-project=true" >> "$GITHUB_OUTPUT"
-        shell: /usr/bin/bash -e {0}
         env:
           SKIP_CACHE: 
           DOTNET_ROOT: /usr/share/dotnet
