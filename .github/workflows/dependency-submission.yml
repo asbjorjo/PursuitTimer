@@ -36,7 +36,7 @@ jobs:
           DOTNET_ROOT: /usr/share/dotnet
       - name: validate-project
         run: |
-          dotnet restore PursuitTimer -f net10.0-android
+          dotnet restore --force PursuitTimer
         env:
           SKIP_CACHE: 
           DOTNET_ROOT: /usr/share/dotnet
