@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   dependency-submission:
-    runs-on: ubuntu-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v5
@@ -21,25 +21,25 @@ jobs:
       - name: Install MAUI Workloads
         run: |
           dotnet workload restore
-      - name: configure-cache
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
-        with:
-          path: ~/.nuget/packages
-          key: Linux-nuget-2349583459sdfjhgslkjdhg
-          restore-keys: Linux-nuget-
-          enableCrossOsArchive: false
-          fail-on-cache-miss: false
-          lookup-only: false
-          save-always: false
-        env:
-          SKIP_CACHE: 
-          DOTNET_ROOT: /usr/share/dotnet
+      # - name: configure-cache
+      #   uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+      #   with:
+      #     path: ~/.nuget/packages
+      #     key: Linux-nuget-2349583459sdfjhgslkjdhg
+      #     restore-keys: Linux-nuget-
+      #     enableCrossOsArchive: false
+      #     fail-on-cache-miss: false
+      #     lookup-only: false
+      #     save-always: false
+      #   env:
+      #     SKIP_CACHE: 
+      #     DOTNET_ROOT: /usr/share/dotnet
       - name: validate-project
         run: |
-          dotnet restore --force PursuitTimer
+          dotnet restore PursuitTimer
         env:
           SKIP_CACHE: 
-          DOTNET_ROOT: /usr/share/dotnet
+          # DOTNET_ROOT: /usr/share/dotnet
       - name: submit-dependency-snapshot
         uses: actions/component-detection-dependency-submission-action@374343effede691df3a5ffaf36b4e7acab919590
         with:
@@ -52,4 +52,4 @@ jobs:
           filePath: .
         env:
           SKIP_CACHE: 
-          DOTNET_ROOT: /usr/share/dotnet
+          # DOTNET_ROOT: /usr/share/dotnet
