@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   dependency-submission:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: setup-ecosystem
@@ -93,7 +93,7 @@ jobs:
           # Restore all projects
           while IFS= read -r project; do
             echo "Restoring project: $project"
-            if ! dotnet restore "$project"; then
+            if ! dotnet restore -r android-arm64 "$project"; then
               echo "::error::Failed to restore project: $project"
               echo "valid-project=false" >> "$GITHUB_OUTPUT"
               exit 1
