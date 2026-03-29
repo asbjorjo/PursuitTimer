@@ -17,7 +17,6 @@ jobs:
       - name: setup-ecosystem
         run: |
           if [ -f "global.json" ]; then
-          if [ -f "global.json" ]; then
             echo "Found global.json file"
             echo "use-global-json=true" >> "$GITHUB_OUTPUT"
           else
