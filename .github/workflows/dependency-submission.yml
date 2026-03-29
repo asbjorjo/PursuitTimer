@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   dependency-submission:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v5
@@ -20,14 +20,13 @@ jobs:
           cache: false
       - name: Install MAUI Workloads
         run: |
-          dotnet workload install ios
-          dotnet workload install maui
+          dotnet workload restore
       - name: configure-cache
         uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
         with:
           path: ~/.nuget/packages
-          key: Linux-nuget-8b286f26666f2a45f829dfda0dad7e6a740718ada5d00bb2a127dcdd3671f303
-          restore-keys: ios-nuget-
+          key: Linux-nuget-2349583459sdfjhgslkjdhg
+          restore-keys: Linux-nuget-
           enableCrossOsArchive: false
           fail-on-cache-miss: false
           lookup-only: false
@@ -37,7 +36,7 @@ jobs:
           DOTNET_ROOT: /usr/share/dotnet
       - name: validate-project
         run: |
-          dotnet restore PursuitTimer -r ios-arm64
+          dotnet restore PursuitTimer -f net10.0-android
         env:
           SKIP_CACHE: 
           DOTNET_ROOT: /usr/share/dotnet
@@ -45,6 +44,11 @@ jobs:
         uses: actions/component-detection-dependency-submission-action@374343effede691df3a5ffaf36b4e7acab919590
         with:
           detectorsCategories: NuGet
+          snapshot-sha: ${{ github.sha }}
+          snapshot-ref: ${{ github.ref }}
+          detector-name: Automatic Dependency Submission
+          detector-version: 244344d64fb0
+          detector-url: https://github.com/actions/component-detection-dependency-submission-action
           filePath: .
         env:
           SKIP_CACHE: 
