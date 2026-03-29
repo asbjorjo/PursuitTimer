@@ -11,26 +11,12 @@ permissions:
 
 jobs:
   dependency-submission:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v3
-      - name: setup-ecosystem
-        run: |
-          if [ -f "global.json" ]; then
-            echo "Found global.json file"
-            echo "use-global-json=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "No global.json file found, using default versions"
-            echo "use-global-json=false" >> "$GITHUB_OUTPUT"
-          fi
-        shell: /usr/bin/bash -e {0}
-        env:
-          SKIP_CACHE: 
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 8.0.x
-                          9.0.x
-                          10.0.x
+          dotnet-version: 10.0.x
           cache: false
       - name: Install MAUI Workloads
         run: |
