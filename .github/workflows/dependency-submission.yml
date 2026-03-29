@@ -19,27 +19,9 @@ jobs:
           dotnet-version: 10.0.x
           cache: false
       - name: Install MAUI Workloads
-        run: |
-          dotnet workload restore
-      # - name: configure-cache
-      #   uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
-      #   with:
-      #     path: ~/.nuget/packages
-      #     key: Linux-nuget-2349583459sdfjhgslkjdhg
-      #     restore-keys: Linux-nuget-
-      #     enableCrossOsArchive: false
-      #     fail-on-cache-miss: false
-      #     lookup-only: false
-      #     save-always: false
-      #   env:
-      #     SKIP_CACHE: 
-      #     DOTNET_ROOT: /usr/share/dotnet
-      - name: validate-project
-        run: |
-          dotnet restore PursuitTimer
-        env:
-          SKIP_CACHE: 
-          # DOTNET_ROOT: /usr/share/dotnet
+        run: dotnet workload restore
+      - name: restore-project
+        run: dotnet restore PursuitTimer
       - name: submit-dependency-snapshot
         uses: actions/component-detection-dependency-submission-action@374343effede691df3a5ffaf36b4e7acab919590
         with:
@@ -50,6 +32,3 @@ jobs:
           detector-version: 244344d64fb0
           detector-url: https://github.com/actions/component-detection-dependency-submission-action
           filePath: .
-        env:
-          SKIP_CACHE: 
-          # DOTNET_ROOT: /usr/share/dotnet
