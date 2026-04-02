@@ -14,10 +14,10 @@ public partial class ChangesPageModel : ObservableObject
     public ChangesPageModel()
     {
         Version = AppInfo.VersionString;
-        Heading = "A minor, but maybe useful feature is back:";
+        Heading = "Fix Android settings crash:";
         Changes = new List<ChangeItem>
         {
-            new("Request device keep screen on while timing is running or timing screen is active.")
+            new("Temporary fix for crash on Android when editing target and tolerances.")
         };
     }
 }
