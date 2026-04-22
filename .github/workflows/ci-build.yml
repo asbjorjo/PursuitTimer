@@ -95,12 +95,12 @@ jobs:
         run: dotnet restore PursuitTimer -r ios-arm64
 
       - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v2
+        uses: Apple-Actions/import-codesign-certs@v3
         with:
           p12-file-base64: ${{ secrets.CERTIFICATES_P12_BASE64 }}
           p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
       - name: Download Apple Provisioning Profiles
-        uses: Apple-Actions/download-provisioning-profiles@v1
+        uses: Apple-Actions/download-provisioning-profiles@v4
         with:
           bundle-id: 'me.veloti.pursuittimer'
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
@@ -125,7 +125,7 @@ jobs:
           path: PursuitTimer/bin/Release/net10.0-ios/**/*.ipa
 
       - name: 'Upload app to TestFlight'
-        uses: apple-actions/upload-testflight-build@v1
+        uses: apple-actions/upload-testflight-build@v4
         with: 
           app-type: ios
           app-path: 'PursuitTimer/bin/Release/net10.0-ios/ios-arm64/publish/PursuitTimer.ipa' 
