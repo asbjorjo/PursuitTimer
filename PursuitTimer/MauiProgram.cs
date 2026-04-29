@@ -37,19 +37,6 @@ public static class MauiProgram
 #endif
         });
 
-        // TODO: Remove this when this makes it to release: https://github.com/dotnet/maui/pull/34427
-#if ANDROID
-        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("DisableEmojiCompat", (handler, view) =>
-        {
-            handler.PlatformView.EmojiCompatEnabled = false;
-        });
-
-        Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("DisableEmojiCompat", (handler, view) =>
-        {
-            handler.PlatformView.EmojiCompatEnabled = false;
-        });
-#endif
-
         return builder.Build();
     }
 }
