@@ -86,6 +86,6 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.7" />
-	    <PackageReference Update="Nerdbank.GitVersioning" Version="3.9.50" />
+	    <PackageReference Update="Nerdbank.GitVersioning" Version="3.10.85" />
 	</ItemGroup>
 </Project>
